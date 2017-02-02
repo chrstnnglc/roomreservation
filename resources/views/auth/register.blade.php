@@ -61,6 +61,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="contact-number" class="col-md-4 control-label">Contact Number</label>
+
+                            <div class="col-md-6">
+                                <input id="contact-number" class="form-control" name="contact_number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
