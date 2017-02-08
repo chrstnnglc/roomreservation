@@ -10,43 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Get routes for PagesController
+Route::get('/', 'PagesController@yes');
+Route::get('login', 'PagesController@login');
+Route::get('register', 'PagesController@register');
 
-Route::get('/', function () {
-    return view('yes');
-});
+// Get routes for AdminController
+Route::get('admin/reservations', 'AdminController@reservations');
+Route::get('admin/equipment', 'AdminController@equipment');
+Route::get('admin/user', 'AdminController@user');
+Route::get('admin/room', 'AdminController@room');
+Route::get('admin/reserve', 'AdminController@reserve');
 
-Route::get('login', function(){
-    return view('login');
-});
-
-Route::get('register', function(){
-    return view('register');
-});
-
-Route::get('reservations', function(){
-    return view('reservations');
-});
-
-Route::get('test', function(){
-    return view('test');
-});
-
-Route::get('equipment', function(){
-    return view('admin_equipment');
-});
-
-Route::get('user', function(){
-    return view('admin_user');
-});
-
-Route::get('room', function(){
-    return view('admin_room');
-});
-
-Route::get('reserve', function(){
-    return view('admin_reserve');
-});
-
-Route::get('child', function(){
-    return view('child');
-});
+// Route::get('child', function(){
+//     return view('child');
+// });
+// Route::get('test', function(){
+//     return view('test');
+// });

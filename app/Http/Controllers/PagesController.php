@@ -9,5 +9,13 @@ class PagesController extends Controller
     public function login ()
     {
     	return view('login');
-    };
+    }
+
+    public function yes() {
+    	return view('yes');
+    }
+
+    public function register() {
+    	return view('login');
+    }
 }

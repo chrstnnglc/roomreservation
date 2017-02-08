@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.master')
 
 @section('content')
 <h3>Add User</h3>
