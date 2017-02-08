@@ -1,6 +1,28 @@
 @extends('admin.master')
 
 @section('content')
+
+<table class="ui celled red table">
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>E-mail</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="user_name"></td>
+      <td class="last_name"></td>
+      <td class="first_name"></td>
+      <td class="e-mail"></td>
+      <td class="role"></td>
+    </tr>
+  </tbody>
+</table>
+
 <h3>Add User</h3>
 
 <form class="ui form">
