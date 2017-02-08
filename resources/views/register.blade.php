@@ -24,7 +24,6 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="{{asset('/js/semantic.min.js')}}"></script>
   <script src="{{asset('/js/calendar.min.js')}}"></script>
-  <script src="{{asset('/js/login.js')}}"></script>
 
 
   <style type="text/css">
@@ -56,11 +55,26 @@
     <h2 class="ui red image header">
       <img src="sprite.png" class="image">
       <div class="content">
-        Log-in to your account
+        Sign up for your account
       </div>
     </h2>
     <form class="ui large form">
       <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui input">
+            <input type="text" name="first_name" placeholder="First Name">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui input">
+            <input type="text" name="last_name" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui input">
+            <input type="text" name="user_name" placeholder="User Name">
+          </div>
+        </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
@@ -73,19 +87,11 @@
             <input type="password" name="password" placeholder="Password">
           </div>
         </div>
-        <div class="ui fluid large red submit button">Login</div>
+        <div class="ui fluid large red submit button">Register!</div>
       </div>
 
       <div class="ui error message"></div>
 
     </form>
-
-    <div class="ui message">
-      New to us? <li><a href="{{ url('/register') }}">Sign Up!</a></li>
-    </div>
-  </div>
-</div>
-
-</body>
-
-</html>
+  </body>
+  </html>
