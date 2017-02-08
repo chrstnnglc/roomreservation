@@ -11,6 +11,14 @@
     </tr>
   </thead>
   <tbody>
+    @foreach ($rooms as $room)
+        <tr>
+            <td class="room">{{ $room->name }}</td>
+            <td class="rates">{{ $room->capacity }}</td>
+            <td class="capacity">{{ $room->rate }}</td>      
+        </tr>
+    @endforeach
+
     <tr>
       <td class="room"></td>
       <td class="rates"></td>

@@ -14,14 +14,18 @@
     </tr>
   </thead>
   <tbody>
+
+    @foreach ($equipments as $equip)
     <tr>
-      <td class="equipment"></td>
-      <td class="brand"></td>
-      <td class="model"></td>
-      <td class="price"></td>
-      <td class="condition"></td>
-      <td class="room"></td>
+
+      <td class="equipment">{{$equip->name}}</td>
+      <td class="brand">{{$equip->brand}}</td>
+      <td class="model">{{$equip->model}}</td>
+      <td class="price">{{$equip->price}}</td>
+      <td class="condition">{{$equip->condition}}</td>
+      <td class="room">{{$equip->room_id}}</td>
     </tr>
+    @endforeach
   </tbody>
 </table>
 

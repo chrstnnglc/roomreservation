@@ -13,13 +13,25 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="user_name"></td>
-      <td class="last_name"></td>
-      <td class="first_name"></td>
-      <td class="e-mail"></td>
-      <td class="role"></td>
-    </tr>
+      @foreach ($users as $user)
+        <tr>
+            <td class="user_name">{{ $user->username }}</td>
+            <td class="last_name">{{ $user->firstname }}</td>
+            <td class="first_name">{{ $user->lastname }}</td>
+            <td class="e-mail">{{ $user->email }}</td>
+            <td class="role">{{$user->users_role}}</td>
+            <!-- <td><button><a href = "/manage/users/{{$user->id}}/edit">Edit</a> </button>
+                <form action = "/manage/users/{{$user->id}}" method="POST" onsubmit = "return confirm('Do you really want to delete this user?');">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+
+                    <button type="submit">
+                        Delete
+                    </button>
+                </form>
+            </td> -->
+        </tr>
+    @endforeach
   </tbody>
 </table>
 

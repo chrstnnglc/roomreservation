@@ -48,16 +48,20 @@
       <img src="12logo.png">
     </div>
     <h3 class="header item">Room Reservation System</h3>
-    <a class="active item" style="font-size: 110%">Reservations</a>
-    <a class="item" style="font-size: 110%">Users</a>
-    <a class="item" style="font-size: 110%">Equipment</a>
-    <a class="item" style="font-size: 110%">Rooms</a>
-    <a class="item" style="font-size: 110%">Logs</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/room')}}">Rooms</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
     <div class="right menu">
       <div class="container" style="padding: 18px 10px 10px 0;">
-        <div class="ui button" style="font-size: 75%;">
+        <form action="{{ url('/logout') }}" method="POST" style = "display: inline-block;">
+        {{ csrf_field() }}
+        <button type = "submit" class="ui button" style="font-size: 75%;"><div>
           Logout
-        </div>
+        </div></button>
+        </form>
+
       </div>
     </div>
   </div>

@@ -51,40 +51,41 @@
     <h3 class="header item">Room Reservation System</h3>
   </div>
 
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui red image header">
-      <img src="sprite.png" class="image">
-      <div class="content">
-        Log-in to your account
-      </div>
-    </h2>
-    <form class="ui large form">
-      <div class="ui stacked segment">
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
-          </div>
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui red image header">
+        <img src="sprite.png" class="image">
+        <div class="content">
+          Log-in to your account
         </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+      </h2>
+      <form class="ui large form" method = "POST" action = "{{url('/login')}}" >
+      {{ csrf_field() }}
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" placeholder="Username">
+            </div>
           </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div ><button type = "submit" class="ui fluid large red submit button">Login</button></div>
         </div>
-        <div class="ui fluid large red submit button">Login</div>
+
+        <div class="ui error message"></div>
+
+      </form>
+
+      <div class="ui message">
+        New to us? <li><a href="{{ url('/register') }}">Sign Up!</a></li>
       </div>
-
-      <div class="ui error message"></div>
-
-    </form>
-
-    <div class="ui message">
-      New to us? <li><a href="{{ url('/register') }}">Sign Up!</a></li>
     </div>
   </div>
-</div>
 
 </body>
 
