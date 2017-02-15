@@ -18,13 +18,15 @@ Route::get('login', 'PagesController@login');
 Route::get('register', 'PagesController@register');
 Route::get('home', 'PagesController@yes');
 
-
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('admin/rooms', 'AdminController@rooms');
 	// Route::get('admin/addroom', 'AdminController@addform');
+	Route::get('admin/rooms/{room}', 'AdminController@showroom');
 	Route::post('admin/rooms', 'AdminController@addroom');
 	Route::post('admin/rooms', 'AdminController@deleteroom');
+	Route::get('admin/rooms/{room}/editroom', 'AdminController@editroom');
+	Route::put('admin/rooms','AdminController@updateroom');
 
 	Route::get('admin/reservations', 'AdminController@reservations');
 

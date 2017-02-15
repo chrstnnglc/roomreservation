@@ -82,7 +82,7 @@
       </form>
 
       <div class="ui message">
-        New to us? <li><a href="{{ url('/register') }}">Sign Up!</a></li>
+        New to us? <li><a href="/register">Sign Up!</a></li>
       </div>
     </div>
   </div>

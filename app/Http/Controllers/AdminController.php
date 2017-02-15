@@ -23,8 +23,8 @@ class AdminController extends Controller
     	return view('admin.rooms', compact('rooms'));
     }
 
-    public function addform() {
-        return view('admin.addroom');
+    public function showroom(Room $room) {
+        return view('admin.showroom', compact('room'));
     }
 
     public function addroom(Request $request) {
@@ -40,10 +40,40 @@ class AdminController extends Controller
         return view('admin.rooms', compact('rooms'));
     }
 
+    public function editroom (Room $room) {
+        return view('admin.editroom', compact('room'));
+    }
+
+    public function updateroom (Request $request, Room $room) {
+
+        print $room;
+
+        // $room->name = $request->roomname;
+        // $room->rate = $request->rate;
+        // $room->capacity = $request->capacity;
+
+        // $room->save();
+
+        $rooms = Room::all();
+        return view('admin.rooms', compact('rooms'));
+    }
+
+    //     public function editpokemon(Request $request, Pokemon $pokemon) {
+
+    //     $pokemon->description = $request->description;
+    //     $pokemon->priceeach = $request->priceeach;
+    //     $pokemon->stock = $request->stock;
+
+    //     $pokemon->save();
+
+    //     return back();
+    // }
+
     public function deleteroom(Request $request) {
-        $room = Room::where('id', $request->id)->first();
+        $room = Room::where('name', $request->roomname)->first();
         $room->delete();
 
+        $rooms = Room::all();
         return view('admin.rooms', compact('rooms'));
         // $user = Auth::user();
         // $order = Order::where('customerid', $user->id)->where('paidstatus', false)->first();

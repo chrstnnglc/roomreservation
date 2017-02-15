@@ -6,8 +6,8 @@
   <thead>
     <tr>
       <th>Room Name</th>
-      <th>Rate</th>
       <th>Capacity</th>
+      <th>Rate</th>
       <th>Options</th>
     </tr>
   </thead>
@@ -18,8 +18,8 @@
             <td class="rates">{{ $room->capacity }}</td>
             <td class="capacity">{{ $room->rate }}</td>
             <td class="options">
-            <form method="POST" action="/admin/rooms">{{ method_field('PUT') }}<button type="submit">Edit</button></form>
-            <form method="POST" action="/admin/rooms"><button type="submit">Delete</button></td></form>
+              <button><a href="/admin/rooms/{{ $room->id }}">View Room</a></button>
+            </td>
             </tr>
     @endforeach
 </tbody>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="container" style="padding: 0px 0px 10px 0px;">
-    <button type="submit">Add</button>
+    <button type="submit" id="add">Add</button>
     </div>
   </div>
   </div>
