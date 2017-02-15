@@ -21,13 +21,31 @@ Route::get('home', 'PagesController@yes');
 
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {
+	Route::get('admin/rooms', 'AdminController@rooms');
+	// Route::get('admin/addroom', 'AdminController@addform');
+	Route::post('admin/rooms', 'AdminController@addroom');
+	Route::post('admin/rooms', 'AdminController@deleteroom');
+
 	Route::get('admin/reservations', 'AdminController@reservations');
+
 	Route::get('admin/equipment', 'AdminController@equipment');
+	
 	Route::get('admin/user', 'AdminController@user');
-	Route::get('admin/room', 'AdminController@room');
+	
 	Route::get('admin/reserve', 'AdminController@reserve');
 });
 
+/*
+
+Route::get('store', 'PokemonsController@index');
+Route::get('store/{pokemon}', 'PokemonsController@show');
+Route::get('store/order', 'PokemonsController@order');
+Route::get('add', 'PokemonsController@addform');
+Route::get('store/{pokemon}/edit', 'PokemonsController@editform');
+Route::post('store', 'PokemonsController@addpokemon');
+Route::put('store/{pokemon}','PokemonsController@editpokemon');
+
+*/
 
 // Route::get('child', function(){
 //     return view('child');
