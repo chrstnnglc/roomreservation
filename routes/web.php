@@ -17,6 +17,7 @@ Route::get('/', 'PagesController@yes');
 Route::get('login', 'PagesController@login');
 Route::get('register', 'PagesController@register');
 Route::get('home', 'PagesController@yes');
+Route::get('profile', 'UserController@index');
 
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {
