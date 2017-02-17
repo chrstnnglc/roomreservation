@@ -20,9 +20,10 @@ Pati equipment.
 <form method="POST" action="/admin/rooms">
 	{{ csrf_field() }}
 	
-	<input type="hidden" name="roomname">
-	<input type="hidden" name="rate">
-	<input type="hidden" name="capacity">
-	<button type="submit" id="add">Delete Room</button>
+	<input type="hidden" name="id" value="{{ $room->id }}">
+	<input type="hidden" name="roomname" value="{{ $room->name }}">
+	<input type="hidden" name="rate" value="{{ $room->rate }}">
+	<input type="hidden" name="capacity" value="{{ $room->capacity }}">
+	<button type="submit">Delete Room</button>
 </form>
 @stop

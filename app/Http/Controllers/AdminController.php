@@ -71,10 +71,11 @@ class AdminController extends Controller
 
     public function deleteroom(Request $request) {
         $room = Room::where('name', $request->roomname)->first();
-        $room->delete();
+        return $room;
+        //$room->delete();
 
-        $rooms = Room::all();
-        return view('admin.rooms', compact('rooms'));
+        // $rooms = Room::all();
+        // return view('admin.rooms', compact('rooms'));
         // $user = Auth::user();
         // $order = Order::where('customerid', $user->id)->where('paidstatus', false)->first();
         // $orderdetail = $order->orderdetails()->where('id', $request->id)->first();
