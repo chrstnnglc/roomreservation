@@ -18,6 +18,11 @@ class LoginController extends Controller
     |
     */
 
+    public function username()
+    {
+        return 'username';
+    }
+
     use AuthenticatesUsers;
 
     /**
@@ -25,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/reserve';
 
     /**
      * Create a new controller instance.

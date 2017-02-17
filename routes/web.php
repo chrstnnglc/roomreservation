@@ -10,7 +10,49 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Get routes for PagesController
+Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'PagesController@yes');
+Route::get('login', 'PagesController@login');
+Route::get('register', 'PagesController@register');
+Route::get('home', 'PagesController@yes');
+Route::get('profile', 'UserController@index');
+
+// Get routes for AdminController
+Route::group(['middleware' => 'admin'], function () {
+	Route::get('admin/rooms', 'AdminController@rooms');
+	// Route::get('admin/addroom', 'AdminController@addform');
+	Route::get('admin/rooms/{room}', 'AdminController@showroom');
+	Route::post('admin/rooms', 'AdminController@addroom');
+	Route::post('admin/rooms', 'AdminController@deleteroom');
+	Route::get('admin/rooms/{room}/editroom', 'AdminController@editroom');
+	Route::put('admin/rooms','AdminController@updateroom');
+
+	Route::get('admin/reservations', 'AdminController@reservations');
+
+	Route::get('admin/equipment', 'AdminController@equipment');
+	
+	Route::get('admin/user', 'AdminController@user');
+	
+	Route::get('admin/reserve', 'AdminController@reserve');
 });
+
+/*
+
+Route::get('store', 'PokemonsController@index');
+Route::get('store/{pokemon}', 'PokemonsController@show');
+Route::get('store/order', 'PokemonsController@order');
+Route::get('add', 'PokemonsController@addform');
+Route::get('store/{pokemon}/edit', 'PokemonsController@editform');
+Route::post('store', 'PokemonsController@addpokemon');
+Route::put('store/{pokemon}','PokemonsController@editpokemon');
+
+*/
+
+// Route::get('child', function(){
+//     return view('child');
+// });
+// Route::get('test', function(){
+//     return view('test');
+// });
