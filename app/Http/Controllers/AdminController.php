@@ -46,44 +46,23 @@ class AdminController extends Controller
 
     public function updateroom (Request $request, Room $room) {
 
-        print $room;
+        $room->name = $request->roomname;
+        $room->rate = $request->rate;
+        $room->capacity = $request->capacity;
 
-        // $room->name = $request->roomname;
-        // $room->rate = $request->rate;
-        // $room->capacity = $request->capacity;
+        $room->save();
 
-        // $room->save();
+        $url = 'admin/rooms/' . $room->id;
 
-        $rooms = Room::all();
-        return view('admin.rooms', compact('rooms'));
+        return redirect($url);
+
     }
 
-    //     public function editpokemon(Request $request, Pokemon $pokemon) {
-
-    //     $pokemon->description = $request->description;
-    //     $pokemon->priceeach = $request->priceeach;
-    //     $pokemon->stock = $request->stock;
-
-    //     $pokemon->save();
-
-    //     return back();
-    // }
-
     public function deleteroom(Request $request) {
-        $room = Room::where('name', $request->roomname)->first();
-        return $room;
-        //$room->delete();
+        $room = Room::where('id', $request->id)->first();
+        $room->delete();
 
-        // $rooms = Room::all();
-        // return view('admin.rooms', compact('rooms'));
-        // $user = Auth::user();
-        // $order = Order::where('customerid', $user->id)->where('paidstatus', false)->first();
-        // $orderdetail = $order->orderdetails()->where('id', $request->id)->first();
-        // $order->total = $order->total - ($orderdetail->priceeach * $orderdetail->quantity);
-        // $order->save();
-        // $orderdetail->delete();
-
-        // return back();
+        return redirect('admin/rooms');
     }
 
 
