@@ -12,12 +12,12 @@ Pati equipment.
 	<td class="rates">{{ $room->capacity }}</td>
 	<td class="capacity">{{ $room->rate }}</td>
 	<td class="options">
-		<button><a href="/admin/rooms/{{ $room->id }}">Edit</a></button>
+		<button><a href="/admin/rooms/{{ $room->id }}/editroom">Edit</a></button>
 	</td>
 	</tr>
 </table>
 
-<form method="POST" action="/admin/rooms">
+<form method="POST" action="/admin/rooms/{{ $room->id }}">
 	{{ csrf_field() }}
 	
 	<input type="hidden" name="id" value="{{ $room->id }}">

@@ -27,7 +27,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('admin/rooms', 'AdminController@addroom');
 	Route::get('admin/rooms/{room}/editroom', 'AdminController@editroom');
 	Route::post('admin/rooms/{room}','AdminController@deleteroom');
-	Route::put('admin/rooms','AdminController@updateroom');
+	Route::put('admin/rooms/{room}','AdminController@updateroom');
 
 	Route::get('admin/reservations', 'AdminController@reservations');
 
