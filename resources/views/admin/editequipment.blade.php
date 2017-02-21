@@ -13,8 +13,8 @@
 
 				<div class="panel-body">				
 
-                    <form method="POST" action="/admin/equipments/{{ $equipment->id }}/editequipment">
-                        {{ method_field('PATCH') }}
+                    <form method="POST" action="/admin/equipments/{{ $equipment->id }}">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <br>
                         <div class="form-group">

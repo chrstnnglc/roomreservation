@@ -97,9 +97,25 @@ class AdminController extends Controller
 
     public function updateequipment(Request $request, Equipment $equipment) {
 
-        $equipment->update($request->all());
+        $equipment->name = $request->equipment;
+        $equipment->brand = $request->brand;
+        $equipment->model = $request->model;
+        $equipment->price = $request->price;
+        $equipment->condition = $request->condition;
+        $equipment->room_id = $request->room_id;
 
-        return back();
+        $equipment->save();
+
+        $url = 'admin/equipments/' . $equipment->id;
+
+        return redirect($url);
+    }
+
+    public function deleteequipment(Request $request) {
+        $equipment = Equipment::where('id', $request->id)->first();
+        $equipment->delete();
+
+        return redirect('admin/equipments');
     }
 
     public function user(User $user) {

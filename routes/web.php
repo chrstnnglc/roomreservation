@@ -35,7 +35,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('admin/equipments', 'AdminController@addequipment');
 	Route::get('admin/equipments/{equipment}', 'AdminController@showequipment');
 	Route::get('admin/equipments/{equipment}/editequipment', 'AdminController@editequipment');
-	Route::patch('admin/equipments/{equipment}','AdminController@updateequipment');
+	Route::put('admin/equipments/{equipment}','AdminController@updateequipment');
+	Route::post('admin/equipments/{equipment}','AdminController@deleteequipment');
 
 	Route::get('admin/user', 'AdminController@user');
 	

@@ -17,7 +17,7 @@
 	</tr>
 </table>
 
-<form method="POST" action="/admin/equipments">
+<form method="POST" action="/admin/equipments/{{ $equipment->id }}">
 	{{ csrf_field() }}
 	
 	<input type="hidden" name="id" value="{{ $equipment->id }}">
