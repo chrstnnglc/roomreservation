@@ -66,9 +66,56 @@ class AdminController extends Controller
     }
 
 
-    public function equipment(Equipment $equipment) {
+    public function equipment() {
         $equipments = Equipment::all();
-        return view('admin.equipment', compact('equipments'));
+        return view('admin.equipments', compact('equipments'));
+    }
+
+    public function showequipment(Equipment $equipment) {
+        return view('admin.showequipment', compact('equipment'));
+    }
+
+    public function addequipment(Request $request) {
+        $equipment = new Equipment;
+        
+        $equipment->name = $request->equipment;
+        $equipment->brand = $request->brand;
+        $equipment->model = $request->model;
+        $equipment->price = $request->price;
+        $equipment->condition = $request->condition;
+        $equipment->room_id = $request->room_id;
+
+        $equipment->save();
+
+        $equipments = Equipment::all();
+        return view('admin.equipments', compact('equipments'));
+    }
+
+    public function editequipment(Equipment $equipment) {
+        return view('admin.editequipment', compact('equipment'));
+    }
+
+    public function updateequipment(Request $request, Equipment $equipment) {
+
+        $equipment->name = $request->equipment;
+        $equipment->brand = $request->brand;
+        $equipment->model = $request->model;
+        $equipment->price = $request->price;
+        $equipment->condition = $request->condition;
+        $equipment->room_id = $request->room_id;
+
+        $equipment->save();
+
+        $url = 'admin/equipments/' . $equipment->id;
+
+        return redirect($url);
+    }
+
+    public function deleteequipment(Request $request) {
+        $equipment = Equipment::where('id', $request->id)->first();
+        $equipment->delete();
+
+        return redirect('admin/equipments');
     }
 
     public function user(User $user) {

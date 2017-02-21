@@ -31,8 +31,13 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('admin/reservations', 'AdminController@reservations');
 
-	Route::get('admin/equipment', 'AdminController@equipment');
-	
+	Route::get('admin/equipments', 'AdminController@equipment');
+	Route::post('admin/equipments', 'AdminController@addequipment');
+	Route::get('admin/equipments/{equipment}', 'AdminController@showequipment');
+	Route::get('admin/equipments/{equipment}/editequipment', 'AdminController@editequipment');
+	Route::put('admin/equipments/{equipment}','AdminController@updateequipment');
+	Route::post('admin/equipments/{equipment}','AdminController@deleteequipment');
+
 	Route::get('admin/user', 'AdminController@user');
 	
 	Route::get('admin/reserve', 'AdminController@reserve');

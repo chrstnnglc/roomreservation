@@ -23,7 +23,10 @@
       <td class="model">{{$equip->model}}</td>
       <td class="price">{{$equip->price}}</td>
       <td class="condition">{{$equip->condition}}</td>
-      <td class="room">{{$equip->room_id}}</td>
+      <td class="room_id">{{$equip->room_id}}</td>
+      <td class="options">
+        <button><a href="/admin/equipments/{{ $equip->id }}">View Equipment</a></button>
+      </td>
     </tr>
     @endforeach
   </tbody>
@@ -31,7 +34,8 @@
 
 <h3>Add Equipment</h3>
 
-<form class="ui form">
+<form method="POST" class="ui form" action="/admin/equipments">
+  {{ csrf_field() }}
   <div class="ui stacked segment">
     <div class="field">
       <div class="ui input">
@@ -60,16 +64,11 @@
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="room" placeholder="Room">
+        <input type="text" name="room_id" placeholder="Room ID">
       </div>
     </div>
     <div class="container" style="padding: 0px 0px 10px 0px;">
-    <div class="ui fluid large red submit button">Add</div>
-    </div>
-    <div class="container" style="padding: 10px 0px 10px 0px;">
-    <div class="ui fluid large red submit button">Delete</div>
-    </div>
-    <div class="ui fluid large red submit button">Edit</div>
+    <button type="submit" id="add">Add</button>
     </div>
   </div>
 </form>

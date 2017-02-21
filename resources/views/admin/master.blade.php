@@ -51,6 +51,7 @@
     <a class="item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
     <a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
     <a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/equipments')}}">Equipments</a>
     <a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
     <div class="right menu">
       <div class="container" style="padding: 18px 10px 10px 0;">
