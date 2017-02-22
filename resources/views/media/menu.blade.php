@@ -7,9 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>Login - Diocese of Cubao Reservation System</title>
-
-  <link rel="stylesheet" type="text/css" href="{{ asset('/css/semantic.min.css') }}">
+  @yield('name')
+  <link rel="stylesheet" typ  - Diocese of Cubao Reservation Systeme="text/css" href="{{ asset('/css/semantic.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/calendar.min.css') }}">
 
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/divider.css')}}">
@@ -24,8 +23,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="{{asset('/js/semantic.min.js')}}"></script>
   <script src="{{asset('/js/calendar.min.js')}}"></script>
-  <script src="{{asset('/js/login.js')}}"></script>
-
+  <script src="{{asset('/js/main.js')}}"></script>
 
   <style type="text/css">
     body {
@@ -39,53 +37,38 @@
       margin-top: -100px;
     }
     .column {
-      max-width: 450px;
+      max-width: 50%;
+      max-height: 75%;
     }
   </style>
 </head>
 <body>
   <div class="ui secondary top fixed inverted blue borderless menu">
     <div class="container" style="padding: 10px 0 10px 10px;">
-      <img src="12logo.png">
+      <img src="{{assets('12logo.png')}}">
     </div>
     <h3 class="header item">Room Reservation System</h3>
-  </div>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/room')}}">Rooms</a>
+    <a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
+    <div class="right menu">
+      <div class="container" style="padding: 18px 10px 10px 0;">
+        <form action="{{ url('/logout') }}" method="POST" style = "display: inline-block;">
+        {{ csrf_field() }}
+        <button type = "submit" class="ui button" style="font-size: 75%;"><div>
+          Logout
+        </div></button>
+        </form>
 
-  <div class="ui middle aligned center aligned grid">
-    <div class="column">
-      <h2>
-        <div class="content">
-          Log-in to your account
-        </div>
-      </h2>
-      <form class="ui large form" method = "POST" action = "{{url('/login')}}" >
-      {{ csrf_field() }}
-        <div class="ui yellow stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="username" placeholder="Username">
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
-            </div>
-          </div>
-          <div ><button type = "submit" class="ui fluid large yellow submit button">Login</button></div>
-        </div>
-
-        <div class="ui error message"></div>
-
-      </form>
-
-      <div class="ui message">
-        New to us? <li><a href="/register">Sign Up!</a></li>
       </div>
     </div>
   </div>
-
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      @yield('content')
+    </div>
+  </div>
 </body>
-
 </html>

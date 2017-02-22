@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>Admin Home Page - Diocese of Cubao Reservation System</title>
+ @yield('name')
   <link rel="stylesheet" typ  - Diocese of Cubao Reservation Systeme="text/css" href="{{ asset('/css/semantic.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/calendar.min.css') }}">
 
@@ -43,16 +43,12 @@
   </style>
 </head>
 <body>
-  <div class="ui secondary top fixed inverted red borderless menu">
+  <div class="ui secondary top fixed inverted blue borderless menu">
     <div class="container" style="padding: 10px 0 10px 10px;">
-      <img src="12logo.png">
+      <img src="{{assets('12logo.png')}}">
     </div>
     <h3 class="header item">Room Reservation System</h3>
-    <a class="item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
-    <a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-    <a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-    <a class="item" style="font-size: 110%" href = "{{url('/admin/equipments')}}">Equipments</a>
-    <a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
+    @yield('items')
     <div class="right menu">
       <div class="container" style="padding: 18px 10px 10px 0;">
         <form action="{{ url('/logout') }}" method="POST" style = "display: inline-block;">

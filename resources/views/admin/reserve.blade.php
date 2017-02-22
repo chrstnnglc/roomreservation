@@ -1,8 +1,17 @@
 @extends('admin.master')
-
+@section('name')
+<title>Reservations - Diocese of Cubao Reservation System</title>
+@stop
+@section('items')
+<a class="active item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/room')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
+@stop
 @section('content')
 
-<table class="ui celled red table">
+<table class="ui celled yellow table">
   <thead>
     <tr>
       <th>Date</th>
@@ -23,45 +32,14 @@
   </tbody>
 </table>
 
-<h3>Add Reservation</h3>
-
-<form class="ui form">
-  <div class="ui stacked segment">
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="user_name" placeholder="Insert user name here...">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="room" placeholder="Insert room being reserved here...">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="date" placeholder="Insert date here...">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="start_time" placeholder="Insert start time here...">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="end_time" placeholder="Insert end time here...">
-      </div>
-    </div>
-    <div class="container" style="padding: 0px 0px 10px 0px;">
-      <div class="ui fluid large red submit button">Add</div>
-    </div>
-    <div class="container" style="padding: 10px 0px 10px 0px;">
-    <div class="ui fluid large red submit button">Delete</div>
-    </div>
-    <div class="container" style="padding: 10px 0px 10px 0px;">
-    <div class="ui fluid large red submit button">Edit</div>
-    </div
-  </div>
+<div class="container" align="center">
+<div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+<a href="{{url('/admin/reserve_form')}}">
+<div class="ui fluid large yellow button" style="font-size: 75%;">New Reservation</div>
+</a>
+</div>
+</div>
+</form>
 </form>
 @stop
 

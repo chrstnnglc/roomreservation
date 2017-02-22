@@ -1,5 +1,5 @@
 // days of the week
-cal_days_labels = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
+cal_days_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // months
 cal_months_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Semptember', 'October', 'November', 'December'];
@@ -26,7 +26,7 @@ Calendar.prototype.generateHTML = function(){
     }
   }
   var monthName = cal_months_labels[this.month];
-  var html = '<table class="ui red celled table">';
+  var html = '<table class="ui fixed yellow celled table">';
   html += '<thead>';
   html +='<tr><th colspan="7">';
   html += monthName + "&nbsp;" + this.year;

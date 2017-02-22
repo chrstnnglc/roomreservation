@@ -2,7 +2,7 @@
 
 @section('content')
 
-<table class="ui celled red table">
+<table class="ui celled yellow table">
   <thead>
     <tr>
       <th>User Name</th>
@@ -38,7 +38,7 @@
 <h3>Add User</h3>
 
 <form class="ui form">
-  <div class="ui stacked segment">
+  <div class="ui yellow stacked segment">
   <div class="field">
     <div class="ui input">
       <input type="text" name="first_name" placeholder="First Name">

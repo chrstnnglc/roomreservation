@@ -18,6 +18,9 @@ Route::get('login', 'PagesController@login');
 Route::get('register', 'PagesController@register');
 Route::get('home', 'PagesController@yes');
 Route::get('profile', 'UserController@index');
+Route::get('reserve_form', 'PagesController@reserve_form');
+Route::get('reserve', 'PagesController@reserve');
+Route::get('user', 'PagesController@user');
 
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {
@@ -41,6 +44,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('admin/user', 'AdminController@user');
 	
 	Route::get('admin/reserve', 'AdminController@reserve');
+	Route::get('admin/logs', 'AdminController@logs');
+	Route::get('admin/payments', 'AdminController@payment');
 });
 
 /*

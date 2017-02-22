@@ -43,7 +43,7 @@
   </style>
 </head>
 <body>
-  <div class="ui secondary top fixed inverted red borderless menu">
+  <div class="ui secondary top fixed inverted blue borderless menu">
     <div class="container" style="padding: 10px 0 10px 10px;">
       <img src="12logo.png">
     </div>
@@ -52,14 +52,13 @@
 
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-    <h2 class="ui red image header">
-      <img src="sprite.png" class="image">
+    <h2>
       <div class="content">
-        Sign up for your account
+        Sign up for your account!
       </div>
     </h2>
     <form class="ui large form">
-      <div class="ui stacked segment">
+      <div class="ui yellow stacked segment">
         <div class="field">
           <div class="ui input">
             <input type="text" name="first_name" placeholder="First Name">
@@ -87,7 +86,7 @@
             <input type="password" name="password" placeholder="Password">
           </div>
         </div>
-        <div class="ui fluid large red submit button">Register!</div>
+        <div class="ui fluid large yellow submit button">Register!</div>
       </div>
 
       <div class="ui error message"></div>

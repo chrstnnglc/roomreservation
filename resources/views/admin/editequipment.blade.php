@@ -1,5 +1,14 @@
 @extends('admin.master')
-
+@section('name')
+<title>Equipment - Diocese of Cubao Reservation System</title>
+@stop
+@section('items')
+<a class="item" style="font-size: 110%" href = "{{url('/admin/reserve')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/room')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
+@stop
 @section('content')
 
 <br><br><br><br><br>
