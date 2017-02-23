@@ -23,17 +23,17 @@
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="date" value = "{{ $reserve->date }}">
+	        <input type="date" name="date" value = "{{ $reserve->date }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="starttime" value = "{{ $reserve->starttime }}">
+	        <input type="time" name="starttime" value = "{{ $reserve->starttime }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="endtime" value = "{{ $reserve->endtime }}">
+	        <input type="time" name="endtime" value = "{{ $reserve->endtime }}">
 	      </div>
 	    </div>
 	    <a href="{{url('/admin/reservations')}}">
