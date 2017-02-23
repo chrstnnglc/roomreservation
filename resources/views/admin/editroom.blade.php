@@ -10,33 +10,31 @@
 <a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
 @stop
 @section('content')
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+		<h1>Edit Room</h1>				
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1>Edit Room</h1>
+		<form method="POST">
+			{{ method_field('PUT') }}
+			{{ csrf_field() }}
+			<div class="ui yellow stacked segment">
+				<div class="field">
+					<input type="hidden" name="id" value="{{ $room->id }}">
 				</div>
-
-				<div class="panel-body">				
-
-                    <form method="POST" action="/admin/rooms/{{ $room->id }}">
-                        {{ method_field('PUT') }}
-                        {{ csrf_field() }}
-
-                        <div>
-                        	<input type="hidden" name="id" value="{{ $room->id }}">
-                        	Name: <input type="text" name="roomname" value={{ $room->name }}><br>
-					    	Rate: <input type="text" name="rate" value={{ $room->rate }}><br>
-						    Capacity: <input type="text" name="capacity" value={{ $room->capacity }}><br>
-                        </div>
-
-                        <button type="submit">Update</button>
-
-                    </form>
+				<div class="field">
+					<input type="text" name="roomname" value="{{ $room->name }}">
 				</div>
-		</div>
+				<div class="field">
+					<input type="text" name="rate" value="{{ $room->rate }}">
+				</div>
+				<div class="field">
+			  	<input type="text" name="capacity" value="{{ $room->capacity }}">
+			  </div>
+			</div>
+			<a href="{{url('/admin/rooms')}}">
+			<button class="ui fluid yellow button" type="submit">Update</button>
+			</a>
+		</form>
 	</div>
 </div>
 

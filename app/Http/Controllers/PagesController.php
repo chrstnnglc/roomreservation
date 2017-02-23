@@ -34,4 +34,7 @@ class PagesController extends Controller
     public function edit_user() {
         return view('user.edit_user');
     }
+    public function editroom() {
+        return view('editroom');
+    }
 }

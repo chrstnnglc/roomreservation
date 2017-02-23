@@ -34,22 +34,22 @@ body > .grid {
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="roomname" value="{{ $reserve->id }}">
+	        <input type="text" name="roomname" placeholder="Room Name">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="date" value = "{{ $reserve->date }}">
+	        <input type="text" name="date" placeholder = "Date">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="starttime" value = "{{ $reserve->starttime }}">
+	        <input type="text" name="starttime" placeholder = "Start Time">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="endtime" value = "{{ $reserve->endtime }}">
+	        <input type="text" name="endtime" placeholder = "End Time">
 	      </div>
 	    </div>
 	    <a href="{{url('/admin/reservations')}}">

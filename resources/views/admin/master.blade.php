@@ -45,7 +45,7 @@
 <body>
   <div class="ui secondary top fixed inverted blue borderless menu">
     <div class="container" style="padding: 10px 0 10px 10px;">
-      <img src="{{assets('12logo.png')}}">
+      <img src="{{asset('12logo.png')}}">
     </div>
     <h3 class="header item">Room Reservation System</h3>
     @yield('items')
