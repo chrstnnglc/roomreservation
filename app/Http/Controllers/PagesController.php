@@ -26,9 +26,9 @@ class PagesController extends Controller
         return view('user.reserve_form');
     }
 
-    public function reserve ()
+    public function reserve (Reservation $reserves)
     {
-      return view('user.reserve');
+      return view('user.reserve', compact('reserves'));
     }
 
     public function edit_user() {

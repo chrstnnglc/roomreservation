@@ -21,7 +21,6 @@ Route::get('reserve_form', 'PagesController@reserve_form');
 Route::get('reserve', 'PagesController@reserve');
 Route::get('user', 'PagesController@user');
 Route::get('edit_user', 'PagesController@edit_user');
-Route::get('editroom', 'PagesController@editroom');
 
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {

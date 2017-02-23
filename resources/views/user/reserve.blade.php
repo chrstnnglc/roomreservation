@@ -40,6 +40,7 @@
         </tr>
       </thead>
       <tbody>
+      @foreach ($reserves as $reserve)
         <tr>
           <td class="date"></td>
           <td class="room"></td>
@@ -55,6 +56,7 @@
             </div>
           </td>
         </tr>
+        @endforeach
       </tbody>
     </table>
     <div class="container" align="center">

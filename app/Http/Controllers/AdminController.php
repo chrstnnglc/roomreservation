@@ -32,7 +32,7 @@ class AdminController extends Controller
         $reserve->save();
 
         $reserves = Reservation::all();
-        return view('admin.reserve', compact('reserves'));
+        return view('admin.reserve_form', compact('reserves'));
     }
 
     public function rooms() {

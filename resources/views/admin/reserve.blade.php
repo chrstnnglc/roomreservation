@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-  @foreach ($rooms as $room)
+  @foreach ($reserves as $reserve)
     <tr>
       <td class="date"></td>
       <td class="user"></td>
