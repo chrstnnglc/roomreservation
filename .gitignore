@@ -7,5 +7,4 @@
 Homestead.json
 Homestead.yaml
 .env
-sqldump.sql
 /config/database.php
