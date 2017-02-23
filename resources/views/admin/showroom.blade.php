@@ -15,7 +15,7 @@ Room information here.
 
 Pati equipment.
 
-<table class="ui celled red table">
+<table class="ui celled yellow table">
 <tr>
 	<td class="room">{{ $room->name }}</td>
 	<td class="rates">{{ $room->capacity }}</td>

@@ -23,9 +23,6 @@
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="{{asset('/js/semantic.min.js')}}"></script>
-  <script src="{{asset('/js/calendar.min.js')}}"></script>
-  <script src="{{asset('/js/login.js')}}"></script>
-
 
   <style type="text/css">
     body {
@@ -73,7 +70,7 @@
               <input type="password" name="password" placeholder="Password">
             </div>
           </div>
-          <div ><button type = "submit" class="ui fluid large yellow submit button">Login</button></div>
+          <div><button type = "submit" class="ui fluid large yellow submit button">Login</button></div>
         </div>
 
         <div class="ui error message"></div>

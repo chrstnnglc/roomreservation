@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('user.menu')
 @section('name')
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
@@ -27,29 +27,32 @@ body > .grid {
 @section('content')
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-	<form class="ui large form">
+  	<h3> Reservation Form </h3>
+	<form class="ui large form" method="POST" action="/admin/reservations/{{ $reserve->id }}">
+	{{ method_field('PUT') }}
+	{{ csrf_field() }}
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="room_name" placeholder="Room Name">
+	        <input type="text" name="roomname" value="{{ $reserve->id }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="date" placeholder="Date">
+	        <input type="text" name="date" value = "{{ $reserve->date }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="start_time" placeholder="Start Time">
+	        <input type="text" name="starttime" value = "{{ $reserve->starttime }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="end_time" placeholder="End Time">
+	        <input type="text" name="endtime" value = "{{ $reserve->endtime }}">
 	      </div>
 	    </div>
-	    <a href="{{url('reserve')}}">
+	    <a href="{{url('/admin/reservations')}}">
 	    <div class="container" align="center">
 	    <div class="conatiner" style="width: 50%;">
 	    <div class="ui fluid large yellow submit button">Submit!</div></a>
@@ -59,3 +62,8 @@ body > .grid {
 	</div>
 </div>
 @stop
+
+<!-- <input type="hidden" name="id" value="{{ $room->id }}">
+Name: <input type="text" name="roomname" value={{ $room->name }}><br>
+Rate: <input type="text" name="rate" value={{ $room->rate }}><br>
+Capacity: <input type="text" name="capacity" value={{ $room->capacity }}><br> -->

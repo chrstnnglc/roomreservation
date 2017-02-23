@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('user.menu')
 @section('name')
 <title>User - Diocese of Cubao Reservation System</title>
 @stop
@@ -53,11 +53,13 @@
         </tr>
       </tbody>
     </table>
+    <a href="{{url('edit_user')}}">
     <div class="container">
-      <div class="ui blue button">
+      <div class="ui yellow button">
         Edit Details
       </div>
     </div>
+    </a>
   </div>
 </div>
 @stop

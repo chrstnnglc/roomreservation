@@ -12,29 +12,31 @@
 @section('content')
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-	<form class="ui large form">
+	<form class="ui large form" method="POST" action="/admin/reservations/{{ $reserve->id }}">
+	{{ method_field('PUT') }}
+	{{ csrf_field() }}
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="room_name" placeholder="Room Name">
+	        <input type="text" name="roomname" value="{{ $reserve->id }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="date" placeholder="Date">
+	        <input type="text" name="date" value = "{{ $reserve->date }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="start_time" placeholder="Start Time">
+	        <input type="text" name="starttime" value = "{{ $reserve->starttime }}">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="end_time" placeholder="End Time">
+	        <input type="text" name="endtime" value = "{{ $reserve->endtime }}">
 	      </div>
 	    </div>
-	    <a href="{{url('/admin/reserve')}}">
+	    <a href="{{url('/admin/reservations')}}">
 	    <div class="container" align="center">
 	    <div class="conatiner" style="width: 50%;">
 	    <div class="ui fluid large yellow submit button">Submit!</div></a>

@@ -27,9 +27,11 @@
     @yield('items')
     <div class="right menu">
       <div class="container" style="padding: 18px 10px 10px 0;">
+      <a href="{{url('login')}}">
         <div class="ui button" style="font-size: 75%;">
           Logout
         </div>
+        </a>
       </div>
     </div>
   </div>

@@ -13,9 +13,26 @@ use App\Room;
 
 class AdminController extends Controller
 {
-    public function reserve(Reservation $reserve) {
+    public function reservations(Reservation $reserve) {
         $reserves = Reservation::all();
     	return view('admin.reserve', compact('reserves'));
+    }
+    public function reserve_form(Reservation $reserve) {
+        $reserves = Reservation::all();
+        return view('admin.reserve_form', compact('reserve'));
+    }
+    public function addreservation(Request $request) {
+        $reserve = new Reservation;
+        
+        $reserve->name = $request->roomname;
+        $reserve->date = $request->rate;
+        $reserve->starttime = $request->starttime;
+        $reserve->endtime = $request->endtime;
+
+        $reserve->save();
+
+        $reserves = Reservation::all();
+        return view('admin.reserve', compact('reserves'));
     }
 
     public function rooms() {

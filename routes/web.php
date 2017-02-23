@@ -17,10 +17,10 @@ Route::get('/', 'PagesController@yes');
 Route::get('login', 'PagesController@login');
 Route::get('register', 'PagesController@register');
 Route::get('home', 'PagesController@yes');
-Route::get('profile', 'UserController@index');
 Route::get('reserve_form', 'PagesController@reserve_form');
 Route::get('reserve', 'PagesController@reserve');
 Route::get('user', 'PagesController@user');
+Route::get('edit_user', 'PagesController@edit_user');
 
 // Get routes for AdminController
 Route::group(['middleware' => 'admin'], function () {
@@ -33,6 +33,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::put('admin/rooms/{room}','AdminController@updateroom');
 
 	Route::get('admin/reservations', 'AdminController@reservations');
+	Route::get('admin/reserve_form', 'AdminController@reserve_form');
 
 	Route::get('admin/equipments', 'AdminController@equipment');
 	Route::post('admin/equipments', 'AdminController@addequipment');

@@ -1,4 +1,4 @@
-@extends('menu')
+@extends('user.menu')
 @section('name')
 <title>Calendar - Diocese of Cubao Reservation System</title>
 @stop
