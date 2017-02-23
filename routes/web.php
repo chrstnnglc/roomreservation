@@ -44,7 +44,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 	Route::get('admin/user', 'AdminController@user');
 	
-	Route::get('admin/reserve', 'AdminController@reserve');
 	Route::get('admin/logs', 'AdminController@logs');
 	Route::get('admin/payments', 'AdminController@payment');
 });

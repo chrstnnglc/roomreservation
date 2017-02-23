@@ -5,9 +5,9 @@
 @section('items')
 <a class="active item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/room')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/log')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/equipments')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
 @stop
 @section('content')
 
