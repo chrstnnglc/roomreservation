@@ -24,11 +24,11 @@
   <tbody>
   @foreach ($reserves as $reserve)
     <tr>
-      <td class="date"></td>
-      <td class="user"></td>
-      <td class="room"></td>
-      <td class="start_time"></td>
-      <td class="end_time"></td>
+      <td class="date">{{ $reserve->date }}</td>
+      <td class="user">{{ $reserve->user }}</td>
+      <td class="room">{{ $reserve->room }}</td>
+      <td class="start_time">{{ $reserve->starttime }}</td>
+      <td class="end_time">{{ $reserve->endtime }}</td>
     </tr>
   @endforeach
   </tbody>
