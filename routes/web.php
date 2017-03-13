@@ -13,10 +13,11 @@
 // Get routes for PagesController
 Auth::routes();
 
-Route::get('/', 'PagesController@yes');
+Route::get('/', 'PagesController@login');
 Route::get('login', 'PagesController@login');
+Route::get('success', 'PagesController@success');
 Route::get('register', 'PagesController@register');
-Route::get('home', 'PagesController@yes');
+// Route::get('home', 'PagesController@yes');
 Route::get('reserve_form', 'PagesController@reserve_form');
 Route::get('reserve', 'PagesController@reserve');
 Route::get('user', 'PagesController@user');
@@ -33,10 +34,11 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::put('admin/rooms/{room}','AdminController@updateroom');
 
 	Route::get('admin/reservations', 'AdminController@reservations');
+	Route::post('admin/reservations', 'AdminController@addreservation');
 	Route::get('admin/reserve_form', 'AdminController@reserve_form');
 
-	Route::get('admin/equipments', 'AdminController@equipment');
-	Route::post('admin/equipments', 'AdminController@addequipment');
+	Route::get('admin/equipment', 'AdminController@equipment');
+	Route::post('admin/equipment', 'AdminController@addequipment');
 	Route::get('admin/equipments/{equipment}', 'AdminController@showequipment');
 	Route::get('admin/equipments/{equipment}/editequipment', 'AdminController@editequipment');
 	Route::put('admin/equipments/{equipment}','AdminController@updateequipment');
@@ -80,6 +82,10 @@ Route::post('media/user/{user}','MediaController@deleteuser');
 
 Route::get('media/logs', 'MediaController@logs');
 #});
+
+
+Route::get('treasury/reservations', 'TreasuryController@reservations');
+Route::patch('treasury/reservation/{reserve}', 'TreasuryController@updatereservation');
 
 /*
 

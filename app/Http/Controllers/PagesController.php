@@ -3,17 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
-    public function login ()
-    {
-    	return view('login');
+    public function login() {
+        if (Auth::check()) {
+            return redirect('/success');
+        } else {
+            return view('login');
+        }
     }
 
-    public function yes() {
-    	return view('user.yes');
+    public function success(Request $request) {
+        // return $request->user();
+        if ($request->user()->users_role == "admin") {
+            return redirect('admin/reservations');
+        } else if ($request->user()->users_role == "media") {
+            return redirect('media/reservations');
+        } else if ($request->user()->users_role == "treasury") {
+            return redirect('treasury/reservations');
+        } else if ($request->user()->users_role == "user") {
+            return redirect('user/reservations');
+        } else {
+            return redirect('login');
+        }
     }
+
+    // public function yes() {
+    // 	return view('user.yes');
+    // }
 
     public function register() {
     	return view('register');

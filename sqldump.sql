@@ -40,17 +40,17 @@ CREATE TABLE Equipment (
 	model varchar(50) NOT NULL,
 	price integer NOT NULL,
 	condition varchar(50) NOT NULL,
-	room_id integer REFERENCES Rooms (id) NOT NULL,
+	room_id integer REFERENCES Rooms (id) NOT NULL
 );
 
 CREATE TABLE Reservations (
 	id SERIAL PRIMARY KEY,
 	user_id integer REFERENCES Users (id) NOT NULL,
 	room_id integer REFERENCES Rooms (id) NOT NULL,
-	date_of_reservation timestamp NOT NULL,
+	date_of_reservation date NOT NULL,
 	date_reserved timestamp NOT NULL,
-	start_of_reserved timestamp NOT NULL,
-	end_of_reserved timestamp NOT NULL,
+	start_of_reserved time NOT NULL,
+	end_of_reserved time NOT NULL,
 	hours integer NOT NULL,
 	price integer NOT NULL,
 	date_paid timestamp,

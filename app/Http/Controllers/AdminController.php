@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Product;
@@ -13,26 +14,35 @@ use App\Room;
 
 class AdminController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function reservations(Reservation $reserve) {
         $reserves = Reservation::all();
     	return view('admin.reserve', compact('reserves'));
     }
     public function reserve_form(Reservation $reserve) {
-        $reserves = Reservation::all();
-        return view('admin.reserve_form', compact('reserve'));
+        // $reserves = Reservation::all();
+        return view('admin.reserve_form');
     }
+    
     public function addreservation(Request $request) {
         $reserve = new Reservation;
+        $user = User::where('username',$request->username)->first();
+        $reserve->user_id = $user->id;
+        $room = Room::where('name',$request->roomname)->first();
+        $reserve->room_id = $room->id;
+        $reserve->date_of_reservation = date("Y-m-d h:i:sa");
+        $reserve->date_reserved = $request->date;
+        $reserve->start_of_reserved = $request->starttime;
+        $reserve->end_of_reserved = $request->endtime;
+        $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
+        $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
+    	$reserve->reservations_status = 'not paid';
         
-        $reserve->name = $request->roomname;
-        $reserve->date = $request->rate;
-        $reserve->starttime = $request->starttime;
-        $reserve->endtime = $request->endtime;
-
         $reserve->save();
-
-        $reserves = Reservation::all();
-        return view('admin.reserve_form', compact('reserves'));
+        return redirect('admin/reservations');
     }
 
     public function rooms() {
@@ -151,7 +161,7 @@ class AdminController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;
@@ -172,7 +182,7 @@ class AdminController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;

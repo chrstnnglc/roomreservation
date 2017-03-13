@@ -13,6 +13,10 @@ use App\Room;
 
 class MediaController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function reservations(Reservation $reserve) {
         $reserves = Reservation::all();
     	return view('media.reserve', compact('reserves'));
@@ -151,7 +155,7 @@ class MediaController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;
@@ -172,7 +176,7 @@ class MediaController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;
