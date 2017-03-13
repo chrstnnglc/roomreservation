@@ -1,13 +1,13 @@
-@extends('admin.master')
+@extends('media.master')
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/equipments')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/user')}}">Users</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/media/equipments')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -34,7 +34,7 @@
       <td class="condition">{{$equip->condition}}</td>
       <td class="room_id">{{$equip->room_id}}</td>
       <td class="options">
-        <button><a href="/admin/equipments/{{ $equip->id }}">View Equipment</a></button>
+        <button><a href="/media/equipments/{{ $equip->id }}">View Equipment</a></button>
       </td>
     </tr>
     @endforeach
@@ -43,7 +43,7 @@
 
 <h3>Add Equipment</h3>
 
-<form method="POST" class="ui form" action="/admin/equipments">
+<form method="POST" class="ui form" action="/media/equipments">
   {{ csrf_field() }}
   <div class="ui yellow stacked segment">
     <div class="field">
@@ -76,7 +76,7 @@
         <input type="text" name="room_id" placeholder="Room ID">
       </div>
     </div>
-    <a href="{{url('/admin/equipment')}}">
+    <a href="{{url('/media/equipment')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>
 

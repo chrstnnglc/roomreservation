@@ -11,15 +11,15 @@ use App\Reservation;
 use App\Equipment;
 use App\Room;
 
-class AdminController extends Controller
+class MediaController extends Controller
 {
     public function reservations(Reservation $reserve) {
         $reserves = Reservation::all();
-    	return view('admin.reserve', compact('reserves'));
+    	return view('media.reserve', compact('reserves'));
     }
     public function reserve_form(Reservation $reserve) {
         $reserves = Reservation::all();
-        return view('admin.reserve_form', compact('reserve'));
+        return view('media.reserve_form', compact('reserve'));
     }
     public function addreservation(Request $request) {
         $reserve = new Reservation;
@@ -32,16 +32,16 @@ class AdminController extends Controller
         $reserve->save();
 
         $reserves = Reservation::all();
-        return view('admin.reserve_form', compact('reserves'));
+        return view('media.reserve_form', compact('reserves'));
     }
 
     public function rooms() {
         $rooms = Room::all();
-    	return view('admin.rooms', compact('rooms'));
+    	return view('media.rooms', compact('rooms'));
     }
 
     public function showroom(Room $room) {
-        return view('admin.showroom', compact('room'));
+        return view('media.showroom', compact('room'));
     }
 
     public function addroom(Request $request) {
@@ -54,11 +54,11 @@ class AdminController extends Controller
         $room->save();
 
         $rooms = Room::all();
-        return view('admin.rooms', compact('rooms'));
+        return view('media.rooms', compact('rooms'));
     }
 
     public function editroom (Room $room) {
-        return view('admin.editroom', compact('room'));
+        return view('media.editroom', compact('room'));
     }
 
     public function updateroom (Request $request, Room $room) {
@@ -69,7 +69,7 @@ class AdminController extends Controller
 
         $room->save();
 
-        $url = 'admin/rooms/' . $room->id;
+        $url = 'media/rooms/' . $room->id;
 
         return redirect($url);
 
@@ -79,17 +79,17 @@ class AdminController extends Controller
         $room = Room::where('id', $request->id)->first();
         $room->delete();
 
-        return redirect('admin/rooms');
+        return redirect('media/rooms');
     }
 
 
     public function equipment() {
         $equipments = Equipment::all();
-        return view('admin.equipments', compact('equipments'));
+        return view('media.equipments', compact('equipments'));
     }
 
     public function showequipment(Equipment $equipment) {
-        return view('admin.showequipment', compact('equipment'));
+        return view('media.showequipment', compact('equipment'));
     }
 
     public function addequipment(Request $request) {
@@ -105,11 +105,11 @@ class AdminController extends Controller
         $equipment->save();
 
         $equipments = Equipment::all();
-        return view('admin.equipments', compact('equipments'));
+        return view('media.equipments', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {
-        return view('admin.editequipment', compact('equipment'));
+        return view('media.editequipment', compact('equipment'));
     }
 
     public function updateequipment(Request $request, Equipment $equipment) {
@@ -123,7 +123,7 @@ class AdminController extends Controller
 
         $equipment->save();
 
-        $url = 'admin/equipments/' . $equipment->id;
+        $url = 'media/equipments/' . $equipment->id;
 
         return redirect($url);
     }
@@ -132,16 +132,16 @@ class AdminController extends Controller
         $equipment = Equipment::where('id', $request->id)->first();
         $equipment->delete();
 
-        return redirect('admin/equipments');
+        return redirect('media/equipments');
     }
 
     public function user(User $user) {
         $users = User::all();
-    	return view('admin.user', compact('users'));
+    	return view('media.user', compact('users'));
     }
 
     public function showuser(User $user) {
-        return view('admin.showuser', compact('user'));
+        return view('media.showuser', compact('user'));
     }
 
     public function adduser(Request $request) {
@@ -159,11 +159,11 @@ class AdminController extends Controller
         $user->save();
 
         $users = User::all();
-        return view('admin.user', compact('users'));
+        return view('media.user', compact('users'));
     }
 
     public function edituser(User $user) {
-        return view('admin.edituser', compact('user'));
+        return view('media.edituser', compact('user'));
     }
 
     public function updateuser(Request $request, User $user) {
@@ -179,7 +179,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        $url = 'admin/user/' . $user->id;
+        $url = 'media/user/' . $user->id;
 
         return redirect($url);
     }
@@ -188,7 +188,6 @@ class AdminController extends Controller
         $user = User::where('id', $request->id)->first();
         $user->delete();
 
-        return redirect('admin/user');
+        return redirect('media/user');
     }
-
 }

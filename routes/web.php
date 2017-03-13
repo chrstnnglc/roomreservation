@@ -43,10 +43,43 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('admin/equipments/{equipment}','AdminController@deleteequipment');
 
 	Route::get('admin/user', 'AdminController@user');
+	Route::post('admin/user', 'AdminController@adduser');
+	Route::get('admin/user/{user}', 'AdminController@showuser');
+	Route::get('admin/user/{user}/edituser', 'AdminController@edituser');
+	Route::put('admin/user/{user}','AdminController@updateuser');
+	Route::post('admin/user/{user}','AdminController@deleteuser');
 	
 	Route::get('admin/logs', 'AdminController@logs');
 	Route::get('admin/payments', 'AdminController@payment');
 });
+
+#Route::group(['middleware' => 'media'], function () {
+Route::get('media/rooms', 'MediaController@rooms');
+Route::get('media/rooms/{room}', 'MediaController@showroom');
+Route::post('media/rooms', 'MediaController@addroom');
+Route::get('media/rooms/{room}/editroom', 'MediaController@editroom');
+Route::post('media/rooms/{room}','MediaController@deleteroom');
+Route::put('media/rooms/{room}','MediaController@updateroom');
+
+Route::get('media/reservations', 'MediaController@reservations');
+Route::get('media/reserve_form', 'MediaController@reserve_form');
+
+Route::get('media/equipments', 'MediaController@equipment');
+Route::post('media/equipments', 'MediaController@addequipment');
+Route::get('media/equipments/{equipment}', 'MediaController@showequipment');
+Route::get('media/equipments/{equipment}/editequipment', 'MediaController@editequipment');
+Route::put('media/equipments/{equipment}','MediaController@updateequipment');
+Route::post('media/equipments/{equipment}','MediaController@deleteequipment');
+
+Route::get('media/user', 'MediaController@user');
+Route::post('media/user', 'MediaController@adduser');
+Route::get('media/user/{user}', 'MediaController@showuser');
+Route::get('media/user/{user}/edituser', 'MediaController@edituser');
+Route::put('media/user/{user}','MediaController@updateuser');
+Route::post('media/user/{user}','MediaController@deleteuser');
+
+Route::get('media/logs', 'MediaController@logs');
+#});
 
 /*
 
