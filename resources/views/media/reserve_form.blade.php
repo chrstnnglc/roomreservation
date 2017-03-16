@@ -5,41 +5,46 @@
 @section('items')
 <a class="active item" style="font-size: 110%" href = "{{url('/media/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/media/equipments')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/logs')}}">Logs</a>
 @stop
 @section('content')
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-	<form class="ui large form" method="POST" action="/media/reservations/{{ $reserve->id }}">
-	{{ method_field('PUT') }}
+	<form class="ui large form" method="POST" action="{{ url('media/reservations')}}">
+	<!--{{ method_field('PUT') }}-->
 	{{ csrf_field() }}
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="roomname" value="{{ $reserve->id }}">
+	        <input type="text" name="roomname" placeholder="Enter room name">
+	      </div>
+	    </div>
+			<div class="field">
+	      <div class="ui input">
+	        <input type="text" name="username" placeholder = "Enter user name">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="date" name="date" value = "{{ $reserve->date }}">
+	        <input type="date" name="date" value = "">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="starttime" value = "{{ $reserve->starttime }}">
+	        <input type="time" name="starttime" value = "">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="endtime" value = "{{ $reserve->endtime }}">
+	        <input type="time" name="endtime" value = "">
 	      </div>
 	    </div>
-	    <a href="{{url('/media/reservations')}}">
+	    <!--<a href="{{url('/media/reservations')}}">-->
 	    <div class="container" align="center">
 	    <div class="conatiner" style="width: 50%;">
-	    <div class="ui fluid large yellow submit button">Submit!</div></a>
+	    <input class="ui fluid large yellow submit button" type = "submit" value = "Submit!"/>
 	    </div>
 	  </div>
 	  </form>
