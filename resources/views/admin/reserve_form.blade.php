@@ -28,17 +28,17 @@
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="date" name="date" value = "">
+	        <input type="date" name="date" value = "" placeholder="mm/dd/yyyy">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="starttime" value = "">
+	        <input type="time" name="starttime" value = "" placeholder="hh:mm">
 	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="endtime" value = "">
+	        <input type="time" name="endtime" value = "" placeholder="hh:mm">
 	      </div>
 	    </div>
 	    <!--<a href="{{url('/admin/reservations')}}">-->

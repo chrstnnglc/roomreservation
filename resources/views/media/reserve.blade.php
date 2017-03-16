@@ -5,7 +5,7 @@
 @section('items')
 <a class="active item" style="font-size: 110%" href = "{{url('/media/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/media/equipments')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/media/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/media/logs')}}">Logs</a>
 @stop
@@ -14,21 +14,29 @@
 <table class="ui celled yellow table">
   <thead>
     <tr>
-      <th>Date</th>
+      <th>Date Reserved</th>
       <th>User</th>
       <th>Room</th>
+      <th>Date of Reservation</th>
       <th>Start Time</th>
       <th>End Time</th>
+      <th>Hours</th>
+      <th>Price</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
   @foreach ($reserves as $reserve)
     <tr>
-      <td class="date">{{ $reserve->date }}</td>
-      <td class="user">{{ $reserve->user }}</td>
-      <td class="room">{{ $reserve->room }}</td>
-      <td class="start_time">{{ $reserve->starttime }}</td>
-      <td class="end_time">{{ $reserve->endtime }}</td>
+      <td class="room">{{ $reserve->date_reserved }}</td>
+      <td class="user">{{ $reserve->user_id }}</td>
+      <td class="room">{{ $reserve->room_id }}</td>
+      <td class="date">{{ $reserve->date_of_reservation }}</td>
+      <td class="start_time">{{ $reserve->start_of_reserved }}</td>
+      <td class="end_time">{{ $reserve->end_of_reserved }}</td>
+      <td class="hours">{{ $reserve->hours }}</td>
+      <td class="price">{{ $reserve->price }}</td>
+      <td class="status">{{ $reserve->reservations_status }}</td>
     </tr>
   @endforeach
   </tbody>
