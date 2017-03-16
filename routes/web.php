@@ -13,7 +13,7 @@
 // Get routes for PagesController
 Auth::routes();
 
-Route::get('/', 'PagesController@login');
+Route::get('/', 'PagesController@login'); // dapat index pero sige ito muna
 Route::get('login', 'PagesController@login');
 Route::get('success', 'PagesController@success');
 Route::get('register', 'PagesController@register');

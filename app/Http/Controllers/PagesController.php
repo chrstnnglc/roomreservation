@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
+    public function index() {
+     return view('index');
+    }
+
     public function login() {
         if (Auth::check()) {
             return redirect('/success');
@@ -29,10 +33,6 @@ class PagesController extends Controller
             return redirect('login');
         }
     }
-
-    // public function yes() {
-    // 	return view('user.yes');
-    // }
 
     public function register() {
     	return view('register');
