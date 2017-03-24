@@ -35,31 +35,11 @@
 </table>
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
-<h3>Add Rooms</h3>
-
-<form method="POST" class="ui form" action="/rooms">
-  {{ csrf_field() }}
-  <div class="ui yellow stacked segment">
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="roomname" placeholder="Name">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="rate" placeholder="Rate">
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui input">
-        <input type="text" name="capacity" placeholder="Capacity">
-      </div>
-    </div>
-   <a href="{{url('/rooms')}}">
-      <button class="ui yellow fluid button" type="submit">Add</button>
-    </a>
-  </div>
-</form>
+<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+<a href="{{url('/rooms/room_form')}}">
+  <button class="ui yellow fluid button">Add Equipment</button>
+</a>
+</div>
 @endif
 @stop
 
