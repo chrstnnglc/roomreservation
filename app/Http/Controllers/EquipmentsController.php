@@ -12,6 +12,11 @@ class EquipmentsController extends Controller
         return view('equipments.index', compact('equipments'));
     }
 
+    public function equipment_form() {
+        $equipments = Equipment::all();
+        return view('equipments.equipments_form', compact('equipments'));
+    }
+
     public function showequipment(Equipment $equipment) {
         return view('showequipment', compact('equipment'));
     }

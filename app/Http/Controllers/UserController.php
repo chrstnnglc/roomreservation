@@ -19,6 +19,11 @@ class UserController extends Controller
         return view('reservations', compact('user'));
     }
 
+    public function user_form(User $user) {
+        $users = User::all();
+        return view('admin.users_form', compact('users'));
+    }
+
     public function userslist(User $user) {
         $users = User::all();
     	return view('user', compact('users'));
