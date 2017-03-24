@@ -1,68 +1,88 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
+  <!-- Site Properties -->
+  <title>Login - Diocese of Cubao Reservation System</title>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/semantic.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/calendar.min.css') }}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/divider.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/segment.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/form.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/input.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/button.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/list.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/message.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/icon.css') }}">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="{{asset('/js/semantic.min.js')}}"></script>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+  <style type="text/css">
+    body {
+      background-color: #DADADA;
+      overflow: auto;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui secondary top fixed inverted blue borderless menu">
+    <div class="container" style="padding: 10px 0 10px 10px;">
+      <img src="12logo.png">
     </div>
-</div>
-@endsection
+    <h3 class="header item">Room Reservation System</h3>
+  </div>
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2>
+        <div class="content">
+          Log-in to your account
+        </div>
+      </h2>
+      <form class="ui large form" method = "POST" action = "{{url('/login')}}" >
+      {{ csrf_field() }}
+        <div class="ui yellow stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" placeholder="Username">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div><button type = "submit" class="ui fluid large yellow submit button">Login</button></div>
+        </div>
+
+        <div class="ui error message"></div>
+
+      </form>
+
+      <div class="ui message">
+        New to us? <li style = "list-style-type: none"><a href="/register">Sign Up!</a></li>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
