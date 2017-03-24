@@ -1,20 +1,20 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 <div class="ui middle aligned center aligned grid">
   <div class="column">
 	<h1>Room</h1>				
 
-		<form class="ui large form" method="POST" action="/admin/rooms/{{ $room->id }}">
+		<form class="ui large form" method="POST" action="/rooms/{{ $room->id }}">
 			{{ method_field('PUT') }}
 			{{ csrf_field() }}
 			<div class="ui yellow stacked segment">
@@ -31,7 +31,7 @@
 			  	<input type="text" name="capacity" value="{{ $room->capacity }}">
 			  </div>
 			</div>
-			<a href="{{url('/admin/rooms')}}">
+			<a href="{{url('/rooms')}}">
 	        	<button class="ui yellow fluid button" type="submit">Update</button>
 	    	</a>
 	    </form>

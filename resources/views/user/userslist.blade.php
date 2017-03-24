@@ -1,10 +1,10 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -31,7 +31,7 @@
             <td class="affiliation">{{ $user->affiliation }}</td>
             <td class="users_role">{{$user->users_role}}</td>
             <td class="options">
-              <button><a href="/admin/user/{{ $user->id }}">View User</a></button>
+              <button><a href="/user/{{ $user->id }}">View User</a></button>
             </td>
             <!-- <td><button><a href = "/manage/users/{{$user->id}}/edit">Edit</a> </button>
                 <form action = "/manage/users/{{$user->id}}" method="POST" onsubmit = "return confirm('Do you really want to delete this user?');">
@@ -50,7 +50,7 @@
 
 <h3>Add User</h3>
 
-<form method="POST" class="ui form" action="/admin/user">
+<form method="POST" class="ui form" action="/user">
   {{ csrf_field() }}
   <div class="ui yellow stacked segment">
   <div class="field">
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>-->
-    <a href="{{url('/admin/user')}}">
+    <a href="{{url('/user')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>
   </div>

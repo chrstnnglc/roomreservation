@@ -1,13 +1,13 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('name')
 <title>Rooms - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -21,12 +21,12 @@ Pati equipment.
 	<td class="rates">{{ $room->capacity }}</td>
 	<td class="capacity">{{ $room->rate }}</td>
 	<td class="options">
-		<button><a href="/admin/rooms/{{ $room->id }}/editroom">Edit</a></button>
+		<button><a href="/rooms/{{ $room->id }}/editroom">Edit</a></button>
 	</td>
 	</tr>
 </table>
 
-<form method="POST" action="/admin/rooms/{{ $room->id }}">
+<form method="POST" action="/rooms/{{ $room->id }}">
 	{{ csrf_field() }}
 	
 	<input type="hidden" name="id" value="{{ $room->id }}">

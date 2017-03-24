@@ -1,13 +1,13 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('name')
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -44,7 +44,7 @@
 
 <div class="container" align="center">
 <div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-<a href="{{url('/admin/reserve_form')}}">
+<a href="{{url('/reserve_form')}}">
 <div class="ui fluid large yellow button" style="font-size: 75%;">New Reservation</div>
 </a>
 </div>

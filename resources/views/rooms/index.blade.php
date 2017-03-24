@@ -1,13 +1,13 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('name')
 <title>Rooms - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -27,16 +27,17 @@
             <td class="rates">{{ $room->capacity }}</td>
             <td class="capacity">{{ $room->rate }}</td>
             <td class="options">
-              <button><a href="/admin/rooms/{{ $room->id }}">View Room</a></button>
+              <button><a href="/rooms/{{ $room->id }}">View Room</a></button>
             </td>
             </tr>
     @endforeach
 </tbody>
 </table>
 
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
 <h3>Add Rooms</h3>
 
-<form method="POST" class="ui form" action="/admin/rooms">
+<form method="POST" class="ui form" action="/rooms">
   {{ csrf_field() }}
   <div class="ui yellow stacked segment">
     <div class="field">
@@ -54,11 +55,12 @@
         <input type="text" name="capacity" placeholder="Capacity">
       </div>
     </div>
-   <a href="{{url('/admin/rooms')}}">
+   <a href="{{url('/rooms')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>
   </div>
 </form>
+@endif
 @stop
 
 <!--  -->
