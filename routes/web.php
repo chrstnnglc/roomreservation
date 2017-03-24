@@ -32,6 +32,7 @@ Route::post('rooms', 'RoomsController@addroom');
 Route::get('rooms/{room}/editroom', 'RoomsController@editroom');
 Route::post('rooms/{room}','RoomsController@deleteroom');
 Route::put('rooms/{room}','RoomsController@updateroom');
+Route::get('rooms/rooms_form', 'RoomsController@room_form');
 
 Route::get('equipment', 'EquipmentsController@index');
 Route::post('equipment', 'EquipmentsController@addequipment');
@@ -39,6 +40,7 @@ Route::get('equipments/{equipment}', 'EquipmentsController@showequipment');
 Route::get('equipments/{equipment}/editequipment', 'EquipmentsController@editequipment');
 Route::put('equipments/{equipment}','EquipmentsController@updateequipment');
 Route::post('equipments/{equipment}','EquipmentsController@deleteequipment');
+Route::get('equipments/equipment_form', 'EquipmentsController@equipment_form');
 
 Route::get('reservations', 'ReservationsController@index');
 Route::post('reservations', 'ReservationsController@addreservation');
