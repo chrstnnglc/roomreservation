@@ -23,12 +23,16 @@
       </thead>
       <tbody>
             <tr>
-                <td class="log_no"></td>
-                <td class="date"></td>
-                <td class="reservation"></td>
-                <td class="user"></td>
+                <td class="id"></td>
+                <td class="user_id"></td>
             </tr>
         </tr>
+        @foreach ($logs as $log)
+            <tr>
+            <td class="id">{{ $log->id }}</td>
+            <td class="user_id">{{ $log->user_id }}</td>
+            </tr>
+    @endforeach
       </tbody>
     </table>
   </div>

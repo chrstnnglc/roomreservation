@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Reservation;
 use App\User;
 use App\Room;
-
+use App\Log;
 
 class ReservationsController extends Controller
 {
@@ -41,7 +41,7 @@ class ReservationsController extends Controller
             $user = User::where('username',$request->username)->first();
             $reserve->user_id = $user->id;
         } else {
-            $reserve->user_id = $user->user_id;
+            $reserve->user_id = $user->id;
         }
         $room = Room::where('name',$request->roomname)->first();
         $reserve->room_id = $room->id;
@@ -49,11 +49,19 @@ class ReservationsController extends Controller
         $reserve->date_reserved = $request->date;
         $reserve->start_of_reserved = $request->starttime;
         $reserve->end_of_reserved = $request->endtime;
-        $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
+        $reserve->hours = abs((strtotime($request->endtime) - strtotime($request->starttime))/3600);
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
     	$reserve->reservations_status = 'not paid';
         
         $reserve->save();
+
+        $log = new Log;
+
+        $log->user_id = $request->user()->id;
+        $log->date_of_reservation = date("Y-m-d h:i:sa");
+        $log->remarks = "Add Reservation";
+
+        $log->save();
         return redirect('reservations');
     }
 }

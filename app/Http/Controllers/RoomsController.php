@@ -31,6 +31,7 @@ class RoomsController extends Controller
         $room->save();
 
         $rooms = Room::all();
+
         return view('rooms.index', compact('rooms'));
     }
 
