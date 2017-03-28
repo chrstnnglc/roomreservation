@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Reservation;
 use App\User;
 use App\Room;
@@ -16,11 +17,16 @@ class ReservationsController extends Controller
     }
 
     public function index(Reservation $reserve) {
-        $reserves = Reservation::all();
-        /* If regular user: show only user's reservations
-            Else, show all reservations */
-            
-    	return view('reservations.index', compact('reserves'));
+        $user = Auth::user();
+
+        if ($user->role == 'admin' or $user->role == 'media' or $user->role == 'treasury') {
+            $reserves = Reservation::all();
+            return view('reservations.index', compact('reserves'));
+        } else {
+            $reserves = Reservation::where('user_id', $user->id);
+            return view('reservations.index', compact('reserves'));    
+        }
+    	
     }
 
     public function form() {
