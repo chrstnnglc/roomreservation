@@ -17,7 +17,7 @@
 		@if (count($errors) > 0)
 		<div class = "ui left aligned inverted red stacked segment">
 			<i class="warning icon"></i>
-			Can't add!
+			Can't update!
 			<ul>
 				@foreach ($errors->all() as $error)
 					<li class = "">{{ $error }}</li>
@@ -45,14 +45,11 @@
 			    <div class="field">
 		    		<input type="text" name="condition" value="{{ $equipment->condition }}">
 		    	</div>
-		    	<div class="field">
-
-					<input type="text" name="room" value="{{ $equipment->room_id }}">
-			    
-				</div>
 
 				<div class="field">
 					<select class = "ui search dropdown" name = "room">
+						<option value = ""></option>
+						
 						@foreach ($rooms as $room)
 						<option value = "{{ $room->name }}" 
 						

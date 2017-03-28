@@ -32,8 +32,7 @@ class EquipmentsController extends Controller
             'model' => 'required|max:255',
             'price' => 'required|numeric|min:0|not_in:0',
             'condition' => 'required|alpha',
-            'room' => 'required|exists:rooms,name',
-
+            
         ]);
         
         $equipment = new Equipment;
@@ -49,23 +48,36 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
-        $equipments = Equipment::with('room')->get();
+        $equipments = Equipment::all();
         return view('equipment.index', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {
-        
-        return view('equipment.editequipment', compact('equipment'));
+        $rooms = Room::all();
+        return view('equipment.editequipment', compact('equipment', 'rooms'));
     }
 
     public function updateequipment(Request $request, Equipment $equipment) {
+
+        $this->validate($request, [
+
+            'equipment' => 'required|alphaNum|max:255',
+            'brand' => 'required|max:255',
+            'model' => 'required|max:255',
+            'price' => 'required|numeric|min:0|not_in:0',
+            'condition' => 'required|alpha',
+            'room' => 'exists:rooms,name',
+
+        ]);
 
         $equipment->name = $request->equipment;
         $equipment->brand = $request->brand;
         $equipment->model = $request->model;
         $equipment->price = $request->price;
         $equipment->condition = $request->condition;
-        $equipment->room_id = $request->room_id;
+        
+        $room = Room::where('name', $request->room)->first();
+        $equipment->room_id = $room->id;
 
         $equipment->save();
 
