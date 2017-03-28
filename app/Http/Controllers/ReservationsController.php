@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\User;
+use App\Room;
+
 
 class ReservationsController extends Controller
 {
@@ -25,9 +28,16 @@ class ReservationsController extends Controller
     }
     
     public function addreservation(Request $request) {
+        $user = Auth::user();
+
         $reserve = new Reservation;
-        $user = User::where('username',$request->username)->first();
-        $reserve->user_id = $user->id;
+
+        if ($user->role != 'admin') {
+            $user = User::where('username',$request->username)->first();
+            $reserve->user_id = $user->id;
+        } else {
+            $reserve->user_id = $user->user_id;
+        }
         $room = Room::where('name',$request->roomname)->first();
         $reserve->room_id = $room->id;
         $reserve->date_of_reservation = date("Y-m-d h:i:sa");
