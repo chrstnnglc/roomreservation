@@ -50,7 +50,7 @@
     <h3 class="header item">Room Reservation System</h3>
     @yield('items')
     @if (Auth::user()!=NULL)
-      <a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">{{Auth::user()->username}}</a>
+      <a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
     @endif
     <div class="right menu">
       <div class="container" style="padding: 18px 10px 10px 0;">
