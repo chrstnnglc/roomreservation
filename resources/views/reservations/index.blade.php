@@ -39,6 +39,8 @@
       <td class="status">{{ $reserve->reservations_status }}</td>
     </tr>
   @endforeach
+
+  
   </tbody>
 </table>
 

@@ -16,14 +16,17 @@
 	<td class="room">{{ $room->name }}</td>
 	<td class="rates">{{ $room->capacity }}</td>
 	<td class="capacity">{{ $room->rate }}</td>
+	@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
 		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
 			<a href="/rooms/{{ $room->id }}/editroom" class="ui yellow fluid button">Edit</a>
 		</div>
 	</td>
+	@endif
 	</tr>
 </table>
 
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <form method="POST" action="/rooms/{{ $room->id }}">
 	{{ csrf_field() }}
 	
@@ -35,4 +38,5 @@
 		<button type="submit" class="ui yellow fluid button">Delete Room</button>
 	</div>
 </form>
+@endif
 @stop
