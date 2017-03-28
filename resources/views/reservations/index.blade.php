@@ -29,8 +29,8 @@
   @foreach ($reserves as $reserve)
     <tr>
       <td class="room">{{ $reserve->date_reserved }}</td>
-      <td class="user">{{ $reserve->user_id }}</td>
-      <td class="room">{{ $reserve->room_id }}</td>
+      <td class="user">{{ $reserve->user->username }}</td>
+      <td class="room">{{ $reserve->room->name }}</td>
       <td class="date">{{ $reserve->date_of_reservation }}</td>
       <td class="start_time">{{ $reserve->start_of_reserved }}</td>
       <td class="end_time">{{ $reserve->end_of_reserved }}</td>
