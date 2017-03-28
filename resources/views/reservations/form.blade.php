@@ -21,11 +21,13 @@
 	        <input type="text" name="roomname" placeholder="Enter room name">
 	      </div>
 	    </div>
+	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
 	      <div class="ui input">
 	        <input type="text" name="username" placeholder = "Enter user name">
 	      </div>
 	    </div>
+	    @endif
 	    <div class="field">
 	      <div class="ui input">
 	        <input type="date" name="date" value = "" placeholder="mm/dd/yyyy">

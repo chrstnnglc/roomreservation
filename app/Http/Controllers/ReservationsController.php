@@ -37,7 +37,7 @@ class ReservationsController extends Controller
 
         $reserve = new Reservation;
 
-        if ($user->users_role != 'admin') {
+        if ($user->users_role != 'user') {
             $user = User::where('username',$request->username)->first();
             $reserve->user_id = $user->id;
         } else {
