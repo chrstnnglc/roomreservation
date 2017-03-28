@@ -11,7 +11,7 @@
 @stop
 @section('content')
 
-<table class="ui celled red table">
+<table class="ui celled yellow table">
   <thead>
     <tr>
       <th>Equipment</th>
