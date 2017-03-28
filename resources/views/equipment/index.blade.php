@@ -12,8 +12,10 @@
 @section('content')
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
-<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-  <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
+<div class = "container" align = "center">
+  <div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+    <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
+  </div>
 </div>
 @endif
 

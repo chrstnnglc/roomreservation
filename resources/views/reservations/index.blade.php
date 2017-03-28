@@ -11,6 +11,12 @@
 @stop
 @section('content')
 
+<div class="container" align="center">
+<div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+<a href="{{url('/reservations/form')}}" class="ui yellow fluid button">New Reservation</a>
+</div>
+</div>
+
 <table class="ui celled yellow table">
   <thead>
     <tr>
@@ -43,12 +49,6 @@
   
   </tbody>
 </table>
-
-<div class="container" align="center">
-<div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-<a href="{{url('/reservations/form')}}" class="ui yellow fluid button">New Reservation</a>
-</div>
-</div>
 @stop
 
 <!-- User, Room, date of res, date reserved, starttime, endtime, hours, price, date_paid-->
