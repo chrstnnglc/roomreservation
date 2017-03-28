@@ -19,10 +19,10 @@
       <td class="model">{{$equipment->model}}</td>
       <td class="price">{{$equipment->price}}</td>
       <td class="condition">{{$equipment->condition}}</td>
-      <td class="room_id">{{$equipment->room_id}}</td>
+      <td class="room_id">{{$equipment->room->name}}</td>
       @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<button><a href="/equipment/{{ $equipment->id }}/editequipment">Edit</a></button>
+		<a href="/equipment/{{ $equipment->id }}/editequipment" class = "ui fluid large yellow submit button">Edit</a>
 	</td>
 	@endif
 	</tr>
@@ -38,8 +38,10 @@
 	<input type="hidden" name="price" value="{{ $equipment->price }}">
 	<input type="hidden" name="condition" value="{{ $equipment->rate }}">
 	<input type="hidden" name="room_id" value="{{ $equipment->room_id }}">
-	<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-		<button type="submit" class="ui yellow fluid button">Delete Equipment</button>
+	<div class = "container" align = "center">
+		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+			<button type="submit" class="ui yellow fluid button">Delete Equipment</button>
+		</div>
 	</div>
 </form>
 @endif

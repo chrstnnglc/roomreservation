@@ -13,12 +13,6 @@
 
 <h3>Add Equipment</h3>
 
-<script type = "javascript/text">
-  $('.ui.dropdown')
-    .dropdown()
-  ;
-</script>
-
 <form method="POST" class="ui form" action="/equipment">
   {{ csrf_field() }}
 

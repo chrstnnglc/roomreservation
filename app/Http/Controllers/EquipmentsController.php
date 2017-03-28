@@ -10,7 +10,7 @@ use App\User;
 class EquipmentsController extends Controller
 {
    public function index() {
-        $equipments = Equipment::all();
+        $equipments = Equipment::with('room')->get();
         return view('equipment.index', compact('equipments'));
     }
 
@@ -49,11 +49,12 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
-        $equipments = Equipment::all();
+        $equipments = Equipment::with('room')->get();
         return view('equipment.index', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {
+        
         return view('equipment.editequipment', compact('equipment'));
     }
 
