@@ -11,8 +11,10 @@
 @stop
 @section('content')
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+<div class = "container" align = "center">
+  <div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
   <a href="{{url('/rooms/form')}}" class="ui yellow fluid button">Add Room</a>
+</div>
 </div>
 @endif
 <table class="ui celled yellow table">
