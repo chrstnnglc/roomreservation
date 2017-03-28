@@ -1,23 +1,34 @@
 @extends('layouts.master')
+@section('items')
+@if (Auth::user()->users_role=='admin')
+<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
+@endif
+@stop
 
 @section('content')
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                	<h1>Profile</h1>
-                </div>
-
-                <div class="panel-body">
-                    <div>
-                        Username: {{ $user->username }}<br><br>
-                        Name: {{ $user->firstname }} {{ $user->lastname }}<br><br>
-                        Email: {{ $user->email }}<br><br>
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>
+<table class="ui yellow table">
+  <thead>
+    <tr><th colspan="3">
+      Profile
+    </th>
+  </tr></thead>
+  <tbody>
+        <tr>
+            <td class="collapsing">Username:</td>
+            <td class="username">{{ Auth::user()->username }}</td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td class="name">{{ Auth::user()->last_name }} {{Auth::user()->first_name}}</td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td class="capacity">{{ Auth::user()->Email }}</td>
+        </tr>
+  </tbody>
+</table>
 @stop
