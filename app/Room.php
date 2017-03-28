@@ -8,7 +8,7 @@ class Room extends Model
 {
     public $timestamps = false;
 
-    public function Equipment() {
+    public function equipment() {
         return $this->hasMany('App\Equipment');
     }
 }

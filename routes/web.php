@@ -55,6 +55,8 @@ Route::post('user/{user}','UserController@deleteuser');
 
 Route::get('profile', 'UserController@profile');
 
+Route::get('logs', 'LogsController@index');
+
 // #Route::group(['middleware' => 'media'], function () {
 // Route::get('media/rooms', 'MediaController@rooms');
 // Route::get('media/rooms/{room}', 'MediaController@showroom');
