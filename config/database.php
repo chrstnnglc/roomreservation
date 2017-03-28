@@ -73,6 +73,7 @@ return [
             'database' => env('DB_DATABASE', 'rocketdevs'),
             'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', 'secret'),
+            'password' => env('DB_PASSWORD', 'password'),
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
