@@ -11,17 +11,15 @@
 @stop
 @section('content')
 
-Room information here.
-
-Pati equipment.
-
 <table class="ui celled yellow table">
 <tr>
 	<td class="room">{{ $room->name }}</td>
 	<td class="rates">{{ $room->capacity }}</td>
 	<td class="capacity">{{ $room->rate }}</td>
 	<td class="options">
-		<button><a href="/rooms/{{ $room->id }}/editroom">Edit</a></button>
+		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+			<a href="/rooms/{{ $room->id }}/editroom" class="ui yellow fluid button">Edit</a>
+		</div>
 	</td>
 	</tr>
 </table>
@@ -33,6 +31,8 @@ Pati equipment.
 	<input type="hidden" name="roomname" value="{{ $room->name }}">
 	<input type="hidden" name="rate" value="{{ $room->rate }}">
 	<input type="hidden" name="capacity" value="{{ $room->capacity }}">
-	<button type="submit">Delete Room</button>
+	<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+		<button type="submit" class="ui yellow fluid button">Delete Room</button>
+	</div>
 </form>
 @stop

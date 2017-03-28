@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('layouts.master')
 
 @section('content')
 
@@ -12,7 +12,8 @@
 
                 <div class="panel-body">
                     <div>
-                        Name: {{ $user->name }}<br><br>
+                        Username: {{ $user->username }}<br><br>
+                        Name: {{ $user->firstname }} {{ $user->lastname }}<br><br>
                         Email: {{ $user->email }}<br><br>
                     </div>
                 </div>

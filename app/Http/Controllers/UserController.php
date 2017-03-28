@@ -19,6 +19,12 @@ class UserController extends Controller
         return view('reservations', compact('user'));
     }
 
+    public function profile() {
+        $user = Auth::user();
+
+        return view('profile.index', compact('user'));
+    }
+
     public function user_form(User $user) {
         $users = User::all();
         return view('admin.users_form', compact('users'));

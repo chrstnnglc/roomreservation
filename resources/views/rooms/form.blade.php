@@ -9,6 +9,7 @@
 <a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
+
 @section('content')
 <h3>Add Rooms</h3>
 

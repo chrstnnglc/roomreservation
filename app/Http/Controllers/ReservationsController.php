@@ -20,8 +20,8 @@ class ReservationsController extends Controller
     	return view('reservations.index', compact('reserves'));
     }
 
-    public function reserve_form(Reservation $reserve) {
-        return view('reserve_form');
+    public function form() {
+        return view('reservations.form');
     }
     
     public function addreservation(Request $request) {

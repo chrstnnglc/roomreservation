@@ -13,7 +13,7 @@
 
 <h3>Add Equipment</h3>
 
-<form method="POST" class="ui form" action="/equipments/equipment">
+<form method="POST" class="ui form" action="/equipment">
   {{ csrf_field() }}
   <div class="ui yellow stacked segment">
     <div class="field">

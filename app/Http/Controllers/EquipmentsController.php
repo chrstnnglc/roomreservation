@@ -9,16 +9,15 @@ class EquipmentsController extends Controller
 {
    public function index() {
         $equipments = Equipment::all();
-        return view('equipments.index', compact('equipments'));
+        return view('equipment.index', compact('equipments'));
     }
 
-    public function equipment_form() {
-        $equipments = Equipment::all();
-        return view('equipments.equipments_form', compact('equipments'));
+    public function form() {
+        return view('equipment.form');
     }
 
     public function showequipment(Equipment $equipment) {
-        return view('showequipment', compact('equipment'));
+        return view('equipment.showequipment', compact('equipment'));
     }
 
     public function addequipment(Request $request) {
@@ -34,11 +33,11 @@ class EquipmentsController extends Controller
         $equipment->save();
 
         $equipments = Equipment::all();
-        return view('equipments', compact('equipments'));
+        return view('equipment', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {
-        return view('equipments.editequipment', compact('equipment'));
+        return view('equipment.editequipment', compact('equipment'));
     }
 
     public function updateequipment(Request $request, Equipment $equipment) {
@@ -52,7 +51,7 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
-        $url = 'equipments/' . $equipment->id;
+        $url = 'equipment/' . $equipment->id;
 
         return redirect($url);
     }
@@ -61,6 +60,6 @@ class EquipmentsController extends Controller
         $equipment = Equipment::where('id', $request->id)->first();
         $equipment->delete();
 
-        return redirect('equipments');
+        return redirect('equipment');
     }
 }

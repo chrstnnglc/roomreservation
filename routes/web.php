@@ -27,24 +27,24 @@ Route::get('edit_user', 'PagesController@edit_user');
 // Get routes for AdminController
 
 Route::get('rooms', 'RoomsController@index');
+Route::get('rooms/form', 'RoomsController@form');
 Route::get('rooms/{room}', 'RoomsController@showroom');
 Route::post('rooms', 'RoomsController@addroom');
 Route::get('rooms/{room}/editroom', 'RoomsController@editroom');
 Route::post('rooms/{room}','RoomsController@deleteroom');
 Route::put('rooms/{room}','RoomsController@updateroom');
-Route::get('rooms/rooms_form', 'RoomsController@room_form');
 
 Route::get('equipment', 'EquipmentsController@index');
+Route::get('equipment/form', 'EquipmentsController@form');
 Route::post('equipment', 'EquipmentsController@addequipment');
-Route::get('equipments/{equipment}', 'EquipmentsController@showequipment');
-Route::get('equipments/{equipment}/editequipment', 'EquipmentsController@editequipment');
-Route::put('equipments/{equipment}','EquipmentsController@updateequipment');
-Route::post('equipments/{equipment}','EquipmentsController@deleteequipment');
-Route::get('equipments/equipment_form', 'EquipmentsController@equipment_form');
+Route::get('equipment/{equipment}', 'EquipmentsController@showequipment');
+Route::get('equipment/{equipment}/editequipment', 'EquipmentsController@editequipment');
+Route::put('equipment/{equipment}','EquipmentsController@updateequipment');
+Route::post('equipment/{equipment}','EquipmentsController@deleteequipment');
 
 Route::get('reservations', 'ReservationsController@index');
 Route::post('reservations', 'ReservationsController@addreservation');
-Route::get('reserve_form', 'ReservationsController@reserve_form');
+Route::get('reservations/form', 'ReservationsController@form');
 
 Route::get('user', 'UserController@userslist');
 Route::post('user', 'UserController@adduser');
@@ -52,6 +52,8 @@ Route::get('user/{user}', 'UserController@showuser');
 Route::get('user/{user}/edituser', 'UserController@edituser');
 Route::put('user/{user}','UserController@updateuser');
 Route::post('user/{user}','UserController@deleteuser');
+
+Route::get('profile', 'UserController@profile');
 
 // #Route::group(['middleware' => 'media'], function () {
 // Route::get('media/rooms', 'MediaController@rooms');

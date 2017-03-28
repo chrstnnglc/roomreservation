@@ -44,13 +44,9 @@
 
 <div class="container" align="center">
 <div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-<a href="{{url('/reserve_form')}}">
-<div class="ui fluid large yellow button" style="font-size: 75%;">New Reservation</div>
-</a>
+<a href="{{url('/reservations/form')}}" class="ui yellow fluid button">New Reservation</a>
 </div>
 </div>
-</form>
-</form>
 @stop
 
 <!-- User, Room, date of res, date reserved, starttime, endtime, hours, price, date_paid-->

@@ -34,7 +34,9 @@
       <td class="condition">{{$equip->condition}}</td>
       <td class="room_id">{{$equip->room_id}}</td>
       <td class="options">
-        <button><a href="/equipments/{{ $equip->id }}">View Equipment</a></button>
+        <div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">
+          <a href="/equipment/{{ $equip->id }}" class="ui yellow fluid button">View</a>
+        </div>
       </td>
     </tr>
     @endforeach
@@ -43,9 +45,7 @@
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
 <div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-<a href="{{url('equipments/equipment_form')}}">
-  <button class="ui yellow fluid button">Add Equipment</button>
-</a>
+  <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
 </div>
 @endif
 @stop

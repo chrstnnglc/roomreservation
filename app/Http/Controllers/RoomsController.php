@@ -13,9 +13,8 @@ class RoomsController extends Controller
     	return view('rooms.index', compact('rooms'));
     }
 
-    public function room_form() {
-        $rooms = Room::all();
-        return view('rooms.rooms_form', compact('rooms'));
+    public function form() {
+        return view('rooms.form');
     }
 
     public function showroom(Room $room) {
