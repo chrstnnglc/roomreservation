@@ -43,7 +43,7 @@
   </tbody>
 </table>
 
-@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
   <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
 </div>

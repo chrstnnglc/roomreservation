@@ -20,7 +20,7 @@
       <td class="price">{{$equipment->price}}</td>
       <td class="condition">{{$equipment->condition}}</td>
       <td class="room_id">{{$equipment->room_id}}</td>
-      @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
+      @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
 		<button><a href="/equipments/{{ $equipment->id }}/editequipment">Edit</a></button>
 	</td>
@@ -28,7 +28,7 @@
 	</tr>
 </table>
 
-@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <form method="POST" action="/equipments/{{ $equipment->id }}">
 	{{ csrf_field() }}
 	
