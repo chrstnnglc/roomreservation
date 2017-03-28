@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('name')
-<title>Rooms - Diocese of Cubao Reservation System</title>
+<title>Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
 @if (Auth::user() !== NULL)
