@@ -19,7 +19,7 @@ class ReservationsController extends Controller
     public function index(Reservation $reserve) {
         $user = Auth::user();
 
-        if ($user->role == 'admin' or $user->role == 'media' or $user->role == 'treasury') {
+        if ($user->users_role == 'admin' or $user->users_role == 'media' or $user->users_role == 'treasury') {
             $reserves = Reservation::all();
             return view('reservations.index', compact('reserves'));
         } else {
@@ -38,7 +38,7 @@ class ReservationsController extends Controller
 
         $reserve = new Reservation;
 
-        if ($user->role != 'admin') {
+        if ($user->users_role != 'admin') {
             $user = User::where('username',$request->username)->first();
             $reserve->user_id = $user->id;
         } else {
