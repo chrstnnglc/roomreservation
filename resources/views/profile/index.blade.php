@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('items')
 @if (Auth::user()->users_role=='admin')
-<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
