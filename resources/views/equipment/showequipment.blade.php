@@ -22,14 +22,14 @@
       <td class="room_id">{{$equipment->room_id}}</td>
       @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<button><a href="/equipments/{{ $equipment->id }}/editequipment">Edit</a></button>
+		<button><a href="/equipment/{{ $equipment->id }}/editequipment">Edit</a></button>
 	</td>
 	@endif
 	</tr>
 </table>
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-<form method="POST" action="/equipments/{{ $equipment->id }}">
+<form method="POST" action="/equipment/{{ $equipment->id }}">
 	{{ csrf_field() }}
 	
 	<input type="hidden" name="id" value="{{ $equipment->id }}">
@@ -38,7 +38,9 @@
 	<input type="hidden" name="price" value="{{ $equipment->price }}">
 	<input type="hidden" name="condition" value="{{ $equipment->rate }}">
 	<input type="hidden" name="room_id" value="{{ $equipment->room_id }}">
-	<button type="submit">Delete Equipment</button>
+	<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+		<button type="submit" class="ui yellow fluid button">Delete Equipment</button>
+	</div>
 </form>
 @endif
 @stop

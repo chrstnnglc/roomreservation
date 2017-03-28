@@ -33,7 +33,7 @@ class EquipmentsController extends Controller
         $equipment->save();
 
         $equipments = Equipment::all();
-        return view('equipment', compact('equipments'));
+        return view('equipment.index', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {

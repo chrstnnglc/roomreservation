@@ -14,7 +14,7 @@
   <div class="column">
 	<h1>Equipment</h1>				
 
-	    <form class="ui large form" method="POST" action="/equipments/{{ $equipment->id }}">
+	    <form class="ui large form" method="POST" action="/equipment/{{ $equipment->id }}">
 	        {{ method_field('PUT') }}
 	        {{ csrf_field() }}
 	        <div class="ui yellow stacked segment">
