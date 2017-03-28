@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Equipment;
+use App\Room;
+use App\User;
 
 class EquipmentsController extends Controller
 {
@@ -13,7 +15,8 @@ class EquipmentsController extends Controller
     }
 
     public function form() {
-        return view('equipment.form');
+        $rooms = Room::all();
+        return view('equipment.form', compact('rooms'));
     }
 
     public function showequipment(Equipment $equipment) {
@@ -21,6 +24,18 @@ class EquipmentsController extends Controller
     }
 
     public function addequipment(Request $request) {
+        
+        $this->validate($request, [
+
+            'equipment' => 'required|alphaNum|max:255',
+            'brand' => 'required|max:255',
+            'model' => 'required|max:255',
+            'price' => 'required|numeric|min:0|not_in:0',
+            'condition' => 'required|alpha',
+            'room' => 'required|exists:rooms,name',
+
+        ]);
+        
         $equipment = new Equipment;
         
         $equipment->name = $request->equipment;
@@ -28,12 +43,14 @@ class EquipmentsController extends Controller
         $equipment->model = $request->model;
         $equipment->price = $request->price;
         $equipment->condition = $request->condition;
-        $equipment->room_id = $request->room_id;
+
+        $room = Room::where('name', $request->room)->first();
+        $equipment->room_id = $room->id;
 
         $equipment->save();
 
         $equipments = Equipment::all();
-        return view('equipment', compact('equipments'));
+        return view('equipment.index', compact('equipments'));
     }
 
     public function editequipment(Equipment $equipment) {

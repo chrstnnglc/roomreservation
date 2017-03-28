@@ -11,7 +11,14 @@
 @stop
 @section('content')
 
-<table class="ui celled red table">
+
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
+<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+  <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
+</div>
+@endif
+
+<table class="ui celled yellow  table">
   <thead>
     <tr>
       <th>Equipment</th>
@@ -20,6 +27,7 @@
       <th>Price</th>
       <th>Condition</th>
       <th>Room</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -32,22 +40,17 @@
       <td class="model">{{$equip->model}}</td>
       <td class="price">{{$equip->price}}</td>
       <td class="condition">{{$equip->condition}}</td>
-      <td class="room_id">{{$equip->room_id}}</td>
+      <td class="room">{{$equip->room->name}}</td>
       <td class="options">
-        <div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">
+        <!--<div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">-->
           <a href="/equipment/{{ $equip->id }}" class="ui yellow fluid button">View</a>
-        </div>
+        <!--</div>-->
       </td>
     </tr>
     @endforeach
   </tbody>
 </table>
 
-@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin')
-<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-  <a href="{{url('/equipment/form')}}" class="ui yellow fluid button">Add Equipment</a>
-</div>
-@endif
 @stop
 
 <!-- name, brand, model, price, condition, room -->

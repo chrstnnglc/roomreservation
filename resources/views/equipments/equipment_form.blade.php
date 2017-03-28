@@ -13,27 +13,8 @@
 
 <h3>Add Equipment</h3>
 
-<script type = "javascript/text">
-  $('.ui.dropdown')
-    .dropdown()
-  ;
-</script>
-
 <form method="POST" class="ui form" action="/equipment">
   {{ csrf_field() }}
-
-  @if (count($errors) > 0)
-  <div class = "ui left aligned inverted red stacked segment">
-      <i class="warning icon"></i>
-      Can't add!
-      <ul>
-          @foreach ($errors->all() as $error)
-              <li class = "">{{ $error }}</li>
-          @endforeach
-      </ul>
-  </div>
-  @endif
-
   <div class="ui yellow stacked segment">
     <div class="field">
       <div class="ui input">
@@ -52,7 +33,7 @@
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="number" name="price" placeholder="Price">
+        <input type="text" name="price" placeholder="Price">
       </div>
     </div>
     <div class="field">
@@ -61,15 +42,9 @@
       </div>
     </div>
     <div class="field">
-      <!--<div class="ui input">
+      <div class="ui input">
         <input type="text" name="room" placeholder="Room Name">
-      </div>-->
-      <select class = "ui search dropdown" name = "room">
-          <option value = ""></value>
-        @foreach ($rooms as $room)
-          <option value = "{{ $room->name }}">{{ $room->name }}</value>
-        @endforeach
-      </select>
+      </div>
     </div>
     <div class="container">
     <a href="{{url('/equipment')}}">
@@ -77,6 +52,5 @@
     </a>
     </div>
   </div>
-
 </form>
 @stop
