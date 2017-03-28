@@ -44,7 +44,7 @@
 	    <!--<a href="{{url('/reservations')}}">-->
 	    <div class="container" align="center">
 	    <div class="conatiner" style="width: 50%;">
-	    <input class="ui fluid large yellow submit button" type = "submit" value = "Submit!"/>
+	    <input class="ui fluid large yellow submit button" type = "submit" value = "Add"/>
 	    </div>
 	  </div>
 	  </form>
