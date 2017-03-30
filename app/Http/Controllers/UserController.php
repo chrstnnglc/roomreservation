@@ -27,16 +27,16 @@ class UserController extends Controller
 
     public function user_form(User $user) {
         $users = User::all();
-        return view('admin.users_form', compact('users'));
+        return view('user.users_form', compact('users'));
     }
 
     public function userslist(User $user) {
         $users = User::all();
-    	return view('user', compact('users'));
+    	return view('user.userslist', compact('users'));
     }
 
     public function showuser(User $user) {
-        return view('showuser', compact('user'));
+        return view('user.showuser', compact('user'));
     }
 
     public function adduser(Request $request) {

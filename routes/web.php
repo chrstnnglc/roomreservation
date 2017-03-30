@@ -47,6 +47,7 @@ Route::post('reservations', 'ReservationsController@addreservation');
 Route::get('reservations/form', 'ReservationsController@form');
 
 Route::get('user', 'UserController@userslist');
+Route::get('user/form', 'UserController@user_form');
 Route::post('user', 'UserController@adduser');
 Route::get('user/{user}', 'UserController@showuser');
 Route::get('user/{user}/edituser', 'UserController@edituser');

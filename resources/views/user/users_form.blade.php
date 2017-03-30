@@ -1,16 +1,17 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
 @stop
 @section('content')
 
 <h3>Add User</h3>
 
-<form method="POST" class="ui form" action="/admin/user">
+<form method="POST" class="ui form" action="/user">
   {{ csrf_field() }}
   <div class="ui yellow stacked segment">
     <div class="field">
@@ -52,20 +53,20 @@
         <input type="text" name="affiliation" placeholder="Affiliation">
       </div>
     </div>
-    <!-- <div class="field">
+    <div class="field">
       <div class="ui input">
         <input type="text" name="users_role" placeholder="Role">
       </div>
-    </div> -->
-    <div class="field">
+    </div>
+    <!-- <div class="field">
       <select name="roles" class="ui dropdown" id="select">
         <option value="">Roles</option>
-        <option value="admin">Admin</option>
-        <option value="media">Media</option>
-        <option value="user">User</option>
+        <option data-value="admin">Admin</option>
+        <option data-value="media">Media</option>
+        <option data-value="user">User</option>
       </select>
-    </div>
-    <a href="{{url('/admin/user')}}">
+    </div> -->
+    <a href="{{url('/user')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>
   </div>

@@ -25,6 +25,10 @@
   <script src="{{asset('/js/calendar.min.js')}}"></script>
   <script src="{{asset('/js/main.js')}}"></script>
 
+  <script>
+    $('#idDropDown').dropdown('get value');
+  </script>
+
   <style type="text/css">
     body {
       background-color: #DADADA;
@@ -50,19 +54,26 @@
     <h3 class="header item">Room Reservation System</h3>
     @yield('items')
     <div class="right menu">
-      <div class="container" style="padding: 18px 10px 10px 0;">
         @if (Auth::guest())
-            <a class="item" style="font-size: 110%" href = "{{url('/login')}}">Login</a>
-            <a class="item" style="font-size: 110%" href = "{{url('/register')}}">Register</a>
+        <div class="container" align="center">
+        <div class="container" style="padding: 15px 10px 10px 0;">
+        <a href="{{url('/login')}}" class="ui yellow fluid button">Login</a>
+        </div>
+        </div>
+        <div class="container" align="center">
+        <div class="container" style="padding: 15px 10px 10px 0;">
+        <a href="{{url('/register')}}" class="ui yellow fluid button">Register!</a>
+        </div>
+        </div>
         @else
+        <div class="container" style="padding: 15px 10px 10px 0;">
         <form action="{{ url('/logout') }}" method="POST" style = "display: inline-block;">
         {{ csrf_field() }}
-        <button type = "submit" class="ui button" style="font-size: 75%;"><div>
+        <button type = "submit" class="ui yellow fluid button"><div>
           Logout
         </div></button>
         </form>
         @endif
-
       </div>
     </div>
   </div>

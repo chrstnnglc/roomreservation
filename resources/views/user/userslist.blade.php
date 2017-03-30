@@ -47,70 +47,7 @@
     @endforeach
   </tbody>
 </table>
-
-<h3>Add User</h3>
-
-<form method="POST" class="ui form" action="/user">
-  {{ csrf_field() }}
-  <div class="ui yellow stacked segment">
-  <div class="field">
-    <div class="ui input">
-      <input type="text" name="username" placeholder="User Name">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui input">
-      <input type="text" name="firstname" placeholder="First Name">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui input">
-      <input type="text" name="lastname" placeholder="Last Name">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui left icon input">
-      <i class="user icon"></i>
-      <input type="text" name="email" placeholder="E-mail address">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui left icon input">
-      <i class="lock icon"></i>
-      <input type="password" name="password" placeholder="Password">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui left icon input">
-      <i class="lock icon"></i>
-      <input type="text" name="mobile" placeholder="Mobile">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui left icon input">
-      <i class="lock icon"></i>
-      <input type="text" name="affiliation" placeholder="Affiliation">
-    </div>
-  </div>
-  <div class="field">
-    <div class="ui left icon input">
-      <i class="lock icon"></i>
-      <input type="text" name="users_role" placeholder="Role">
-    </div>
-  </div>
-    <!--<div class="container" style="padding: 0px 0px 20px 0px;">
-      <div class="ui simple dropdown item">
-        <input name="roles" type="hidden">
-        <i class="dropdown icon"></i>
-        <div class="default text">Roles</div>
-        <div class="menu">
-          <div class="item" data-value="1">Treasury</div>
-          <div class="item" data-value="2">Admin</div>
-          <div class="item" data-value="3">Media</div>
-        </div>
-      </div>
-    </div>-->
-    <a href="{{url('/user')}}">
+    <a href="{{url('/user/form')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>
   </div>

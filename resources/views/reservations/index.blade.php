@@ -43,7 +43,30 @@
       <td class="end_time">{{ $reserve->end_of_reserved }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
       <td class="price">{{ $reserve->price }}</td>
-      <td class="status">{{ $reserve->reservations_status }}</td>
+      <td class="status">
+      @if(Auth::user()->users_role=='treasury')
+        <form class = "" method = "POST" action="{{ url('treasury/reservation/' . $reserve->id) }}">
+          {!! method_field('PATCH') !!}
+          {{ csrf_field() }}
+          <select class="ui dropdown" name = "status">
+            <option value="paid"
+              @if ($reserve->reservations_status == "paid")
+                selected
+              @endif
+            >Paid</option>
+            <option value="not paid"
+              @if ($reserve->reservations_status == "not paid")
+                selected
+              @endif
+            >Not Paid</option>
+          </select>
+
+          <input class="ui primary button" type = "submit" value = "Save" />
+        </form>
+      @else
+      {{ $reserve->reservations_status }}
+      @endif
+      </td>
     </tr>
   @endforeach
 

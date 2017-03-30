@@ -40,7 +40,7 @@ CREATE TABLE Equipment (
 	model varchar(50) NOT NULL,
 	price integer NOT NULL,
 	condition varchar(50) NOT NULL,
-	room_id integer REFERENCES Rooms (id) NOT NULL
+	room_id integer 
 );
 
 CREATE TABLE Reservations (
@@ -66,6 +66,7 @@ CREATE TABLE Reservation_Equipments (
 CREATE TABLE Logs (
 	id SERIAL PRIMARY KEY,
 	user_id integer REFERENCES Users (id) NOT NULL,
+	date_of_reservation timestamp NOT NULL,
 	remarks varchar(255) NOT NULL
 );
 
