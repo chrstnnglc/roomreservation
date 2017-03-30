@@ -53,19 +53,19 @@
         <input type="text" name="affiliation" placeholder="Affiliation">
       </div>
     </div>
-    <div class="field">
+    <!-- <div class="field">
       <div class="ui input">
         <input type="text" name="users_role" placeholder="Role">
       </div>
-    </div>
-    <!-- <div class="field">
-      <select name="roles" class="ui dropdown" id="select">
-        <option value="">Roles</option>
-        <option data-value="admin">Admin</option>
-        <option data-value="media">Media</option>
-        <option data-value="user">User</option>
-      </select>
     </div> -->
+    <div class="field">
+      <select name="users_role" class="ui dropdown" id="select">
+        <option value=""></option>
+        <option value="admin">Admin</option>
+        <option value="media">Media</option>
+        <option value="user">User</option>
+      </select>
+    </div>
     <a href="{{url('/user')}}">
       <button class="ui yellow fluid button" type="submit">Add</button>
     </a>

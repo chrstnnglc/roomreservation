@@ -54,7 +54,7 @@ class UserController extends Controller
         $user->save();
 
         $users = User::all();
-        return view('user', compact('users'));
+        return view('user.userslist', compact('users'));
     }
 
     public function edituser(User $user) {
