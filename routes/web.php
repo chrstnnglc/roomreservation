@@ -58,6 +58,8 @@ Route::get('profile', 'UserController@profile');
 
 Route::get('logs', 'LogsController@index');
 
+Route::patch('reservation/{reserve}', 'TreasuryController@updatereservation');
+
 // #Route::group(['middleware' => 'media'], function () {
 // Route::get('media/rooms', 'MediaController@rooms');
 // Route::get('media/rooms/{room}', 'MediaController@showroom');
@@ -88,4 +90,3 @@ Route::get('logs', 'LogsController@index');
 
 
 Route::get('treasury/reservations', 'TreasuryController@reservations');
-Route::patch('treasury/reservation/{reserve}', 'TreasuryController@updatereservation');
