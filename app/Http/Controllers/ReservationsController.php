@@ -37,7 +37,7 @@ class ReservationsController extends Controller
 
         $reserve = new Reservation;
 
-        if ($user->users_role != 'admin') {
+        if ($user->users_role != 'user') {
             $user = User::where('username',$request->username)->first();
             $reserve->user_id = $user->id;
         } else {
@@ -49,7 +49,12 @@ class ReservationsController extends Controller
         $reserve->date_reserved = $request->date;
         $reserve->start_of_reserved = $request->starttime;
         $reserve->end_of_reserved = $request->endtime;
-        $reserve->hours = abs((strtotime($request->endtime) - strtotime($request->starttime))/3600);
+        if ((strtotime($request->endtime) - strtotime($request->starttime))/3600 < 0){
+            $reserve->hours = (strtotime($request->endtime)+(12*60*60) - strtotime($request->starttime))/3600;
+        }
+        else{
+            $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
+        }
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
     	$reserve->reservations_status = 'not paid';
         
