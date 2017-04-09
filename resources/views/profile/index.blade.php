@@ -1,11 +1,17 @@
 @extends('layouts.master')
 @section('items')
-@if (Auth::user()->users_role=='admin')
+@if (Auth::user()->users_role == 'admin')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
+<a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+@elseif (Auth::user()->users_role == 'treasury')
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+@elseif (Auth::user()->users_role == 'user')
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
 @endif
 @stop

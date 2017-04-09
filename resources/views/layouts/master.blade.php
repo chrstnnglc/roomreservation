@@ -9,7 +9,6 @@
   <!-- Site Properties -->
  @yield('name')
   <link rel="stylesheet" typ  - Diocese of Cubao Reservation Systeme="text/css" href="{{ asset('/css/semantic.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('/css/calendar.min.css') }}">
 
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/divider.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/segment.css')}}">
@@ -22,7 +21,6 @@
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="{{asset('/js/semantic.min.js')}}"></script>
-  <script src="{{asset('/js/calendar.min.js')}}"></script>
   <script src="{{asset('/js/main.js')}}"></script>
 
   <script>
@@ -51,7 +49,9 @@
     <div class="container" style="padding: 10px 0 10px 10px;">
       <img src="{{asset('12logo.png')}}">
     </div>
-    <h3 class="header item">Room Reservation System</h3>
+    <div class="container" style="padding: 10px 0 10px 10px;">
+    <a href="{{url('/')}}"><h3 class="header item">Room Reservation System</h3></a>
+    </div>
     @yield('items')
     <div class="right menu">
         @if (Auth::guest())

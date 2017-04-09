@@ -22,13 +22,6 @@
         </tr>
       </thead>
       <tbody>
-            <tr>
-                <td class="id"></td>
-                <td class="user_id"></td>
-                <td class="date_of_reservation"></td>
-                <td class="remarks"></td>
-            </tr>
-        </tr>
         @foreach ($logs as $log)
             <tr>
             <td class="id">{{ $log->id }}</td>
