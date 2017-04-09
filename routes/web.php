@@ -45,6 +45,7 @@ Route::post('equipment/{equipment}','EquipmentsController@deleteequipment');
 Route::get('reservations', 'ReservationsController@index');
 Route::post('reservations', 'ReservationsController@addreservation');
 Route::get('reservations/form', 'ReservationsController@form');
+Route::patch('reservations/{reserve}', 'ReservationsController@updatereservation');
 
 Route::get('user', 'UserController@userslist');
 Route::get('user/form', 'UserController@user_form');
@@ -57,8 +58,6 @@ Route::post('user/{user}','UserController@deleteuser');
 Route::get('profile', 'UserController@profile');
 
 Route::get('logs', 'LogsController@index');
-
-Route::patch('treasury/reservation/{reserve}', 'TreasuryController@updatereservation');
 
 // #Route::group(['middleware' => 'media'], function () {
 // Route::get('media/rooms', 'MediaController@rooms');
