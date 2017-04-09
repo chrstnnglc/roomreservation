@@ -45,7 +45,9 @@
     <div class="container" style="padding: 10px 0 10px 10px;">
       <img src="12logo.png">
     </div>
-    <h3 class="header item">Room Reservation System</h3>
+    <div class="container" style="padding: 10px 0 10px 10px;">
+    <a href="{{url('/')}}"><h3 class="header item">Room Reservation System</h3></a>
+    </div>
   </div>
 
   <div class="ui middle aligned center aligned grid">
