@@ -2,6 +2,9 @@
 @section('name')
 <title>Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 75%;
+@stop
 @section('items')
 @if (Auth::user() != NULL)
 @if (Auth::user()->users_role == 'admin')
@@ -64,7 +67,7 @@ reservation_status = [
 
 // fill the month table with column headings
 function day_title(day_name){
-     document.write("<td align=center width=35>"+day_name+"</td>");
+     document.write("<td>"+day_name+"</td>");
 }
 // fills the month table with numbers
 function fill_table(month,month_length,year)
@@ -72,7 +75,7 @@ function fill_table(month,month_length,year)
   name_of_months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Semptember', 'October', 'November', 'December']; 
   day=1
   // begin the new month table
-  document.write("<table class='ui fixed yellow celled table'>");
+  document.write("<table class='ui fixed yellow celled table' style='column: 100%'>");
   document.write('<thead><tr><th colspan="7" style="text-align: center;"><b>'+name_of_months[month]+'   '+year+'</b></th></tr></thead>');
   // column headings
   day_title("Sun");
@@ -110,22 +113,22 @@ function fill_table(month,month_length,year)
       }
     }
     if(yes==1){
-      document.write("<td align=center>"+string_of_day);
+      document.write("<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day);
       for(var index=0; index<indices.length; index++){
         if(index>2){
           document.write("...");
           break;
         }
         if(reservation_status[indices[index]]=="paid"){
-          document.write("<div class='ui green label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          document.write("<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
         }else{
-          document.write("<div class='ui yellow label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          document.write("<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
         }
-        document.write("</div></font><br>");
+        document.write("</div></font>");
       }
-      document.write("</td>");
+      document.write("</div></td>");
     }else{
-      document.write("<td align=center>"+string_of_day+"</td>");
+      document.write("<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day+"</td>");
     }
     day++;
   }
@@ -148,7 +151,7 @@ function fill_table(month,month_length,year)
         }
       }
       if(yes==1){
-        document.write("<td align=center>"+string_of_day);
+        document.write("<td style='height: 125px;'><div style='height: 100px'>"+string_of_day);
         for(var index=0; index<indices.length; index++){
           if(index>2){
             document.write("...");
@@ -157,13 +160,13 @@ function fill_table(month,month_length,year)
           if(reservation_status[indices[index]]=="paid"){
             document.write("<div class='ui green label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
           }else{
-            document.write("<div class='ui yellow label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+            document.write("<div class='ui orange label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
           }
           document.write("</div></font><br>");
         }
         document.write("</td>");
       }else{
-        document.write("<td align=center>"+string_of_day+"</td>");
+        document.write("<td style='height: 125px;'><div style='height: 100px'>"+string_of_day+"</td>");
       }
       day++;
     }

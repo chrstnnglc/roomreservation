@@ -2,6 +2,9 @@
 @section('name')
 <title>Rooms - Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 40%;
+@stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>

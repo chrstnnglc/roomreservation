@@ -34,12 +34,13 @@
     }
     body > .grid {
       height: 100%;
+
     }
     .image {
       margin-top: -100px;
     }
     .column {
-      max-width: 50%;
+      @yield('width')
       max-height: 75%;
     }
   </style>

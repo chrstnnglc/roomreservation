@@ -1,5 +1,11 @@
 @extends('layouts.master')
 @section('items')
+@section('name')
+<title>Profile - Diocese of Cubao Reservation System</title>
+@stop
+@section('width')
+max-width: 20%;
+@stop
 @if (Auth::user()->users_role == 'admin')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
