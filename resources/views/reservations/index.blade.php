@@ -53,7 +53,7 @@
       <td class="price">{{ $reserve->price }}</td>
       <td class="status">
       @if(Auth::user()->users_role=='treasury')
-        <form class = "" method = "POST" action="{{ url('reservation/' . $reserve->id) }}">
+        <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
           <select class="ui dropdown" name = "status">

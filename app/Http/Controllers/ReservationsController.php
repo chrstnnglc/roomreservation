@@ -69,4 +69,12 @@ class ReservationsController extends Controller
         $log->save();
         return redirect('reservations');
     }
+
+    public function updatereservation(Request $request, Reservation $reserve) {
+        $reserve->reservations_status = $request->status;
+        
+        $reserve->save();
+
+        return redirect('reservations');
+    }
 }
