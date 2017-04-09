@@ -36,7 +36,7 @@
       margin-top: -100px;
     }
     .column {
-      max-width: 450px;
+      max-width: 25%;
     }
   </style>
 </head>
