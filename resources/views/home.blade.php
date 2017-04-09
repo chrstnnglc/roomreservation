@@ -33,7 +33,7 @@ dates_reserved = [
 @endif
 @endforeach
 ];
-start_time=[
+start_time = [
 @foreach ($reserves as $reserve)
 @if ($loop->last)
 "{{ $reserve->start_of_reserved}}"
@@ -42,7 +42,7 @@ start_time=[
 @endif
 @endforeach
 ];
-end_time=[
+end_time = [
 @foreach ($reserves as $reserve)
 @if ($loop->last)
 "{{ $reserve->end_of_reserved}}"
@@ -51,7 +51,7 @@ end_time=[
 @endif
 @endforeach
 ];
-status=[
+reservation_status = [
 @foreach ($reserves as $reserve)
 @if ($loop->last)
 "{{ $reserve->reservations_status }}"
@@ -102,19 +102,28 @@ function fill_table(month,month_length,year)
       string_of_day=String(day);
     }
     var yes=0;
-    var index;
-    for (index=0; index<dates_reserved.length; index++){
+    var indices=[];
+    for (var index=0; index<dates_reserved.length; index++){
       if(dates_reserved[index]==year+"-"+string_of_month+"-"+string_of_day){
         yes=1;
-        break;
+        indices.push(index);
       }
     }
     if(yes==1){
-      if(status[index]=="paid"){
-        document.write("<td align=center>"+day+"<br><div class='ui green label'><font size='1'>"+start_time[index]+"-"+end_time[index]+"</div></font></td>");
-      }else{
-        document.write("<td align=center>"+day+"<br><div class='ui yellow label'><font size='1'>"+start_time[index]+"-"+end_time[index]+"</div></font></td>");
+      document.write("<td align=center>"+string_of_day);
+      for(var index=0; index<indices.length; index++){
+        if(index>2){
+          document.write("...");
+          break;
+        }
+        if(reservation_status[indices[index]]=="paid"){
+          document.write("<div class='ui green label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+        }else{
+          document.write("<div class='ui yellow label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+        }
+        document.write("</div></font><br>");
       }
+      document.write("</td>");
     }else{
       document.write("<td align=center>"+string_of_day+"</td>");
     }
@@ -125,25 +134,34 @@ function fill_table(month,month_length,year)
   
   while (day <= month_length) {
     for (var i=0;i<7 && day<=month_length;i++){
-      var yes=0;
-      var index;
       if (day<10){
         string_of_day='0'+String(day);
       }else{
         string_of_day=String(day);
       }
-      for (index=0; index<dates_reserved.length; index++){
+      var yes=0;
+      var indices=[];
+      for (var index=0; index<dates_reserved.length; index++){
         if(dates_reserved[index]==year+"-"+string_of_month+"-"+string_of_day){
           yes=1;
-          break;
+          indices.push(index);
         }
       }
       if(yes==1){
-        if(status[index]=="paid"){
-          document.write("<td align=center>"+day+"<br><div class='ui green label'><font size='1'>"+start_time[index]+"-"+end_time[index]+"</div></font></td>");
-        }else{
-          document.write("<td align=center>"+day+"<br><div class='ui yellow label'><font size='1'>"+start_time[index]+"-"+end_time[index]+"</div></font></td>");
+        document.write("<td align=center>"+string_of_day);
+        for(var index=0; index<indices.length; index++){
+          if(index>2){
+            document.write("...");
+            break;
+          }
+          if(reservation_status[indices[index]]=="paid"){
+            document.write("<div class='ui green label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          }else{
+            document.write("<div class='ui yellow label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          }
+          document.write("</div></font><br>");
         }
+        document.write("</td>");
       }else{
         document.write("<td align=center>"+string_of_day+"</td>");
       }
