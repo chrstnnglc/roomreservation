@@ -3,7 +3,7 @@
 <title>Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 75%;
+max-width: 67.5%;
 @stop
 @section('items')
 @if (Auth::user() != NULL)
@@ -63,20 +63,19 @@ reservation_status = [
 @endif
 @endforeach
 ];
-
+name_of_months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; 
 
 // fill the month table with column headings
 function day_title(day_name){
-     document.write("<td>"+day_name+"</td>");
+     calendarTable+="<td>"+day_name+"</td>";
 }
 // fills the month table with numbers
-function fill_table(month,month_length,year)
-{
-  name_of_months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Semptember', 'October', 'November', 'December']; 
+function fill_table(month,month_length,year){
+  calendarTable="";
   day=1
   // begin the new month table
-  document.write("<table class='ui fixed yellow celled table' style='column: 100%'>");
-  document.write('<thead><tr><th colspan="7" style="text-align: center;"><b>'+name_of_months[month]+'   '+year+'</b></th></tr></thead>');
+  calendarTable+="<table class='ui fixed yellow celled table' style='column: 100%'>";
+  calendarTable+='<thead><tr><th style="border-right: 0;"> <button class="ui yellow button" id = "prev_month" onclick = "month_subtracter();"> <h3> << </h3> </button> </th><th colspan="5" style="text-align: center; border-left: 0; border-right: 0;"><h2>'+name_of_months[month]+'   '+year+'</h2></th><th style="border-left: 0;"><div style="text-align: right;"> <button class="ui yellow button" id = "next_month" onclick = "month_adder();"> <h3> >> </h3> </button> </div></th></tr></thead>';
   // column headings
   day_title("Sun");
   day_title("Mon");
@@ -86,10 +85,10 @@ function fill_table(month,month_length,year)
   day_title("Fri");
   day_title("Sat");
   // pad cells before first day of month
-  document.write("</tr><tr>");
+  calendarTable+="</tr><tr>";
   if(start_day%7!=0){
     for (var i=0;i<start_day;i++){
-          document.write("<td class='active'></td>");
+          calendarTable+="<td class='active'></td>";
     }
   }
   if(month>9){
@@ -113,26 +112,26 @@ function fill_table(month,month_length,year)
       }
     }
     if(yes==1){
-      document.write("<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day);
+      calendarTable+="<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day;
       for(var index=0; index<indices.length; index++){
         if(index>2){
-          document.write("...");
+          calendarTable+="...";
           break;
         }
         if(reservation_status[indices[index]]=="paid"){
-          document.write("<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          calendarTable+="<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
         }else{
-          document.write("<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+          calendarTable+="<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
         }
-        document.write("</div></font>");
+        calendarTable+="</div></font>";
       }
-      document.write("</div></td>");
+      calendarTable+="</div></td>";
     }else{
-      document.write("<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day+"</td>");
+      calendarTable+="<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day+"</td>";
     }
     day++;
   }
-  document.write("</tr><tr>");
+  calendarTable+="</tr><tr>";
   // fill the remaining weeks
   
   while (day <= month_length) {
@@ -151,59 +150,129 @@ function fill_table(month,month_length,year)
         }
       }
       if(yes==1){
-        document.write("<td style='height: 125px;'><div style='height: 100px'>"+string_of_day);
+        calendarTable+="<td style='height: 125px;'><div style='height: 100px'>"+string_of_day;
         for(var index=0; index<indices.length; index++){
           if(index>2){
-            document.write("...");
+            calendarTable+="...";
             break;
           }
           if(reservation_status[indices[index]]=="paid"){
-            document.write("<div class='ui green label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+            calendarTable+="<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
           }else{
-            document.write("<div class='ui orange label'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]]);
+            calendarTable+="<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
           }
-          document.write("</div></font><br>");
+          calendarTable+="</div></font>";
         }
-        document.write("</td>");
+        calendarTable+="</td>";
       }else{
-        document.write("<td style='height: 125px;'><div style='height: 100px'>"+string_of_day+"</td>");
+        calendarTable+="<td style='height: 125px;'><div style='height: 100px'>"+string_of_day+"</td>";
       }
       day++;
     }
     for(j=i; j<7; j++){
-      document.write("<td class='active'></td>");
+      calendarTable+="<td class='active'></td>";
     }
-    document.write("</tr><tr>");
+    calendarTable+="</tr><tr>";
     // the first day of the next month
     start_day=i;
   }
-  document.write("</tr></table><br>");
+  calendarTable+="</tr></table><br>";
+  return calendarTable;
 }
-year = new Date();
-// CAHNGE the below variable to the CURRENT YEAR
-// first day of the week of the new year
-today= new Date("January 1,"+ year.getFullYear());
-start_day = today.getDay();   // starts with 0
-for(var month=0; month<12; month++){
-  if(month==1){
-    if((today.getFullYear()%4==0 && today.getFullYear()%100!=0) || today.getFullYear()%400==0){
-      fill_table(month,29,today.getFullYear());
+window.onload = function (){
+  current = new Date();
+  month = current.getMonth();
+  year = current.getFullYear();
+  // CAHNGE the below variable to the CURRENT YEAR
+  // first day of the week of the new year
+  today= new Date(name_of_months[month]+" 1,"+ year);
+  start_day = today.getDay();   // starts with 0
+  actual_calendar = document.getElementById('show_calendar');
+  if(month == 1){
+    if((year%4==0 && year%100!=0) || year%400==0){
+      actual_calendar.innerHTML = fill_table(month,29,year);
     }else{
-      fill_table(month,28,today.getFullYear());
+      actual_calendar.innerHTML = fill_table(month,28,year);  
     }
-  }else if (month<8){
-    if(month%2==0){
-      fill_table(month,31,today.getFullYear());
-    }else{
-      fill_table(month,30,today.getFullYear());
+  }else{
+    if(month<7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,30,year);  
+      }else{
+        actual_calendar.innerHTML = fill_table(month,31,year);  
+      }
+    }else if(month>=7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,31,year);
+      }else{
+        actual_calendar.innerHTML = fill_table(month,30,year);
+      }
     }
-  }else if(month>=8){
-    if(month%2==1){
-      fill_table(month,31,today.getFullYear());
+  }
+  prev_month = document.getElementById('prev_month');
+  next_month = document.getElementById('next_month');
+}
+
+function month_adder(){
+  month = month + 1;
+  if(month>11){
+    month=month%12;
+    year+=1;
+  }
+  today= new Date(name_of_months[month]+" 1,"+ year);
+  start_day = today.getDay();
+  if(month == 1){
+    if((year%4==0 && year%100!=0) || year%400==0){
+      actual_calendar.innerHTML = fill_table(month,29,year);
     }else{
-      fill_table(month,30,today.getFullYear());
+      actual_calendar.innerHTML = fill_table(month,28,year);  
+    }
+  }else{
+    if(month<7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,30,year);  
+      }else{
+        actual_calendar.innerHTML = fill_table(month,31,year);  
+      }
+    }else if(month>=7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,31,year);
+      }else{
+        actual_calendar.innerHTML = fill_table(month,30,year);
+      }
+    }
+  }
+}
+function month_subtracter(){
+  month = month - 1;
+  if(month<0){
+    month=11;
+    year-=1;
+  }
+  today= new Date(name_of_months[month]+" 1,"+ year);
+  start_day = today.getDay();
+  if(month == 1){
+    if((year%4==0 && year%100!=0) || year%400==0){
+      actual_calendar.innerHTML = fill_table(month,29,year);
+    }else{
+      actual_calendar.innerHTML = fill_table(month,28,year);  
+    }
+  }else{
+    if(month<7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,30,year);  
+      }else{
+        actual_calendar.innerHTML = fill_table(month,31,year);  
+      }
+    }else if(month>=7){
+      if(month%2==1){
+        actual_calendar.innerHTML = fill_table(month,31,year);
+      }else{
+        actual_calendar.innerHTML = fill_table(month,30,year);
+      }
     }
   }
 }
 </script>
+<div id="show_calendar">&nbsp;</div>
 @endsection
