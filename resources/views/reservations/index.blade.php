@@ -32,10 +32,10 @@ max-width: 50%;
 <table class="ui celled yellow table">
   <thead>
     <tr>
-      <th>Date Reserved</th>
+      <th>Date of Reservation</th>
       <th>User</th>
       <th>Room</th>
-      <th>Date of Reservation</th>
+      <th>Date Reserved</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Hours</th>
