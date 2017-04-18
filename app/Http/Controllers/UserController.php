@@ -58,7 +58,7 @@ class UserController extends Controller
     }
 
     public function edituser(User $user) {
-        return view('edituser', compact('user'));
+        return view('user.edituser', compact('user'));
     }
 
     public function updateuser(Request $request, User $user) {

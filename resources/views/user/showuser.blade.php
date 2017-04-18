@@ -1,13 +1,13 @@
-@extends('admin.master')
+@extends('layouts.master')
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
 @section('items')
-<a class="item" style="font-size: 110%" href = "{{url('/admin/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/user')}}">Users</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/admin/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/rooms')}}">Rooms</a>
-<a class="item" style="font-size: 110%" href = "{{url('/admin/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
 @section('content')
 
@@ -21,13 +21,16 @@
     <td class="mobile">{{ $user->mobile }}</td>
     <td class="affiliation">{{ $user->affiliation }}</td>
     <td class="users_role">{{$user->users_role}}</td>
+    @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<button><a href="/admin/user/{{ $user->id }}/edituser">Edit</a></button>
+		<a href="/user/{{ $user->id }}/edituser"  class = "ui fluid large yellow submit button">Edit</a>
 	</td>
+	@endif
 	</tr>
 </table>
 
-<form method="POST" action="/admin/user/{{ $user->id }}">
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<form method="POST" action="/user/{{ $user->id }}">
 	{{ csrf_field() }}
 	
 	<input type="hidden" name="id" value="{{ $user->id }}">
@@ -38,6 +41,11 @@
 	<input type="hidden" name="mobile" value="{{ $user->mobile }}">
 	<input type="hidden" name="affiliation" value="{{ $user->affiliation }}">
 	<input type="hidden" name="users_role" value="{{ $user->users_role }}">
-	<button type="submit">Delete User</button>
+	<div class = "container" align = "center">
+		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
+			<button type="submit" class="ui yellow fluid button">Delete User</button>
+		</div>
+	</div>
 </form>
+@endif
 @stop

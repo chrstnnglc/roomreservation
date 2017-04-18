@@ -58,20 +58,49 @@ class ReservationsController extends Controller
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
     	$reserve->reservations_status = 'not paid';
         
-        $reserve->save();
+        $reserve_in_database1 = Reservation::where('room_id', $room->id)
+            ->where('date_reserved', $request->date)
+            ->where('start_of_reserved', '<=', $request->starttime)
+            ->where('end_of_reserved', '>=', $request->endtime);
 
-        $log = new Log;
+        $reserve_in_database2 = Reservation::where('room_id', $room->id)
+            ->where('date_reserved', $request->date)
+            ->where('start_of_reserved', '>=', $request->starttime)
+            ->where('end_of_reserved', '<=', $request->endtime);
 
-        $log->user_id = $request->user()->id;
-        $log->date_of_reservation = date("Y-m-d h:i:sa");
-        $log->remarks = "Add Reservation";
+        $reserve_in_database3 = Reservation::where('room_id', $room->id)
+            ->where('date_reserved', $request->date)
+            ->where('start_of_reserved', '>=', $request->starttime)
+            ->where('start_of_reserved', '<=', $request->endtime)
+            ->where('end_of_reserved', '>=', $request->endtime);
 
-        $log->save();
+        $reserve_in_database4 = Reservation::where('room_id', $room->id)
+            ->where('date_reserved', $request->date)
+            ->where('start_of_reserved', '<=', $request->starttime)
+            ->where('end_of_reserved', '<=', $request->endtime)
+            ->where('end_of_reserved', '>=', $request->starttime);
+
+        if (!$reserve_in_database1->first() and !$reserve_in_database2->first() and !$reserve_in_database3->first() and !$reserve_in_database4->first()) {
+            $reserve->save();
+
+            $log = new Log;
+
+            $log->user_id = $request->user()->id;
+            $log->date_of_reservation = date("Y-m-d h:i:sa");
+            $log->remarks = "Add Reservation";
+
+            $log->save();
+        }
         return redirect('reservations');
     }
 
     public function updatereservation(Request $request, Reservation $reserve) {
-        $reserve->reservations_status = $request->status;
+        if ($request->status){
+            $reserve->reservations_status = $request->status;
+        }
+        if ($request->or_number){
+            $reserve->or_number = $request->or_number;
+        }
         
         $reserve->save();
 
