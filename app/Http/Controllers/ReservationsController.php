@@ -95,7 +95,12 @@ class ReservationsController extends Controller
     }
 
     public function updatereservation(Request $request, Reservation $reserve) {
-        $reserve->reservations_status = $request->status;
+        if ($request->status){
+            $reserve->reservations_status = $request->status;
+        }
+        if ($request->or_number){
+            $reserve->or_number = $request->or_number;
+        }
         
         $reserve->save();
 

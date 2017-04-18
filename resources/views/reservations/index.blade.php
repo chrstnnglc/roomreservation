@@ -22,12 +22,13 @@ max-width: 50%;
 @endif
 @stop
 @section('content')
-
+@if (Auth::user()->users_role != 'treasury')
 <div class="container" align="center">
 <div class="container" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
 <a href="{{url('/reservations/form')}}" class="ui yellow fluid button">New Reservation</a>
 </div>
 </div>
+@endif
 
 <table class="ui celled yellow table">
   <thead>
@@ -41,6 +42,7 @@ max-width: 50%;
       <th>Hours</th>
       <th>Price</th>
       <th>Status</th>
+      <th>OR Number</th>
     </tr>
   </thead>
   <tbody>
@@ -76,6 +78,20 @@ max-width: 50%;
         </form>
       @else
       {{ $reserve->reservations_status }}
+      @endif
+      </td>
+      <td class="or_number">
+      @if(Auth::user()->users_role=='treasury')
+      <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
+          {{ method_field('PATCH') }}
+          {{ csrf_field() }}
+            <div class="field">
+              <input type="text" name="or_number" value="{{ $reserve->or_number }}">
+            </div>
+          <input class="ui primary button" type = "submit" value = "Save" />
+      </form>
+      @else
+      {{ $reserve->or_number }}
       @endif
       </td>
     </tr>
