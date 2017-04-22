@@ -98,7 +98,7 @@ class ReservationsController extends Controller
         if ($request->status){
             $reserve->reservations_status = $request->status;
         }
-        if ($request->or_number){
+        if ($request->or_number and $request->status == "paid"){
             $reserve->or_number = $request->or_number;
         }
         

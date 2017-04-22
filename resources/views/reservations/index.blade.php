@@ -57,7 +57,7 @@ max-width: 50%;
       <td class="hours">{{ $reserve->hours }}</td>
       <td class="price">{{ $reserve->price }}</td>
       <td class="status">
-      @if(Auth::user()->users_role=='treasury')
+      @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
@@ -73,27 +73,16 @@ max-width: 50%;
               @endif
             >Not Paid</option>
           </select>
-
+            <div class="field">
+              <input type="text" name="or_number" placeholder="OR Number">
+            </div>
           <input class="ui primary button" type = "submit" value = "Save" />
         </form>
       @else
       {{ $reserve->reservations_status }}
       @endif
       </td>
-      <td class="or_number">
-      @if(Auth::user()->users_role=='treasury')
-      <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
-          {{ method_field('PATCH') }}
-          {{ csrf_field() }}
-            <div class="field">
-              <input type="text" name="or_number" value="{{ $reserve->or_number }}">
-            </div>
-          <input class="ui primary button" type = "submit" value = "Save" />
-      </form>
-      @else
-      {{ $reserve->or_number }}
-      @endif
-      </td>
+      <td class="or_number">{{ $reserve->or_number }}</td>
     </tr>
   @endforeach
 
