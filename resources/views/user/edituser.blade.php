@@ -2,6 +2,9 @@
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 25%;
+@stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
@@ -25,6 +28,7 @@
 			</ul>
 		</div>
 		@endif
+
 	    <form class="ui large form" method="POST" action="/user/{{ $user->id }}">
 	        {{ method_field('PUT') }}
 	        {{ csrf_field() }}
@@ -42,7 +46,10 @@
 					<input type="hidden" name="email" value="{{ $user->email }}">
 				</div>
 				<div class="field">
-					<input type="text" name="password" value="{{ $user->password }}">
+					<input type="password" name="password" value="" placeholder = "Password">
+				</div>
+				<div class="field">
+					<input type="password" name="password_confirmation" value="" placeholder = "Confirm Password">
 				</div>
 				<div class="field">
 					<input type="text" name="mobile" value="{{ $user->mobile }}">
@@ -50,13 +57,29 @@
 				<div class="field">
 			  	<input type="text" name="affiliation" value="{{ $user->affiliation }}">
 			  </div>
+
 			  <div class="field">
 		      <select name="users_role" class="ui dropdown" id="select">
 		        <option value=""></option>
-		        <option value="admin">Admin</option>
-		        <option value="media">Media</option>
-		        <option value="treasury">Treasury</option>
-		        <option value="user">User</option>
+		        <option value="admin"
+					@if($user->users_role == "admin")
+						selected
+					@endif
+				>Admin</option>
+		        <option value="media"
+					@if($user->users_role == "media")
+						selected
+					@endif
+				>Media</option>
+		        <option value="treasury"
+					@if($user->users_role == "treasury")
+						selected
+					@endif>Treasury</option>
+		        <option value="user"
+					@if($user->users_role == "user")
+						selected
+					@endif
+				>User</option>
 		      </select>
 		    </div>
 	        </div>
