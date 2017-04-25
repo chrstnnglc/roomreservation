@@ -30,7 +30,12 @@ max-width: 50%;
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="text" name="roomname" placeholder="Enter room name">
+			<select name="roomname" class="ui dropdown" id="select">
+		        <option value=""></option>
+		        @foreach ($rooms as $room)
+		        	<option value="{{ $room-> name }}">{{ $room->name }}</option>
+		        @endforeach
+		    </select>
 	      </div>
 	    </div>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
@@ -46,13 +51,29 @@ max-width: 50%;
 	      </div>
 	    </div>
 	    <div class="field">
-	      <div class="ui input">
-	        <input type="time" name="starttime" value = "" placeholder="hh:mm">
-	      </div>
+	      	<select name="starttime" class="ui dropdown" id="select">
+		        <option value=""></option>
+		        @for ($i = 0; $i < 24; $i+=0.5)
+		        @if($i/0.5 % 2 == 0)
+		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        @else
+		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        @endif
+		        @endfor
+		    </select>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="endtime" value = "" placeholder="hh:mm">
+	      	<select name="endtime" class="ui dropdown" id="select">
+		        <option value=""></option>
+		        @for ($i = 0; $i < 24; $i+=0.5)
+		        @if($i/0.5 % 2 == 0)
+		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        @else
+		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        @endif
+		        @endfor
+		    </select>
 	      </div>
 	    </div>
 	    <!--<a href="{{url('/reservations')}}">-->
