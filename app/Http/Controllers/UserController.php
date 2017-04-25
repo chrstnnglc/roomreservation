@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use App\User;
 
 class UserController extends Controller
@@ -40,8 +41,24 @@ class UserController extends Controller
     }
 
     public function adduser(Request $request) {
+        $this->validate($request, [
+            'username' => 'required|alpha_num|max:255|unique:users',
+            'firstname' => 'nullable|alpha_num|max:255',
+            'lastname' => 'nullable|alpha_num|max:255',
+            'email' => 'nullable|email',
+            'password' => 'required|alpha_num|min:6',
+            'password_confirmation' => 'required|confirmed',
+            'mobile' => 'nullable|numeric|max:11',
+            'affiliation' => 'nullable|alpha_num|max:255',
+            'users_role' => [
+                'required',
+                Rule::in(['admin', 'media', 'treasury', 'user']),
+            ],
+            
+        ]);
+
         $user = new User;
-        
+
         $user->username = $request->username;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
@@ -62,6 +79,31 @@ class UserController extends Controller
     }
 
     public function updateuser(Request $request, User $user) {
+        
+        $this->validate($request, [
+
+            'username' => [
+                'required',
+                'alpha_num',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'firstname' => 'nullable|alpha_num|max:255',
+            'lastname' => 'nullable|alpha_num|max:255',
+            'email' => [
+                'nullable',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'password' => 'required|alpha_num|min:6',
+            'mobile' => 'nullable|numeric|max:11',
+            'affiliation' => 'nullable|alpha_num|max:255',
+            'users_role' => [
+                'required',
+                Rule::in(['admin', 'media', 'treasury', 'user']),
+            ],
+            
+        ]);
 
         $user->username = $request->username;
         $user->firstname = $request->firstname;
