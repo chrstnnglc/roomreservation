@@ -22,6 +22,15 @@ class RoomsController extends Controller
     }
 
     public function addroom(Request $request) {
+        
+        $this->validate($request, [
+
+            'roomname' => 'required|alphaNum|max:255|unique:rooms,name',
+            'rate' => 'required|integer|min:1',
+            'capacity' => 'required|integer|min:1',
+        
+        ]);
+        
         $room = new Room;
         
         $room->name = $request->roomname;
@@ -29,7 +38,6 @@ class RoomsController extends Controller
         $room->capacity = $request->capacity;
 
         $room->save();
-
         $rooms = Room::all();
 
         return view('rooms.index', compact('rooms'));
@@ -40,6 +48,19 @@ class RoomsController extends Controller
     }
 
     public function updateroom (Request $request, Room $room) {
+
+        $this->validate($request, [
+
+            'roomname' => [
+                'required',
+                'alphaNum',
+                'max:255',
+                Rule::unique('rooms')->ignore($user->id),
+            ],
+            'rate' => 'required|integer|min:1',
+            'capacity' => 'required|integer|min:1',
+        
+        ]);
 
         $room->name = $request->roomname;
         $room->rate = $request->rate;
