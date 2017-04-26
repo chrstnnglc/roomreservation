@@ -34,27 +34,27 @@ max-width: 25%;
   <div class="ui yellow stacked segment">
     <div class="field">
       <div class="ui input">
-        <input type="text" name="equipment" placeholder="Equipment name">
+        <input type="text" name="equipment" placeholder="Equipment name" value = "{{ old('equipment') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="brand" placeholder="Brand">
+        <input type="text" name="brand" placeholder="Brand" value = "{{ old('brand') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="model" placeholder="Model">
+        <input type="text" name="model" placeholder="Model" value = "{{ old('model') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="number" name="price" placeholder="Price">
+        <input type="number" name="price" placeholder="Price" value = "{{ old('price') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="condition" placeholder="Condition">
+        <input type="text" name="condition" placeholder="Condition" value = "{{ old('condition') }}">
       </div>
     </div>
     <div class="field">
@@ -64,7 +64,12 @@ max-width: 25%;
       <select class = "ui search dropdown" name = "room">
           <option value = ""></value>
         @foreach ($rooms as $room)
-          <option value = "{{ $room->name }}">{{ $room->name }}</value>
+          <option value = "{{ $room->name }}"
+          
+          @if (old('room') == $room->name)
+            selected
+          @endif
+          >{{ $room->name }}</value>
         @endforeach
       </select>
     </div>
