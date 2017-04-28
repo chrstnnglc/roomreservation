@@ -23,7 +23,7 @@ class UserController extends Controller
     public function profile() {
         $user = Auth::user();
 
-        return view('profile.index', compact('user'));
+        return view('user.profile', compact('user'));
     }
 
     public function user_form(User $user) {
@@ -116,9 +116,13 @@ class UserController extends Controller
 
         $user->save();
 
-        $url = 'user/' . $user->id;
-
-        return redirect($url);
+        if ($user->users_role == 'user') {
+            $url = 'user/profile';
+            return redirect($url);
+        } else {
+            $url = 'user/' . $user->id;
+            return redirect($url);
+        }
     }
 
     public function deleteuser(Request $request) {

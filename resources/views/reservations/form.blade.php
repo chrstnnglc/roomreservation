@@ -6,20 +6,19 @@
 max-width: 50%;
 @stop
 @section('items')
-@if (Auth::user()->users_role == 'admin')
+@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
-<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'treasury')
 <a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'user')
 <a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
-@endif
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>@endif
 @stop
 @section('content')
 <div class="ui middle aligned center aligned grid">
@@ -29,24 +28,16 @@ max-width: 50%;
 	{{ csrf_field() }}
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
-			<select name="roomname" class="ui dropdown" id="select">
-		        <option value="">Room</option>
-		        @foreach ($rooms as $room)
-		        	<option value="{{ $room-> name }}">{{ $room->name }}</option>
-		        @endforeach
-		    </select>
+	      <div class="ui input">
+	        <input type="text" name="roomname" placeholder="Enter room name">
+	      </div>
 	    </div>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
-		      	<select name="username" class="ui dropdown" id="select">
-			        <option value="">User</option>
-			        @foreach ($users as $user)
-			        	@if($user->users_role != 'treasury')
-			        		<option value="{{ $user->username }}">{{ $user->username }}</option>
-			        	@endif
-			        @endforeach
-			    </select>
-	    	</div>
+	      <div class="ui input">
+	        <input type="text" name="username" placeholder = "Enter user name">
+	      </div>
+	    </div>
 	    @endif
 	    <div class="field">
 	      <div class="ui input">
@@ -54,29 +45,13 @@ max-width: 50%;
 	      </div>
 	    </div>
 	    <div class="field">
-	      	<select name="starttime" class="ui dropdown" id="select">
-		        <option value="">hh:mm</option>
-		        @for ($i = 0; $i < 24; $i+=0.5)
-		        @if($i/0.5 % 2 == 0)
-		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
-		        @else
-		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
-		        @endif
-		        @endfor
-		    </select>
+	      <div class="ui input">
+	        <input type="time" name="starttime" value = "" placeholder="hh:mm">
+	      </div>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	      	<select name="endtime" class="ui dropdown" id="select">
-		        <option value="">hh:mm</option>
-		        @for ($i = 0; $i < 24; $i+=0.5)
-		        @if($i/0.5 % 2 == 0)
-		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
-		        @else
-		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
-		        @endif
-		        @endfor
-		    </select>
+	        <input type="time" name="endtime" value = "" placeholder="hh:mm">
 	      </div>
 	    </div>
 	    <!--<a href="{{url('/reservations')}}">-->

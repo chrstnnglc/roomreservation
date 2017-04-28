@@ -4,21 +4,21 @@
 <title>Profile - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 20%;
+max-width: 40%;
 @stop
-@if (Auth::user()->users_role == 'admin')
+@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
-<a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'treasury')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'user')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="active item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @endif
 @stop
 
@@ -36,12 +36,25 @@ max-width: 20%;
         </tr>
         <tr>
             <td>Name:</td>
-            <td class="name">{{ Auth::user()->last_name }} {{Auth::user()->first_name}}</td>
+            <td class="name">{{ Auth::user()->firstname }} {{Auth::user()->lastname}}</td>
         </tr>
         <tr>
             <td>E-mail:</td>
-            <td class="capacity">{{ Auth::user()->Email }}</td>
+            <td class="capacity">{{ Auth::user()->email }}</td>
+        </tr>
+        <tr>
+            <td>Mobile:</td>
+            <td class="capacity">{{ Auth::user()->mobile }}</td>
+        </tr>
+        <tr>
+            <td>Affiliation:</td>
+            <td class="capacity">{{ Auth::user()->affiliation }}</td>
+        </tr>
+        <tr>
+          <td colspan="3"><a href="">View previous reservations</a></td>
         </tr>
   </tbody>
 </table>
+
+<a href="/user/{{ $user->id }}/edituser"  class = "ui fluid large yellow submit button">Edit</a>
 @stop
