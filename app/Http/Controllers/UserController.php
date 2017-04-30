@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\User;
+use App\Reservation;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-	public function index()
+    public function index()
     {
         $user = Auth::user();
 
@@ -33,7 +34,7 @@ class UserController extends Controller
 
     public function userslist(User $user) {
         $users = User::all();
-    	return view('user.userslist', compact('users'));
+        return view('user.userslist', compact('users'));
     }
 
     public function showuser(User $user) {
@@ -136,5 +137,15 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('user');
+    }
+
+    public function viewhistory(Request $request) {
+        $user = Auth::user();
+        $reserves = Reservation::where('username', $user->username);
+
+        if ($reserves !== NULL) {
+            $reserves->orderBy('date_reserved', 'desc');
+        }
+        return view('user.history', compact('reserves'));
     }
 }
