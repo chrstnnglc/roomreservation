@@ -104,7 +104,9 @@ max-width: 25%;
     </a>
   </div>
 </form>
-@stop@extends('layouts.master')
+@stop
+
+@extends('layouts.master')
 @section('name')
 <title>Users - Diocese of Cubao Reservation System</title>
 @stop

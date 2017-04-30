@@ -81,7 +81,6 @@ class UserController extends Controller
     public function updateuser(Request $request, User $user) {
         
         $this->validate($request, [
-
             'username' => [
                 'required',
                 'alpha_num',
@@ -95,7 +94,8 @@ class UserController extends Controller
                 'email',
                 Rule::unique('users')->ignore($user->id),
             ],
-            'password' => 'required|alpha_num|min:6',
+            'password' => 'required|alpha_num|min:6|confirmed',
+            'password_confirmation' => 'required',
             'mobile' => 'nullable|digits:11',
             'affiliation' => 'nullable|alpha_num|max:255',
             'users_role' => [
@@ -105,6 +105,12 @@ class UserController extends Controller
             
         ]);
 
+        if (Auth::user()->users_role != "admin" && Auth::user()->users_role != "media") {
+            if (bcrypt($request->password) != $user->password) {
+                // return [$user, 'error' => 'Current password is incorrect!'];
+                return view('user.edituser', ['user' => $user, 'error' => 'Current password is incorrect!']); 
+            }
+        }
         $user->username = $request->username;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
