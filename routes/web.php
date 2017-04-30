@@ -49,5 +49,6 @@ Route::get('user/{user}', 'UserController@showuser');
 Route::get('user/{user}/edituser', 'UserController@edituser');
 Route::put('user/{user}','UserController@updateuser');
 Route::post('user/{user}','UserController@deleteuser');
+Route::get('user/profile/past','UserController@viewhistory');
 
 Route::get('logs', 'LogsController@index');
