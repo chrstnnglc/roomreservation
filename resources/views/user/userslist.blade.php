@@ -50,7 +50,7 @@ max-width: 50%;
             <td class="affiliation">{{ $user->affiliation }}</td>
             <td class="users_role">{{$user->users_role}}</td>
             <td class="options">
-              <button><a href="/user/{{ $user->id }}">View User</a></button>
+              <a href="/user/{{ $user->id }}" class="ui yellow button">View User</a>
             </td>
             <!-- <td><button><a href = "/manage/users/{{$user->id}}/edit">Edit</a> </button>
                 <form action = "/manage/users/{{$user->id}}" method="POST" onsubmit = "return confirm('Do you really want to delete this user?');">
