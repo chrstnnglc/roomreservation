@@ -58,6 +58,12 @@ class ReservationsController extends Controller
             $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
         }
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
+        $equipment_reserved = Equipment::where('room_id', $room->id);
+
+        foreach ($equipment_reserved as $equipment) {
+            $reserve->price += $equipment->price;
+        }
+
     	$reserve->reservations_status = 'not paid';
         
         $reserve_in_database1 = Reservation::where('room_id', $room->id)
