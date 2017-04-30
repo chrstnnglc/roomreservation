@@ -29,7 +29,9 @@ class ReservationsController extends Controller
     }
 
     public function form() {
-        return view('reservations.form');
+        $rooms = Room::all();
+        $users = User::all();
+        return view('reservations.form', compact('rooms', 'users'));
     }
     
     public function addreservation(Request $request) {
@@ -103,6 +105,13 @@ class ReservationsController extends Controller
         }
         
         $reserve->save();
+
+        return redirect('reservations');
+    }
+
+    public function deletereservation(Request $request) {
+        $reservation = Reservation::where('id', $request->id)->first();
+        $reservation->delete();
 
         return redirect('reservations');
     }

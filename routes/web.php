@@ -39,6 +39,7 @@ Route::get('reservations', 'ReservationsController@index');
 Route::post('reservations', 'ReservationsController@addreservation');
 Route::get('reservations/form', 'ReservationsController@form');
 Route::patch('reservations/{reserve}', 'ReservationsController@updatereservation');
+Route::post('reservations/{reserve}','ReservationsController@deletereservation');
 
 Route::get('user', 'UserController@userslist');
 Route::get('user/form', 'UserController@user_form');

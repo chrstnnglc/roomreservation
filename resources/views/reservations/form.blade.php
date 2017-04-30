@@ -28,15 +28,23 @@ max-width: 50%;
 	{{ csrf_field() }}
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
-	      <div class="ui input">
-	        <input type="text" name="roomname" placeholder="Enter room name">
-	      </div>
+	      <select name="roomname" class="ui dropdown" id="select">
+		        <option value="">Room</option>
+		        @foreach ($rooms as $room)
+		        	<option value="{{ $room-> name }}">{{ $room->name }}</option>
+		        @endforeach
+		    </select>
 	    </div>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
-	      <div class="ui input">
-	        <input type="text" name="username" placeholder = "Enter user name">
-	      </div>
+	      <select name="username" class="ui dropdown" id="select">
+			        <option value="">User</option>
+			        @foreach ($users as $user)
+			        	@if($user->users_role != 'treasury')
+			        		<option value="{{ $user->username }}">{{ $user->username }}</option>
+			        	@endif
+			        @endforeach
+			    </select>
 	    </div>
 	    @endif
 	    <div class="field">
@@ -45,18 +53,34 @@ max-width: 50%;
 	      </div>
 	    </div>
 	    <div class="field">
-	      <div class="ui input">
-	        <input type="time" name="starttime" value = "" placeholder="hh:mm">
-	      </div>
+	      	<select name="starttime" class="ui dropdown" id="select">
+		        <option value=""></option>
+		        @for ($i = 0; $i < 24; $i+=0.5)
+		        @if($i/0.5 % 2 == 0)
+		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        @else
+		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        @endif
+		        @endfor
+		    </select>
 	    </div>
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="time" name="endtime" value = "" placeholder="hh:mm">
+	      	<select name="endtime" class="ui dropdown" id="select">
+		        <option value=""></option>
+		        @for ($i = 0; $i < 24; $i+=0.5)
+		        @if($i/0.5 % 2 == 0)
+		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        @else
+		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        @endif
+		        @endfor
+		    </select>
 	      </div>
 	    </div>
 	    <!--<a href="{{url('/reservations')}}">-->
 	    <div class="container" align="center">
-	    <div class="conatiner" style="width: 50%;">
+	    <div class="container" style="width: 50%;">
 	    <input class="ui fluid large yellow submit button" type = "submit" value = "Add"/>
 	    </div>
 	  </div>

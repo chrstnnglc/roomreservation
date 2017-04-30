@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 50%;
+max-width: 60%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -43,6 +43,7 @@ max-width: 50%;
       <th>Price</th>
       <th>Status</th>
       <th>OR Number</th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>
@@ -55,7 +56,7 @@ max-width: 50%;
       <td class="start_time">{{ $reserve->start_of_reserved }}</td>
       <td class="end_time">{{ $reserve->end_of_reserved }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
-      <td class="price">{{ $reserve->price }}</td>
+      <td class="price">Php {{ $reserve->price }}</td>
       <td class="status">
       @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
@@ -83,6 +84,20 @@ max-width: 50%;
       @endif
       </td>
       <td class="or_number">{{ $reserve->or_number }}</td>
+      <td>
+        @if(Auth::user()->username == $reserve->user->username)
+        <form method="POST" action="/reservations/{{ $reserve->id }}">
+          {{ csrf_field() }}
+          
+          <input type="hidden" name="id" value="{{ $reserve->id }}">
+          <div class = "container" align = "center">
+            <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
+              <button type="submit" class="ui red fluid button">Cancel</button>
+            </div>
+          </div>
+        </form>
+        @endif
+      </td>
     </tr>
   @endforeach
 
