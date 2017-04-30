@@ -46,9 +46,9 @@ class UserController extends Controller
             'firstname' => 'nullable|alpha_num|max:255',
             'lastname' => 'nullable|alpha_num|max:255',
             'email' => 'nullable|email',
-            'password' => 'required|alpha_num|min:6',
-            'password_confirmation' => 'required|confirmed',
-            'mobile' => 'nullable|numeric|max:11',
+            'password' => 'required|alpha_num|min:6|confirmed',
+            'password_confirmation' => 'required',
+            'mobile' => 'nullable|digits:11',
             'affiliation' => 'nullable|alpha_num|max:255',
             'users_role' => [
                 'required',
@@ -96,7 +96,7 @@ class UserController extends Controller
                 Rule::unique('users')->ignore($user->id),
             ],
             'password' => 'required|alpha_num|min:6',
-            'mobile' => 'nullable|numeric|max:11',
+            'mobile' => 'nullable|digits:11',
             'affiliation' => 'nullable|alpha_num|max:255',
             'users_role' => [
                 'required',
