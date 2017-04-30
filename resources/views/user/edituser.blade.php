@@ -26,17 +26,22 @@ max-width: 25%;
   <div class="column">
 	<h1>Edit User</h1>				
 		
-		@if (count($errors) > 0)
+		@if (count($errors) > 0 || isset($error))
 		<div class = "ui left aligned inverted red stacked segment">
 			<i class="warning icon"></i>
 			Can't update!
 			<ul>
-				@foreach ($errors->all() as $error)
-					<li class = "">{{ $error }}</li>
+				@foreach ($errors->all() as $error1)
+					<li class = "">{{ $error1 }}</li>
 				@endforeach
+				@if(isset($error))
+					<li class = "">{{$error}}</li>
+				@endif
 			</ul>
 		</div>
 		@endif
+		
+			
 
 		@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	    <form class="ui large form" method="POST" action="/user/{{ $user->id }}">
@@ -44,16 +49,16 @@ max-width: 25%;
 	        {{ csrf_field() }}
 	        <div class="ui yellow stacked segment">
 				<div class="field">
-					<input type="text" name="username" value="{{ $user->username }}">
+					<input type="text" name="username" value="{{ $user->username }}" placeholder = "Username">
 				</div>
 				<div class="field">
-					<input type="text" name="firstname" value="{{ $user->firstname }}">
+					<input type="text" name="firstname" value="{{ $user->firstname }}" placeholder = "First Name">
 				</div>
 				<div class="field">
-			  	<input type="text" name="lastname" value="{{ $user->lastname }}">
+			  	<input type="text" name="lastname" value="{{ $user->lastname }}" placeholder = "Last Name">
 			  </div>
 			  <div class="field">
-					<input type="hidden" name="email" value="{{ $user->email }}">
+					<input type="hidden" name="email" value="{{ $user->email }}"placeholder = "Email">
 				</div>
 				<div class="field">
 					<input type="password" name="password" value="" placeholder = "Password">
@@ -62,10 +67,10 @@ max-width: 25%;
 					<input type="password" name="password_confirmation" value="" placeholder = "Confirm Password">
 				</div>
 				<div class="field">
-					<input type="text" name="mobile" value="{{ $user->mobile }}">
+					<input type="text" name="mobile" value="{{ $user->mobile }}" placeholder = "Mobile (09xxxxxxxxx)">
 				</div>
 				<div class="field">
-			  	<input type="text" name="affiliation" value="{{ $user->affiliation }}">
+			  	<input type="text" name="affiliation" value="{{ $user->affiliation }}" placeholder = "Affiliation">
 			  </div>
 
 			  <div class="field">
@@ -103,33 +108,35 @@ max-width: 25%;
 	        {{ csrf_field() }}
 	        <div class="ui yellow stacked segment">
 				<div class="field">
-					<input type="text" name="username" value="{{ $user->username }}">
+					<input type="text" name="username" value="{{ $user->username }}" placeholder = "Username">
 				</div>
 				<div class="field">
-					<input type="text" name="firstname" value="{{ $user->firstname }}">
+					<input type="text" name="firstname" value="{{ $user->firstname }}" placeholder = "First Name">
 				</div>
 				<div class="field">
-			  	<input type="text" name="lastname" value="{{ $user->lastname }}">
+			  	<input type="text" name="lastname" value="{{ $user->lastname }}" placeholder = "Last Name">
 			  </div>
 			  <div class="field">
-					<input type="hidden" name="email" value="{{ $user->email }}">
+					<input type="hidden" name="email" value="{{ $user->email }}" placeholder = "Email">
 				</div>
 				<div class="field">
-					<input type="text" name="mobile" value="{{ $user->mobile }}">
+					<input type="text" name="mobile" value="{{ $user->mobile }}" placeholder = "Mobile (09xxxxxxxxx)">
 				</div>
 				<div class="field">
-			  	<input type="text" name="affiliation" value="{{ $user->affiliation }}">
+			  	<input type="text" name="affiliation" value="{{ $user->affiliation }}" placeholder = "Affiliation">
 			  </div>
 			  <div class="field">
 			  	<input type="hidden" name="users_role" value="{{ $user->users_role }}">
 			  </div>
 
-			  Please enter your password.
+				<div class="field">
+						<input type="password" name="old_password" value="" placeholder = "Current Password">
+					</div>
 			  <div class="field">
-					<input type="password" name="password" value="" placeholder = "Password">
+					<input type="password" name="password" value="" placeholder = "New Password">
 				</div>
 				<div class="field">
-					<input type="password" name="password_confirmation" placeholder = "Confirm Password">
+					<input type="password" name="password_confirmation" placeholder = "Confirm New Password">
 				</div>
 	        </div>
 	        <a href="{{url('/user')}}">
