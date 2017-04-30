@@ -51,7 +51,7 @@ max-width: 40%;
             <td class="capacity">{{ Auth::user()->affiliation }}</td>
         </tr>
         <tr>
-          <td colspan="3"><a href="">View previous reservations</a></td>
+          <td colspan="3"><a href="{{url('/user/profile/past')}}">View previous reservations</a></td>
         </tr>
   </tbody>
 </table>
