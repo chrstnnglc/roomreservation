@@ -57,8 +57,21 @@ max-width: 60%;
       <td class="end_time">{{ $reserve->end_of_reserved }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
       <td class="price">Php {{ $reserve->price }}</td>
-      <td class="status">
-      @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
+      <td class="status">{{ $reserve->reservations_status }}</td>
+      <td class="or_number">{{ $reserve->or_number }}</td>
+      <td>
+        @if(Auth::user()->username == $reserve->user->username)
+        <form method="POST" action="/reservations/{{ $reserve->id }}">
+          {{ csrf_field() }}
+          
+          <input type="hidden" name="id" value="{{ $reserve->id }}">
+          <div class = "container" align = "center">
+            <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
+              <button type="submit" class="ui red fluid button">Cancel</button>
+            </div>
+          </div>
+        </form>
+        @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
@@ -78,23 +91,6 @@ max-width: 60%;
               <input type="text" name="or_number" placeholder="OR Number">
             </div>
           <input class="ui primary button" type = "submit" value = "Save" />
-        </form>
-      @else
-      {{ $reserve->reservations_status }}
-      @endif
-      </td>
-      <td class="or_number">{{ $reserve->or_number }}</td>
-      <td>
-        @if(Auth::user()->username == $reserve->user->username)
-        <form method="POST" action="/reservations/{{ $reserve->id }}">
-          {{ csrf_field() }}
-          
-          <input type="hidden" name="id" value="{{ $reserve->id }}">
-          <div class = "container" align = "center">
-            <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
-              <button type="submit" class="ui red fluid button">Cancel</button>
-            </div>
-          </div>
         </form>
         @endif
       </td>
