@@ -45,7 +45,9 @@ max-width: 50%;
       <td class="model">{{$equip->model}}</td>
       <td class="price">{{$equip->price}}</td>
       <td class="condition">{{$equip->condition}}</td>
-      <td class="room">{{$equip->room->name}}</td>
+      @if ($equip->room != "")
+        <td class="room">{{$equip->room->name}}</td>
+      @endif
       <td class="options">
         <!--<div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">-->
           <a href="/equipment/{{ $equip->id }}" class="ui yellow fluid button">View</a>

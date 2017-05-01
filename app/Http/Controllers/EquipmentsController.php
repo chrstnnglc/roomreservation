@@ -43,8 +43,10 @@ class EquipmentsController extends Controller
         $equipment->price = $request->price;
         $equipment->condition = $request->condition;
 
-        $room = Room::where('name', $request->room)->first();
-        $equipment->room_id = $room->id;
+        if ($request->room != ""){
+            $room = Room::where('name', $request->room)->first();
+            $equipment->room_id = $room->id;
+        }
 
         $equipment->save();
 

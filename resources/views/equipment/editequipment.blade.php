@@ -56,11 +56,11 @@ max-width: 25%;
 						
 						@foreach ($rooms as $room)
 						<option value = "{{ $room->name }}" 
-						
-						@if($equipment->room->name == $room->name)
-							selected
-						@endif
-						
+						@if($equipment->room)
+							@if($equipment->room->name == $room->name)
+								selected
+							@endif
+						@endif			
 						>{{ $room->name }}</value>
 						@endforeach
 					</select>

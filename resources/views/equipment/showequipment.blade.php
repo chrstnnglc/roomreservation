@@ -23,7 +23,9 @@ max-width: 40%;
       <td class="model">{{$equipment->model}}</td>
       <td class="price">{{$equipment->price}}</td>
       <td class="condition">{{$equipment->condition}}</td>
-      <td class="room_id">{{$equipment->room->name}}</td>
+      @if ($equipment->room != "")
+      	<td class="room_id">{{$equipment->room->name}}</td>
+      @endif
       @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
 		<a href="/equipment/{{ $equipment->id }}/editequipment" class = "ui fluid tiny yellow submit button">Edit</a>

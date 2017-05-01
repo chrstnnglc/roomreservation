@@ -63,7 +63,7 @@ max-width: 25%;
         <input type="text" name="room" placeholder="Room Name">
       </div>-->
       <select class = "ui search dropdown" name = "room">
-          <option value = ""></value>
+          <option value = "">Select Room</value>
         @foreach ($rooms as $room)
           <option value = "{{ $room->name }}"
           
