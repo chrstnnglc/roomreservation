@@ -50,7 +50,7 @@ max-width: 90%;
   </thead>
   <tbody>
   @if (count($errors) > 0)
-  <div class = "ui inverted red stacked segment">
+  <div class = "ui left aligned inverted red stacked segment">
       <i class="warning icon"></i>
       Warning!
       <ul>
