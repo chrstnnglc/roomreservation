@@ -49,6 +49,18 @@ max-width: 90%;
     </tr>
   </thead>
   <tbody>
+  @if (count($errors) > 0)
+  <div class = "ui inverted red stacked segment">
+      <i class="warning icon"></i>
+      Warning!
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li class = "">{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+  @endif
+  
   @foreach ($reserves as $reserve)
     <tr>
       <td class="room">{{ $reserve->date_of_reservation }}</td>
@@ -80,18 +92,6 @@ max-width: 90%;
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
-
-          @if (count($errors) > 0)
-            <div class = "ui inverted red stacked segment">
-                <i class="warning icon"></i>
-                Warning!
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class = "">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
 
           <div class="ui mini input">
             <input type="text" placeholder="OR Number" name = "or_number" style="width: 90%;">
