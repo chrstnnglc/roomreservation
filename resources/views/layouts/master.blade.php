@@ -34,6 +34,7 @@
     }
     body > .grid {
       height: 100%;
+      width: 100vw;
 
     }
     .image {
@@ -52,6 +53,17 @@
       user-select:none;
       transform:translate(-50%,-50%);
       -ms-transform:translate(-50%,-50%)
+    }
+    #message {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      z-index: 102;
+      margin: 5vw;
+      width: auto;
+    }
+    #message .close {
+      cursor: pointer;
     }
   </style>
 
@@ -94,5 +106,28 @@
       @yield('content')
     </div>
   </div>
+
+  @if (isset($success))
+  <div class="ui green inverted segment" id = "message">
+    <i class="close icon"></i> {{ $success }}
+  </div>
+
+  <script>
+    // $('#message').delay("slow").show(0).transition("fade");
+   
+    $('#message .close')
+      .on('click', function() {
+        $(this)
+          .closest('#message')
+          .transition('fade')
+        ;
+      });
+   $(document).ready(function(){
+      setTimeout(function() {
+          $("#message").fadeOut(2000);
+      }, 5000);
+    });
+  </script>
+  @endif
 </body>
 </html>

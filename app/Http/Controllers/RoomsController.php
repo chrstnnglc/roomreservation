@@ -42,8 +42,9 @@ class RoomsController extends Controller
 
         $room->save();
         $rooms = Room::all();
+        $success = 'Successfully added room!';
 
-        return view('rooms.index', compact('rooms'));
+        return view('rooms.index', compact('rooms', 'success'));
     }
 
     public function editroom (Room $room) {
@@ -80,6 +81,9 @@ class RoomsController extends Controller
         $room = Room::where('id', $request->id)->first();
         $room->delete();
 
-        return redirect('rooms');
+        $rooms = Room::all();
+        $success = 'Successfully deleted room!';
+
+        return view('rooms.index', compact('rooms', 'success'));
     }
 }
