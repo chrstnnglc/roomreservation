@@ -7,6 +7,9 @@ use App\Room;
 
 class RoomsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('adminmedia');
+    }
 
     public function index() {
         $rooms = Room::all();

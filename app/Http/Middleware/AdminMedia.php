@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 
-class Admin
+class AdminMedia
 {
     /**
      * Handle an incoming request.
@@ -14,12 +13,14 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->users_role == 'admin') {
+        $user = $request->user();
+
+        if ($user->users_role == 'admin' or $user->users_role == 'media') {
             return $next($request);
-        } else {
-            return redirect('/login');
         }
+        
+        return redirect('/');
     }
 }

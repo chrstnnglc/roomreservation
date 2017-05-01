@@ -12,13 +12,7 @@ class UserController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
-    }
-
-    public function index()
-    {
-        $user = Auth::user();
-
-        return view('reservations', compact('user'));
+        $this->middleware('adminmedia', ['only' => ['user_form', 'userslist', 'showuser', 'adduser', 'deleteuser', 'userhistory']]);
     }
 
     public function profile() {
@@ -58,8 +52,10 @@ class UserController extends Controller
             
         ]);
 
+        $users = User::all();
         $user = new User;
 
+        $user->id = $users->last()->id + 1;
         $user->username = $request->username;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;

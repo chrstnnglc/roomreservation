@@ -9,6 +9,10 @@ use App\User;
 
 class EquipmentsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('adminmedia');
+    }
+
    public function index() {
         $equipments = Equipment::with('room')->get();
         return view('equipment.index', compact('equipments'));

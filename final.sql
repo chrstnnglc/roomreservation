@@ -59,7 +59,11 @@ CREATE TABLE Logs (
 	remarks varchar(255) NOT NULL
 );
 
-INSERT INTO Users (username, password, users_role)
-VALUES ('admin1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'admin');
-VALUES ('media1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'media');
-VALUES ('treasury1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'treasury');
+INSERT INTO Users (id, username, password, users_role)
+VALUES (1, 'admin1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'admin');
+
+INSERT INTO Users (id, username, password, users_role)
+VALUES (2, 'media1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'media');
+
+INSERT INTO Users (id, username, password, users_role)
+VALUES (3, 'treasury1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'treasury');

@@ -49,4 +49,19 @@ max-width: 40%;
 </table>
 
 <a href="/user/{{ $user->id }}/edituser"  class = "ui fluid large yellow submit button">Edit</a>
+<form method="POST" action="/user/{{ $user->id }}">
+	{{ csrf_field() }}
+	
+	<input type="hidden" name="id" value="{{ $user->id }}">
+	<input type="hidden" name="username" value="{{ $user->username }}">
+	<input type="hidden" name="firstname" value="{{ $user->firstname }}">
+	<input type="hidden" name="lastname" value="{{ $user->lastname }}">
+	<input type="hidden" name="email" value="{{ $user->email }}">
+	<input type="hidden" name="mobile" value="{{ $user->mobile }}">
+	<input type="hidden" name="affiliation" value="{{ $user->affiliation }}">
+	<input type="hidden" name="users_role" value="{{ $user->users_role }}">
+	<div class="container" align="center" style="padding: 5px 0px 0px 0px">
+		<button type="submit" class="ui fluid large red submit button">Delete User</button>
+	</div>
+</form>
 @stop
