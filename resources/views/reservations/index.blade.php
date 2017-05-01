@@ -43,9 +43,7 @@ max-width: 80%;
       <th>Price</th>
       <th>Status</th>
       <th>OR Number</th>
-      @if(Auth::user()->users_role=='treasury' or Auth::user()->users_role=='user')
       <th>Options</th>
-      @endif
     </tr>
   </thead>
   <tbody>
@@ -61,7 +59,6 @@ max-width: 80%;
       <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
       <td class="status">{{ $reserve->reservations_status }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
-      @if(Auth::user()->users_role!='admin' and Auth::user()->users_role!='media')
       <td>
         @if(Auth::user()->username == $reserve->user->username)
         <form method="POST" action="/reservations/{{ $reserve->id }}">
@@ -98,7 +95,6 @@ max-width: 80%;
         </form>
         @endif
       </td>
-      @endif
     </tr>
   @endforeach
 
