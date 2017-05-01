@@ -14,7 +14,7 @@ class EquipmentsController extends Controller
     }
 
    public function index() {
-        $equipments = Equipment::with('room')->get();
+        $equipments = Equipment::with('room')->orderby('id')->get();
         return view('equipment.index', compact('equipments'));
     }
 
