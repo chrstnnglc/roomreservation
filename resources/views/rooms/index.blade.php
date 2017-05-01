@@ -25,8 +25,8 @@ max-width: 40%;
   <thead>
     <tr>
       <th>Room Name</th>
-      <th>Capacity</th>
       <th>Rate</th>
+      <th>Capacity</th>
       <th>Options</th>
     </tr>
   </thead>
@@ -34,8 +34,8 @@ max-width: 40%;
     @foreach ($rooms as $room)
         <tr>
             <td class="room">{{ $room->name }}</td>
-            <td class="rates">{{ $room->capacity }}</td>
-            <td class="capacity">{{ $room->rate }}</td>
+            <td class="rate">{{ $room->rate }}</td>
+            <td class="capacity">{{ $room->capacity }}</td>
             <td class="options">
               <div class="container" align="center" style="padding: 0px 0px 0px 0px;">
                 <a href="/rooms/{{ $room->id }}" class="ui tiny yellow fluid button">View</a>
