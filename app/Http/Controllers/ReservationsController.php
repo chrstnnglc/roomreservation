@@ -43,16 +43,40 @@ class ReservationsController extends Controller
     }
     
     public function addreservation(Request $request) {
+
         $user = Auth::user();
 
-        $reserve = new Reservation;
-
         if ($user->users_role != 'user') {
+            
+            $this->validate($request, [
+            
+            'username' => "required|exists:users,username",
+            'roomname' => "required|exists:rooms,name",
+            'date' => "required|date|after_or_equal:" . date("Y-m-d"),
+            'starttime' => "required",
+            'endtime' => "required"
+
+            ]);
+
+            $reserve = new Reservation;
             $user = User::where('username',$request->username)->first();
             $reserve->user_id = $user->id;
+
         } else {
+
+            $this->validate($request, [
+            
+            'roomname' => "required|exists:rooms,name",
+            'date' => "required|date|after_or_equal:" . date("Y-m-d"),
+            'starttime' => "required",
+            'endtime' => "required"
+
+            ]);
+
+            $reserve = new Reservation;
             $reserve->user_id = $user->id;
         }
+
         $room = Room::where('name',$request->roomname)->first();
         $reserve->room_id = $room->id;
         $reserve->date_of_reservation = date("Y-m-d H:i:sa");
@@ -106,16 +130,28 @@ class ReservationsController extends Controller
             $log->remarks = "Add Reservation";
 
             $log->save();
+        } else {
+
+            $rooms = Room::all();
+            $users = User::all();
+            $conflict = 'The time and date is already taken.';
+            return view('reservations.form', compact('rooms', 'users', 'conflict'));
         }
+        
         return redirect('reservations');
     }
 
     public function updatereservation(Request $request, Reservation $reserve) {
-        if ($request->status){
-            $reserve->reservations_status = $request->status;
-        }
-        if ($request->or_number and $request->status == "paid"){
+        
+        
+        if ($request->or_number){
+            $this->validate($request, [
+
+                'or_number' => "required|alpha_num|min:1",
+                
+            ]);
             $reserve->or_number = $request->or_number;
+            $reserve->reservations_status = "paid";
         }
         
         $reserve->save();

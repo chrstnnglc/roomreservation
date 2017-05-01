@@ -60,6 +60,7 @@ max-width: 80%;
       <td class="status">{{ $reserve->reservations_status }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
       <td>
+      
         @if(Auth::user()->username == $reserve->user->username)
         <form method="POST" action="/reservations/{{ $reserve->id }}">
           {{ csrf_field() }}
@@ -67,31 +68,33 @@ max-width: 80%;
           <input type="hidden" name="id" value="{{ $reserve->id }}">
           <div class = "container" align = "center">
             <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
-              <button type="submit" class="ui red tiny fluid button">Cancel</button>
+              <button type="submit" class="ui red tiny fluid button" onclick = "return confirm('This action cannot be undone. Are you sure?');">Cancel</button>
             </div>
           </div>
         </form>
         @endif
+
         @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
-          <select class="ui dropdown" name = "status">
-            <option value="paid"
-              @if ($reserve->reservations_status == "paid")
-                selected
-              @endif
-            >Paid</option>
-            <option value="not paid"
-              @if ($reserve->reservations_status == "not paid")
-                selected
-              @endif
-            >Not Paid</option>
-          </select>
-            <div class="field">
-              <input type="text" name="or_number" placeholder="OR Number">
+
+          @if (count($errors) > 0)
+            <div class = "ui inverted red stacked segment">
+                <i class="warning icon"></i>
+                Warning!
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class = "">{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-          <input class="ui primary button" type = "submit" value = "Save" />
+            @endif
+
+          <div class="ui fluid action input">
+            <input type="text" placeholder="OR Number" name = "or_number">
+            <button class="ui blue button" type = "submit" onclick = "return confirm('This action cannot be undone. Are you sure?')">Confirm Payment</button>
+          </div>
         </form>
         @endif
       </td>

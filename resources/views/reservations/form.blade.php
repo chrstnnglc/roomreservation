@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 50%;
+max-width: 25%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -21,11 +21,29 @@ max-width: 50%;
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>@endif
 @stop
 @section('content')
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-	<form class="ui large form" method="POST" action="{{ url('/reservations')}}">
+<!--<div class="ui middle aligned center aligned grid">
+  <div class="column">-->
+	<h3>Add Reservation</h3>
+
+	<form class="ui form" method="POST" action="{{ url('/reservations')}}">
 	<!--{{ method_field('PUT') }}-->
 	{{ csrf_field() }}
+
+	          @if (count($errors) > 0 || isset($conflict))
+            <div class = "ui left aligned inverted red stacked segment">
+                <i class="warning icon"></i>
+									Can't Add!
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class = "">{{ $error }}</li>
+                    @endforeach
+										@if(isset($conflict))
+												<li class = "">{{ $conflict }}</li>
+										@endif
+                </ul>
+            </div>
+            @endif
+
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <select name="roomname" class="ui dropdown" id="select">
@@ -102,6 +120,6 @@ max-width: 50%;
 		</div>
 		</div>
 	  </form>
-	</div>
-</div>
+	<!--</div>
+</div>-->
 @stop
