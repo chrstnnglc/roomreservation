@@ -8,6 +8,7 @@ use App\Reservation;
 use App\User;
 use App\Room;
 use App\Log;
+use App\Equipment;
 
 class ReservationsController extends Controller
 {
@@ -47,10 +48,10 @@ class ReservationsController extends Controller
         }
         $room = Room::where('name',$request->roomname)->first();
         $reserve->room_id = $room->id;
-        $reserve->date_of_reservation = date("Y-m-d h:i:sa");
+        $reserve->date_of_reservation = date("Y-m-d H:i:sa");
         $reserve->date_reserved = $request->date;
-        $reserve->start_of_reserved = date("h:i:s", strtotime($request->starttime) - 3600);
-        $reserve->end_of_reserved = date("h:i:s", strtotime($request->endtime) + 1800);
+        $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime) - 3600);
+        $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime) + 1800);
         if ((strtotime($request->endtime) - strtotime($request->starttime))/3600 < 0){
             $reserve->hours = (strtotime($request->endtime)+(12*60*60) - strtotime($request->starttime))/3600;
         }
@@ -94,7 +95,7 @@ class ReservationsController extends Controller
             $log = new Log;
 
             $log->user_id = $request->user()->id;
-            $log->date_of_reservation = date("Y-m-d h:i:sa");
+            $log->date_of_reservation = date("Y-m-d H:i:sa");
             $log->remarks = "Add Reservation";
 
             $log->save();
@@ -118,6 +119,14 @@ class ReservationsController extends Controller
     public function deletereservation(Request $request) {
         $reservation = Reservation::where('id', $request->id)->first();
         $reservation->delete();
+
+        $log = new Log;
+
+        $log->user_id = $request->user()->id;
+        $log->date_of_reservation = date("Y-m-d H:i:sa");
+        $log->remarks = "Cancel Reservation";
+
+        $log->save();
 
         return redirect('reservations');
     }
