@@ -15,6 +15,8 @@ class ReservationsController extends Controller
     //add, view, edit, delete
     public function __construct() {
         $this->middleware('auth');
+
+        $this->middleware('treasury', ['only' => ['updatereservation']]);
     }
 
     public function index(Reservation $reserve) {
