@@ -27,7 +27,7 @@ class ReservationsController extends Controller
             return view('reservations.index', compact('reserves'));
 
         } elseif ($user->users_role == 'treasury') {
-            $reserves = Reservation::with('room', 'user')->orderby('reservations_status', 'desc')->get();
+            $reserves = Reservation::with('room', 'user')->orderby('date_of_reservation')->get();
             return view('reservations.index', compact('reserves'));
             
         } else {
