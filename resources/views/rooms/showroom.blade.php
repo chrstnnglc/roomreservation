@@ -2,6 +2,9 @@
 @section('name')
 <title>Rooms - Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 40%;
+@stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
@@ -13,18 +16,30 @@
 @section('content')
 
 <table class="ui celled yellow table">
+<thead>
+<tr>
+<th>Name</th>
+<th>Rates</th>
+<th>Capacity</th>
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<th></th>
+@endif
+</tr>
+</thead>
+<tbody>
 <tr>
 	<td class="room">{{ $room->name }}</td>
 	<td class="rates">{{ $room->capacity }}</td>
 	<td class="capacity">{{ $room->rate }}</td>
 	@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
-			<a href="/rooms/{{ $room->id }}/editroom" class="ui yellow fluid button">Edit</a>
+		<div class="container" align="center">
+			<a href="/rooms/{{ $room->id }}/editroom" class="ui tiny yellow fluid button">Edit</a>
 		</div>
 	</td>
 	@endif
-	</tr>
+</tr>
+</tbody>
 </table>
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -35,8 +50,10 @@
 	<input type="hidden" name="roomname" value="{{ $room->name }}">
 	<input type="hidden" name="rate" value="{{ $room->rate }}">
 	<input type="hidden" name="capacity" value="{{ $room->capacity }}">
+	<div class="container" align="center">
 	<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
 		<button type="submit" class="ui yellow fluid button">Delete Room</button>
+	</div>
 	</div>
 </form>
 @endif
