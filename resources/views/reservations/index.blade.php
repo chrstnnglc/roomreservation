@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 60%;
+max-width: 70%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -58,7 +58,7 @@ max-width: 60%;
       <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
       <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
-      <td class="price">Php {{ $reserve->price }}</td>
+      <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
       <td class="status">{{ $reserve->reservations_status }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
       @if(Auth::user()->users_role!='admin' and Auth::user()->users_role!='media')
@@ -106,5 +106,3 @@ max-width: 60%;
   </tbody>
 </table>
 @stop
-
-<!-- User, Room, date of res, date reserved, starttime, endtime, hours, price, date_paid-->
