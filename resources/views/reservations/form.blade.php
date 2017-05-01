@@ -29,7 +29,7 @@ max-width: 50%;
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <select name="roomname" class="ui dropdown" id="select">
-		        <option value="">Room</option>
+		        <option value="">Select Room</option>
 		        @foreach ($rooms as $room)
 		        	<option value="{{ $room-> name }}">{{ $room->name }}</option>
 		        @endforeach
@@ -38,7 +38,7 @@ max-width: 50%;
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
 	      <select name="username" class="ui dropdown" id="select">
-			        <option value="">User</option>
+			        <option value="">Select User</option>
 			        @foreach ($users as $user)
 			        	@if($user->users_role != 'treasury')
 			        		<option value="{{ $user->username }}">{{ $user->username }}</option>
@@ -54,7 +54,7 @@ max-width: 50%;
 	    </div>
 	    <div class="field">
 	      	<select name="starttime" class="ui dropdown" id="select">
-		        <option value=""></option>
+		        <option value="">Select Start Time</option>
 		        @for ($i = 0; $i < 24; $i+=0.5)
 		        @if($i/0.5 % 2 == 0)
 		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
@@ -67,7 +67,7 @@ max-width: 50%;
 	    <div class="field">
 	      <div class="ui input">
 	      	<select name="endtime" class="ui dropdown" id="select">
-		        <option value=""></option>
+		        <option value="">Select End Time</option>
 		        @for ($i = 0; $i < 24; $i+=0.5)
 		        @if($i/0.5 % 2 == 0)
 		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
