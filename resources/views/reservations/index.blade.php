@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 70%;
+max-width: 80%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
