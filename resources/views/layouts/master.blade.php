@@ -107,13 +107,14 @@
     </div>
   </div>
 
-  @if (isset($success))
-  <div class="ui green inverted segment" id = "message">
-    <i class="close icon"></i> {{ $success }}
-  </div>
+  @if (isset($notice))
+    <div class="ui {{ $notice['color'] }} inverted segment" id = "message">
+      <i class="close icon"></i> {{ $notice['message'] }}
+    </div>
+  @endif
 
-  <script>
-    // $('#message').delay("slow").show(0).transition("fade");
+    <script>
+    // $('#message').delay("slow").show(0).transition("fa de");
    
     $('#message .close')
       .on('click', function() {
@@ -128,6 +129,5 @@
       }, 5000);
     });
   </script>
-  @endif
 </body>
 </html>

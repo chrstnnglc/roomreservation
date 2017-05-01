@@ -10,7 +10,10 @@ use App\Reservation;
 
 class UserController extends Controller
 {
+    // private $notice = ['color' => '', 'message' => ''];
+
     public function __construct() {
+        // $this->notice = ['color' => 'hello', 'message' => ''];
         $this->middleware('auth');
         $this->middleware('adminmedia', ['only' => ['user_form', 'userslist', 'showuser', 'adduser', 'deleteuser', 'userhistory']]);
     }
@@ -28,7 +31,16 @@ class UserController extends Controller
 
     public function userslist(User $user) {
         $users = User::all();
-        return view('user.userslist', compact('users'));
+        // if ($this->notice['message'] != '') {
+        //     return $this->notice;
+        //     $notice['message'] = $this->notice['message'];
+        //     $notice['color'] = $this->notice['color'];
+        //     $this->notice['message'] = '';
+
+        //     return view('user.userslist', compact('users, notice'));
+        // } else {
+            return view('user.userslist', compact('users'));
+        // }
     }
 
     public function showuser(User $user) {
@@ -129,10 +141,29 @@ class UserController extends Controller
     }
 
     public function deleteuser(Request $request) {
-        $user = User::where('id', $request->id)->first();
-        $user->delete();
+        
+        $user = User::withCount('reservation')->withCount('log')->where('id', $request->id)->first();
+        if (Auth::user()->id == $request->id) {
+            $users = User::all();
+            $notice['message'] = 'Cannot delete the account you are using.';
+            $notice['color'] = 'red';
+            // return $this->notice;
+        } elseif ($user->reservation_count != 0 || $user->log_count) {
+            $users = User::all();
+            
+            $notice['message'] = 'Cannot delete! User is referenced in entries in the database.';
+            $notice['color'] = 'red';
+        
+        } else {
+            $user->delete();
+            
+            $users = User::all();
+            $notice['message'] = 'Successfully deleted user!';
+            $notice['color'] = 'green';
+        }
 
-        return redirect('user');
+        $users = User::all();
+        return view('user.userslist', compact('users', 'notice'));
     }
 
     public function viewhistory(Request $request) {

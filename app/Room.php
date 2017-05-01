@@ -11,4 +11,8 @@ class Room extends Model
     public function equipment() {
         return $this->hasMany('App\Equipment');
     }
+
+    public function reservation() {
+        return $this->hasMany('App\Reservation');
+    }
 }

@@ -29,6 +29,14 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function reservation() {
+        return $this->hasMany('App\Reservation');
+    }
+
+    public function log() {
+        return $this->hasMany('App\Log');
+    }
+
     public function setAttribute($key, $value)
     {
         $isRememberTokenAttribute = $key == $this->getRememberTokenName();

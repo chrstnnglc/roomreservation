@@ -42,9 +42,9 @@ class RoomsController extends Controller
 
         $room->save();
         $rooms = Room::all();
-        $success = 'Successfully added room!';
-
-        return view('rooms.index', compact('rooms', 'success'));
+        $notice['message'] = 'Successfully added room!';
+        $notice['color'] = 'green';
+        return view('rooms.index', compact('rooms', 'notice'));
     }
 
     public function editroom (Room $room) {
@@ -78,12 +78,20 @@ class RoomsController extends Controller
     }
 
     public function deleteroom(Request $request) {
-        $room = Room::where('id', $request->id)->first();
-        $room->delete();
 
+        $room = Room::withCount('reservation')->withCount('equipment')->where('id',$request->id)->first();
+        
+        if ($room->reservation_count != 0 || $room->equipment_count != 0) {
+            $rooms = Room::all();
+            $notice['message'] = 'Cannot delete! Room has dependent entries in the database.';
+            $notice['color'] = 'red';
+
+        } else {
+            $room->delete();
+            $notice['message'] = 'Successfully deleted room!';
+            $notice['color'] = 'green';
+        }
         $rooms = Room::all();
-        $success = 'Successfully deleted room!';
-
-        return view('rooms.index', compact('rooms', 'success'));
+        return view('rooms.index', compact('rooms', 'notice'));
     }
 }
