@@ -7,19 +7,19 @@ max-width: 67.5%;
 @stop
 @section('items')
 @if (Auth::user() != NULL)
-@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+@if (Auth::user()->users_role == 'admin')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
-<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'treasury')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'user')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+<a class="item" style="font-size: 110%" href = "{{url('profile')}}">{{Auth::user()->username}}</a>
 @endif
 @endif
 @stop
@@ -60,6 +60,15 @@ reservation_status = [
 "{{ $reserve->reservations_status }}"
 @else
 "{{ $reserve->reservations_status }}",
+@endif
+@endforeach
+];
+room_name = [
+@foreach ($reserves as $reserve)
+@if ($loop->last)
+"{{ $reserve->room->name }}"
+@else
+"{{ $reserve->room->name }}",
 @endif
 @endforeach
 ];
@@ -112,22 +121,33 @@ function fill_table(month,month_length,year){
       }
     }
     if(yes==1){
-      calendarTable+="<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day;
+      calendarTable+="<td id='cell_"+String(day)+"' style='height: 130px;'><div style='height: 100px'>"+string_of_day;
+      calendarTable+="<table class='ui very compact fixed single line table' style='border: none;'><tbody>";
       for(var index=0; index<indices.length; index++){
-        if(index>2){
-          calendarTable+="...";
+        if(index>1){
+          calendarTable+="<tr><td><div id='"+string_of_day+"' style='display: none; position: fixed; height: 100%; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; user-select:none; background-color: rgba(0,0,0, 0.6); overflow-x: hidden;'><table class='ui very compact single line table' id='table'><thead><tr><th><i onclick='off("+String(day)+")' class='remove icon' style='cursor: pointer;'></i></th></tr></thead><tbody>"
+          for(var iter=0; iter<indices.length; iter++){
+            if(reservation_status[indices[iter]]=="paid"){
+              calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+            }else{
+              calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+            }
+            calendarTable+="</font></td></tr>";
+          }
+          calendarTable+="</tbody></table></div>";
+          calendarTable+="<button onclick='on("+String(day)+")' class='ui mini very compact yellow button'><font size='1'>More...</font></button></td></tr>";
           break;
         }
         if(reservation_status[indices[index]]=="paid"){
-          calendarTable+="<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
+          calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
         }else{
-          calendarTable+="<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
+          calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
         }
-        calendarTable+="</div></font>";
+        calendarTable+="</font></td></tr>";
       }
-      calendarTable+="</div></td>";
+      calendarTable+="</tbody></table></td>";
     }else{
-      calendarTable+="<td style='height: 125px;'><div style='height: 100px;'>"+string_of_day+"</td>";
+      calendarTable+="<td style='height: 130px;'><div style='height: 100px;'>"+string_of_day+"</td>";
     }
     day++;
   }
@@ -150,22 +170,33 @@ function fill_table(month,month_length,year){
         }
       }
       if(yes==1){
-        calendarTable+="<td style='height: 125px;'><div style='height: 100px'>"+string_of_day;
+        calendarTable+="<td style='height: 130px;'><div style='height: 100px'>"+string_of_day;
+        calendarTable+="<table class='ui very compact fixed single line table' style='border: none;'>";
         for(var index=0; index<indices.length; index++){
-          if(index>2){
-            calendarTable+="...";
+          if(index>1){
+            calendarTable+="<tr><td><div id='"+string_of_day+"' style='display: none; position: fixed; height: 100%; display: none; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; user-select:none; background-color: rgba(0,0,0, 0.6); overflow-x: hidden;'><table class='ui very compact single line table' id='table'><thead><tr><th><i onclick='off("+String(day)+")' class='remove icon' style='cursor: pointer;'></i></th></tr></thead><tbody>"
+            for(var iter=0; iter<indices.length; iter++){
+              if(reservation_status[indices[iter]]=="paid"){
+                calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+              }else{
+                calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+              }
+              calendarTable+="</font></td></tr>";
+            }
+            calendarTable+="</tbody></table></div>";
+            calendarTable+="<button onclick='on("+String(day)+")' class='ui mini very compact yellow button'><font size='1'>More...</font></button></td></tr>";
             break;
           }
           if(reservation_status[indices[index]]=="paid"){
-            calendarTable+="<div style='background-color: lightgreen'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
+            calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
           }else{
-            calendarTable+="<div style='background-color: #EE6363'><font size='1'>"+start_time[indices[index]]+"-"+end_time[indices[index]];
+            calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
           }
-          calendarTable+="</div></font>";
+          calendarTable+="</font></td></tr>";
         }
-        calendarTable+="</td>";
+        calendarTable+="</tbody></table></td>";
       }else{
-        calendarTable+="<td style='height: 125px;'><div style='height: 100px'>"+string_of_day+"</td>";
+        calendarTable+="<td style='height: 130px;'><div style='height: 100px'>"+string_of_day+"</td>";
       }
       day++;
     }
@@ -275,4 +306,21 @@ function month_subtracter(){
 }
 </script>
 <div id="show_calendar">&nbsp;</div>
-@endsection
+<script>
+function on(x) {
+  if(x<10){
+    document.getElementById("0"+String(x)).style.display = "block";
+  }else{
+    document.getElementById(String(x)).style.display = "block";
+  }
+}
+
+function off(x) {
+  if(x<10){
+    document.getElementById("0"+String(x)).style.display = "none";
+  }else{
+    document.getElementById(String(x)).style.display = "none";
+  }
+}
+</script>
+@stop
