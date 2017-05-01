@@ -40,13 +40,16 @@ max-width: 25%;
 					<input type="hidden" name="id" value="{{ $room->id }}">
 				</div>
 				<div class="field">
-					<input type="text" name="roomname" value="{{ old('roomname') or $room->name }}">
+					<td>Name</td>
+					<input type="text" name="roomname" value="{{ $room->name }}">
 				</div>
 				<div class="field">
-					<input type="text" name="rate" value="{{ old('rate') or $room->rate }}">
+					<td>Rate</td>
+					<input type="text" name="rate" value="{{ $room->rate }}">
 				</div>
 				<div class="field">
-			  	<input type="text" name="capacity" value="{{ old('capacity') or $room->capacity }}">
+					<td>Capacity</td>
+			  		<input type="text" name="capacity" value="{{ $room->capacity }}">
 			  </div>
 			</div>
 			<a href="{{url('/rooms')}}">

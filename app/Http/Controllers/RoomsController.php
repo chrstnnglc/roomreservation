@@ -58,7 +58,6 @@ class RoomsController extends Controller
                 'required',
                 'alphaNum',
                 'max:255',
-                Rule::unique('rooms')->ignore($user->id),
             ],
             'rate' => 'required|integer|min:1',
             'capacity' => 'required|integer|min:1',

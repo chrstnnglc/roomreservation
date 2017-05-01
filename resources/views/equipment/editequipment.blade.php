@@ -36,22 +36,28 @@ max-width: 25%;
 	        {{ csrf_field() }}
 	        <div class="ui yellow stacked segment">
 	        	<div class="field">
+	        		<td>Name</td>
 	        		<input type="text" name="equipment" value="{{ $equipment->name }}">
 	        	</div>
 	        	<div class="field">
+	        		<td>Brand</td>
 		    		<input type="text" name="brand" value="{{ $equipment->brand }}">
 		    	</div>
 		    	<div class="field">
+		    		<td>Model</td>
 			    	<input type="text" name="model" value="{{ $equipment->model }}">
 			    </div>
 			    <div class="field">
+			    	<td>Price</td>
 			    	<input type="number" name="price" value="{{ $equipment->price }}">
 			    </div>
 			    <div class="field">
+			    	<td>Condition</td>
 		    		<input type="text" name="condition" value="{{ $equipment->condition }}">
 		    	</div>
 
 				<div class="field">
+					<td>Room</td>
 					<select class = "ui search dropdown" name = "room">
 						<option value = ""></option>
 						
