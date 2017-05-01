@@ -79,7 +79,7 @@ class ReservationsController extends Controller
 
         $room = Room::where('name',$request->roomname)->first();
         $reserve->room_id = $room->id;
-        $reserve->date_of_reservation = date("Y-m-d H:i:sa");
+        $reserve->date_of_reservation = date("Y-m-d H:i:s");
         $reserve->date_reserved = $request->date;
         $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime) - 3600);
         $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime) + 1800);
@@ -128,7 +128,7 @@ class ReservationsController extends Controller
             $log = new Log;
 
             $log->user_id = $request->user()->id;
-            $log->date_of_reservation = date("Y-m-d H:i:sa");
+            $log->date_of_reservation = date("Y-m-d H:i:s");
             $log->remarks = "Add Reservation";
 
             $log->save();
