@@ -152,6 +152,14 @@ class ReservationsController extends Controller
             ]);
             $reserve->or_number = $request->or_number;
             $reserve->reservations_status = "paid";
+
+            $log = new Log;
+
+            $log->user_id = $request->user()->id;
+            $log->date_of_reservation = date("Y-m-d H:i:sa");
+            $log->remarks = "Paid Reservation";
+
+            $log->save();
         }
         
         $reserve->save();
