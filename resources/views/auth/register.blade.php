@@ -13,6 +13,19 @@
     </h2>
     <form class="ui large form" role="form" method="POST" action="{{ url('/register') }}">
       {{ csrf_field() }}
+
+            @if (count($errors) > 0)
+            <div class = "ui inverted red stacked segment">
+                <i class="warning icon"></i>
+                Can't Sign Up!
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class = "">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
       <div class="ui yellow stacked segment">
         <div class="field">
         <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
