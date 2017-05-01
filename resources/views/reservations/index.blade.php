@@ -43,7 +43,9 @@ max-width: 60%;
       <th>Price</th>
       <th>Status</th>
       <th>OR Number</th>
+      @if(Auth::user()->users_role=='treasury' or Auth::user()->users_role=='user')
       <th>Options</th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -59,6 +61,7 @@ max-width: 60%;
       <td class="price">Php {{ $reserve->price }}</td>
       <td class="status">{{ $reserve->reservations_status }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
+      @if(Auth::user()->users_role!='admin' and Auth::user()->users_role!='media')
       <td>
         @if(Auth::user()->username == $reserve->user->username)
         <form method="POST" action="/reservations/{{ $reserve->id }}">
@@ -67,7 +70,7 @@ max-width: 60%;
           <input type="hidden" name="id" value="{{ $reserve->id }}">
           <div class = "container" align = "center">
             <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
-              <button type="submit" class="ui red fluid button">Cancel</button>
+              <button type="submit" class="ui red tiny fluid button">Cancel</button>
             </div>
           </div>
         </form>
@@ -95,6 +98,7 @@ max-width: 60%;
         </form>
         @endif
       </td>
+      @endif
     </tr>
   @endforeach
 
@@ -104,3 +108,27 @@ max-width: 60%;
 @stop
 
 <!-- User, Room, date of res, date reserved, starttime, endtime, hours, price, date_paid-->
+
+@extends('layouts.master')
+@section('name')
+<title>Reservations - Diocese of Cubao Reservation System</title>
+@stop
+@section('width')
+max-width: 60%;
+@stop
+@section('items')
+@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+@elseif (Auth::user()->users_role == 'treasury')
+<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+@elseif (Auth::user()->users_role == 'user')
+<a class="active item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+@endif
+@stop

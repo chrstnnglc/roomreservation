@@ -16,7 +16,8 @@ max-width: 25%;
 @section('content')
 <div class="ui middle aligned center aligned grid">
   <div class="column">
-	<h1>Edit Equipment</h1>				
+  	<br>
+	<h2>Edit Equipment</h2>				
 		
 		@if (count($errors) > 0)
 		<div class = "ui left aligned inverted red stacked segment">

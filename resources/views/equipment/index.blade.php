@@ -52,7 +52,7 @@ max-width: 50%;
       @endif
       <td class="options">
         <!--<div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">-->
-          <a href="/equipment/{{ $equip->id }}" class="ui yellow fluid button">View</a>
+          <a href="/equipment/{{ $equip->id }}" class="ui tiny yellow fluid button">View</a>
         <!--</div>-->
       </td>
     </tr>

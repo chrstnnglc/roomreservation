@@ -8,15 +8,15 @@ max-width: 25%;
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
-<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @stop
 @section('content')
 <div class="ui middle aligned center aligned grid">1
   <div class="column">
-	<h1>Room</h1>				
+	<h2>Room</h2>				
 
 		<form class="ui large form" method="POST" action="/rooms/{{ $room->id }}">
 			{{ method_field('PUT') }}

@@ -3,7 +3,7 @@
 <title>Rooms - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 50%;
+max-width: 40%;
 @stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
@@ -37,8 +37,8 @@ max-width: 50%;
             <td class="rates">{{ $room->capacity }}</td>
             <td class="capacity">{{ $room->rate }}</td>
             <td class="options">
-              <div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">
-                <a href="/rooms/{{ $room->id }}" class="ui yellow fluid button">View</a>
+              <div class="container" align="center" style="padding: 0px 0px 0px 0px;">
+                <a href="/rooms/{{ $room->id }}" class="ui tiny yellow fluid button">View</a>
               </div>
             </td>
             </tr>

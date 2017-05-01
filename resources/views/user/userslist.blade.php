@@ -3,7 +3,7 @@
 <title>Users - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 50%;
+max-width: 60%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -36,7 +36,7 @@ max-width: 50%;
       <th>Mobile</th>
       <th>Affiliation</th>
       <th>Role</th>
-      <th></th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>

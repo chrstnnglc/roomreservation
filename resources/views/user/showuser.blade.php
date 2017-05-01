@@ -26,7 +26,7 @@ max-width: 60%;
 <th>Affiliation</th>
 <th>Role</th>
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-<th></th>
+<th>Options</th>
 @endif
 </tr>
 </thead>

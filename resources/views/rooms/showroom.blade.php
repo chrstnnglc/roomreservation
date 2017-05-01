@@ -22,7 +22,7 @@ max-width: 40%;
 <th>Rates</th>
 <th>Capacity</th>
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-<th></th>
+<th>Options</th>
 @endif
 </tr>
 </thead>
