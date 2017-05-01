@@ -13,9 +13,7 @@ use App\Equipment;
 class ReservationsController extends Controller
 {
     //add, view, edit, delete
-    public $message = "";
-    public $isSuccess = 0;
-
+    
     public function __construct() {
         $this->middleware('auth');
 
@@ -44,17 +42,8 @@ class ReservationsController extends Controller
                 }
             }
 
-            
-            if ($this->message != "") {
-                if ($isSuccess = $this->message);
-                $success = $this->message;
-                $this->message = "";
+            return view('reservations.index', compact('reserves'));
 
-                return view('reservations.index', compact(''))
-            } else {
-
-                return view('reservations.index', compact('reserves'));
-            }
         } elseif ($user->users_role == 'treasury') {
             $reserves = Reservation::with('room', 'user')->orderby('date_of_reservation')->get();
             return view('reservations.index', compact('reserves'));
@@ -170,7 +159,7 @@ class ReservationsController extends Controller
             
         }
         
-        $this->message = "Reservation successful!";
+        $reser
         return redirect('reservations');
     }
 
