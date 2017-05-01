@@ -141,7 +141,15 @@ class UserController extends Controller
 
     public function viewhistory(Request $request) {
         $user = Auth::user();
-        $reserves = Reservation::where('user_id', $user->id)->where('reservations_status', 'paid')->orderby('date_of_reservation', 'desc')->get();;
+
+        $reserves = Reservation::where('user_id', $user->id)->where('reservations_status', 'paid')->orderby('date_of_reservation', 'desc')->get();
+        
         return view('user.history', compact('reserves'));
+    }
+
+    public function userhistory(User $user) {
+        $reserves = Reservation::where('user_id', $user->id)->where('reservations_status', 'paid')->orderby('date_of_reservation', 'desc')->get();
+
+        return view('user.userhistory', compact('reserves'));
     }
 }
