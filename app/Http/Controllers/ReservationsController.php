@@ -20,9 +20,14 @@ class ReservationsController extends Controller
     public function index(Reservation $reserve) {
         $user = Auth::user();
 
-        if ($user->users_role == 'admin' || $user->users_role == 'media' || $user->users_role == 'treasury') {
+        if ($user->users_role == 'admin' || $user->users_role == 'media') {
             $reserves = Reservation::with('room', 'user')->get();
             return view('reservations.index', compact('reserves'));
+
+        } elseif ($user->users_role == 'treasury') {
+            $reserves = Reservation::with('room', 'user')->orderby('reservations_status', 'desc')->get();
+            return view('reservations.index', compact('reserves'));
+            
         } else {
             $reserves = Reservation::with('room', 'user')->where('user_id', $user->id)->get();
             return view('reservations.index', compact('reserves'));    
