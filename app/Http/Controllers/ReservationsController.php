@@ -111,11 +111,16 @@ class ReservationsController extends Controller
     }
 
     public function updatereservation(Request $request, Reservation $reserve) {
-        if ($request->status){
-            $reserve->reservations_status = $request->status;
-        }
-        if ($request->or_number and $request->status == "paid"){
+        
+        $this->validate($request, [
+
+            'or_number' => "required|alpha_num|min:1",
+            
+        ]);
+        
+        if ($request->or_number){
             $reserve->or_number = $request->or_number;
+            $reserve->reservations_status = "paid";
         }
         
         $reserve->save();
