@@ -61,3 +61,5 @@ CREATE TABLE Logs (
 
 INSERT INTO Users (username, password, users_role)
 VALUES ('admin1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'admin');
+VALUES ('media1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'media');
+VALUES ('treasury1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'treasury');
