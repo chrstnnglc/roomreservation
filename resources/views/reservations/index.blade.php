@@ -68,7 +68,7 @@ max-width: 90%;
           <input type="hidden" name="id" value="{{ $reserve->id }}">
           <div class = "container" align = "center">
             <div class="container" align="center" style="padding: 5px 0px 5px 0px;">
-              <button type="submit" class="ui red tiny fluid button" onclick = "return confirm('This action cannot be undone. Are you sure?');">Cancel</button>
+              <button type="submit" class="ui red tiny fluid button" onclick = "return confirm('This action cannot be undone. If you have paid, please note that your payment is non-refundable. Are you sure?');">Cancel</button>
             </div>
           </div>
         </form>
