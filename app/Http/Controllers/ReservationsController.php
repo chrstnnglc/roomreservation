@@ -12,7 +12,6 @@ use App\Equipment;
 
 class ReservationsController extends Controller
 {
-    //add, view, edit, delete
     
     public function __construct() {
         $this->middleware('auth');
@@ -159,7 +158,6 @@ class ReservationsController extends Controller
             
         }
         
-        $reser
         return redirect('reservations');
     }
 
