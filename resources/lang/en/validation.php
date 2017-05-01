@@ -102,6 +102,7 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    'greater_than_field'   => 'The :attribute must be before :field.',
 
     /*
     |--------------------------------------------------------------------------

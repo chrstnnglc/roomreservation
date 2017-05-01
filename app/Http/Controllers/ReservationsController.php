@@ -69,7 +69,7 @@ class ReservationsController extends Controller
             'roomname' => "required|exists:rooms,name",
             'date' => "required|date|after_or_equal:" . date("Y-m-d"),
             'starttime' => "required",
-            'endtime' => "required"
+            'endtime' => "required|greater_than_field"
 
             ]);
 
@@ -84,7 +84,7 @@ class ReservationsController extends Controller
         $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime) - 3600);
         $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime) + 1800);
         if ((strtotime($request->endtime) - strtotime($request->starttime))/3600 < 0){
-            $reserve->hours = (strtotime($request->endtime)+(24*60*60) - strtotime($request->starttime))/3600;
+            $reserve->hours = (strtotime($request->endtime)+(12*60*60) - strtotime($request->starttime))/3600;
         }
         else{
             $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
@@ -136,6 +136,7 @@ class ReservationsController extends Controller
             $users = User::all();
             $conflict = 'The time and date is already taken.';
             return view('reservations.form', compact('rooms', 'users', 'conflict'));
+            
         }
         
         return redirect('reservations');
