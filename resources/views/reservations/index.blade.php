@@ -53,8 +53,8 @@ max-width: 60%;
       <td class="user">{{ $reserve->user->username }}</td>
       <td class="room">{{ $reserve->room->name }}</td>
       <td class="date">{{ $reserve->date_reserved }}</td>
-      <td class="start_time">{{ $reserve->start_of_reserved }}</td>
-      <td class="end_time">{{ $reserve->end_of_reserved }}</td>
+      <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
+      <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
       <td class="price">Php {{ $reserve->price }}</td>
       <td class="status">{{ $reserve->reservations_status }}</td>

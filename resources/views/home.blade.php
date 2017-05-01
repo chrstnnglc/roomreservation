@@ -39,18 +39,18 @@ dates_reserved = [
 start_time = [
 @foreach ($reserves as $reserve)
 @if ($loop->last)
-"{{ $reserve->start_of_reserved}}"
+"{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}"
 @else
-"{{ $reserve->start_of_reserved}}",
+"{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}",
 @endif
 @endforeach
 ];
 end_time = [
 @foreach ($reserves as $reserve)
 @if ($loop->last)
-"{{ $reserve->end_of_reserved}}"
+"{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}"
 @else
-"{{ $reserve->end_of_reserved}}",
+"{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}",
 @endif
 @endforeach
 ];
