@@ -32,7 +32,7 @@ max-width: 50%;
       <th>Price</th>
       <th>Condition</th>
       <th>Room</th>
-      <th></th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +47,8 @@ max-width: 50%;
       <td class="condition">{{$equip->condition}}</td>
       @if ($equip->room != "")
         <td class="room">{{$equip->room->name}}</td>
+      @else
+        <td class="room"></td>
       @endif
       <td class="options">
         <!--<div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">-->
