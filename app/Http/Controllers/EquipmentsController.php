@@ -10,7 +10,7 @@ use App\User;
 class EquipmentsController extends Controller
 {
     public function __construct() {
-        $this->middleware('adminmedia');
+        $this->middleware('adminmedia', ['only' => 'form', 'showequipment', 'addequipment', 'editequipment', 'updateequipment', 'deleteequipment']);
     }
 
    public function index() {

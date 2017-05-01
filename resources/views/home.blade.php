@@ -7,7 +7,7 @@ max-width: 90%;
 @stop
 @section('items')
 @if (Auth::user() != NULL)
-@if (Auth::user()->users_role == 'admin')
+@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
@@ -19,6 +19,8 @@ max-width: 90%;
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @elseif (Auth::user()->users_role == 'user')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
 @endif
 @endif
