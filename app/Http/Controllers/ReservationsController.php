@@ -84,7 +84,7 @@ class ReservationsController extends Controller
         $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime) - 3600);
         $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime) + 1800);
         if ((strtotime($request->endtime) - strtotime($request->starttime))/3600 < 0){
-            $reserve->hours = (strtotime($request->endtime)+(12*60*60) - strtotime($request->starttime))/3600;
+            $reserve->hours = (strtotime($request->endtime)+(24*60*60) - strtotime($request->starttime))/3600;
         }
         else{
             $reserve->hours = (strtotime($request->endtime) - strtotime($request->starttime))/3600;
