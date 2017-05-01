@@ -40,10 +40,10 @@ max-width: 50%;
             <td class="room">{{ $reserve->date_of_reservation }}</td>
             <td class="room">{{ $reserve->room->name }}</td>
             <td class="date">{{ $reserve->date_reserved }}</td>
-            <td class="start_time">{{ $reserve->start_of_reserved }}</td>
-            <td class="end_time">{{ $reserve->end_of_reserved }}</td>
+            <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
+            <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
             <td class="hours">{{ $reserve->hours }}</td>
-            <td class="price">Php {{ $reserve->price }}</td>
+            <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
             <td class="or_number">{{ $reserve->or_number }}</td>
         </tr>
     @endforeach
