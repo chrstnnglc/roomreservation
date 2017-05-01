@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 80%;
+max-width: 90%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -30,7 +30,7 @@ max-width: 80%;
 </div>
 @endif
 
-<table class="ui celled yellow table">
+<table class="ui very compact celled yellow table">
   <thead>
     <tr>
       <th>Date of Reservation</th>
@@ -91,9 +91,9 @@ max-width: 80%;
             </div>
             @endif
 
-          <div class="ui fluid action input">
-            <input type="text" placeholder="OR Number" name = "or_number">
-            <button class="ui blue button" type = "submit" onclick = "return confirm('This action cannot be undone. Are you sure?')">Confirm Payment</button>
+          <div class="ui mini input">
+            <input type="text" placeholder="OR Number" name = "or_number" style="width: 90%;">
+            <button class="ui very compact mini blue button" type = "submit" onclick = "return confirm('This action cannot be undone. Are you sure?')"><font size='1'>Confirm</font></button>
           </div>
         </form>
         @endif
