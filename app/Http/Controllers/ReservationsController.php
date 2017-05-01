@@ -120,6 +120,14 @@ class ReservationsController extends Controller
         $reservation = Reservation::where('id', $request->id)->first();
         $reservation->delete();
 
+        $log = new Log;
+
+        $log->user_id = $request->user()->id;
+        $log->date_of_reservation = date("Y-m-d H:i:sa");
+        $log->remarks = "Cancel Reservation";
+
+        $log->save();
+
         return redirect('reservations');
     }
 }
