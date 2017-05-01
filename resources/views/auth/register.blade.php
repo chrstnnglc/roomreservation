@@ -15,7 +15,7 @@
       {{ csrf_field() }}
 
             @if (count($errors) > 0)
-            <div class = "ui inverted red stacked segment">
+            <div class = "ui left aligned inverted red stacked segment">
                 <i class="warning icon"></i>
                 Can't Sign Up!
                 <ul>
@@ -30,13 +30,7 @@
         <div class="field">
         <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
             <div class="col-md-6">
-                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autofocus placeholder="First Name">
-
-                @if ($errors->has('firstname'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('firstname') }}</strong>
-                    </span>
-                @endif
+                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" autofocus placeholder="First Name">
             </div>
         </div>
         </div>
@@ -44,13 +38,7 @@
         <div class="field">
         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
             <div class="col-md-6">
-                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required placeholder="Last Name">
-
-                @if ($errors->has('lastname'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('lastname') }}</strong>
-                    </span>
-                @endif
+                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Last Name">
             </div>
         </div>
         </div>
@@ -59,12 +47,6 @@
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
             <div class="col-md-6">
                 <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required placeholder="User Name">
-
-                @if ($errors->has('username'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('username') }}</strong>
-                    </span>
-                @endif
             </div>
         </div>
         </div>
@@ -73,12 +55,6 @@
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <div class="col-md-6">
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="E-Mail">
-
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
             </div>
         </div>
         </div>
@@ -87,12 +63,6 @@
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
-
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
             </div>
         </div>
         </div>
