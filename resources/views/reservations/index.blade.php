@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 60%;
+max-width: 70%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -60,7 +60,7 @@ max-width: 60%;
       <td class="status">{{ $reserve->reservations_status }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
       <td>
-        @if(Auth::user()->username == $reserve->user->username)
+        @if(Auth::user()->users_role!='treasury' and Auth::user()->username == $reserve->user->username)
         <form method="POST" action="/reservations/{{ $reserve->id }}">
           {{ csrf_field() }}
           
@@ -71,7 +71,7 @@ max-width: 60%;
             </div>
           </div>
         </form>
-        @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
+        @elseif(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
           {{ csrf_field() }}
@@ -96,10 +96,6 @@ max-width: 60%;
       </td>
     </tr>
   @endforeach
-
-  
   </tbody>
 </table>
 @stop
-
-<!-- User, Room, date of res, date reserved, starttime, endtime, hours, price, date_paid-->

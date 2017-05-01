@@ -78,10 +78,18 @@ max-width: 50%;
 		    </select>
 	      </div>
 	    </div>
-	    <!--<a href="{{url('/reservations')}}">-->
-	    <div class="container" align="center">
+
+	    <!-- <div class="field">
+	    	<div class="ui slider checkbox">
+			  <input type="checkbox" name="terms">
+			  <label>I accept the terms and conditions.</label>
+			</div>
+		</div> -->
+
+		<div class="container" align="center">
 	    <div class="container" style="width: 50%;">
 	    <input class="ui fluid large yellow submit button" type = "submit" value = "Add"/>
+		
 	    </div>
 	  </div>
 	  </form>
