@@ -18,7 +18,7 @@ CREATE TABLE Rooms (
 	id SERIAL PRIMARY KEY,
 	name varchar(255) NOT NULL UNIQUE,
 	capacity integer NOT NULL,
-	rate integer NOT NULL
+	rate decimal NOT NULL
 );
 
 CREATE TABLE Equipment (
@@ -26,7 +26,7 @@ CREATE TABLE Equipment (
 	name varchar(50) NOT NULL,
 	brand varchar(50) NOT NULL,
 	model varchar(50) NOT NULL,
-	price integer NOT NULL,
+	price decimal NOT NULL,
 	condition varchar(50) NOT NULL,
 	room_id integer 
 );
@@ -40,7 +40,7 @@ CREATE TABLE Reservations (
 	start_of_reserved time NOT NULL,
 	end_of_reserved time NOT NULL,
 	hours integer NOT NULL,
-	price integer NOT NULL,
+	price decimal NOT NULL,
 	date_paid timestamp,
 	reservations_status status NOT NULL,
 	OR_number integer
