@@ -71,6 +71,7 @@ max-width: 60%;
             </div>
           </div>
         </form>
+        @endif
         @if(Auth::user()->users_role=='treasury' and $reserve->reservations_status == "not paid")
         <form class = "" method = "POST" action="{{ url('reservations/' . $reserve->id) }}">
           {!! method_field('PATCH') !!}
