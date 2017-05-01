@@ -150,7 +150,7 @@ class ReservationsController extends Controller
         if ($request->or_number){
             $this->validate($request, [
 
-                'or_number' => "required|alpha_num|min:1|max:10",
+                'or_number' => "numeric",
                 
             ]);
             $reserve->or_number = $request->or_number;
