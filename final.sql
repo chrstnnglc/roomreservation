@@ -1,6 +1,18 @@
+\c rocketdevs
+
+DROP TYPE role;
 CREATE TYPE role AS ENUM('admin', 'media', 'treasury', 'user');
 
+DROP TYPE status;
 CREATE TYPE status AS ENUM('paid', 'not paid', 'waitlisted');
+
+DROP TABLE Reservation_Equipments;
+DROP TABLE Logs;
+DROP TABLE Reservations;
+DROP TABLE Equipment;
+DROP TABLE Rooms;
+DROP TABLE Users;
+
 
 CREATE TABLE Users (
 	id SERIAL PRIMARY KEY,
@@ -18,7 +30,7 @@ CREATE TABLE Rooms (
 	id SERIAL PRIMARY KEY,
 	name varchar(255) NOT NULL UNIQUE,
 	capacity integer NOT NULL,
-	rate decimal NOT NULL
+	rate integer NOT NULL
 );
 
 CREATE TABLE Equipment (
@@ -26,7 +38,7 @@ CREATE TABLE Equipment (
 	name varchar(50) NOT NULL,
 	brand varchar(50) NOT NULL,
 	model varchar(50) NOT NULL,
-	price decimal NOT NULL,
+	price integer NOT NULL,
 	condition varchar(50) NOT NULL,
 	room_id integer 
 );
@@ -39,11 +51,11 @@ CREATE TABLE Reservations (
 	date_reserved date NOT NULL,
 	start_of_reserved time NOT NULL,
 	end_of_reserved time NOT NULL,
-	hours integer NOT NULL,
-	price decimal NOT NULL,
+	hours float NOT NULL,
+	price float NOT NULL,
 	date_paid timestamp,
 	reservations_status status NOT NULL,
-	OR_number integer
+	OR_number varchar(10)
 );
 
 CREATE TABLE Reservation_Equipments (
@@ -58,6 +70,7 @@ CREATE TABLE Logs (
 	date_of_reservation timestamp NOT NULL,
 	remarks varchar(255) NOT NULL
 );
+
 
 INSERT INTO Users (id, username, password, users_role)
 VALUES (1, 'admin1','$2a$10$PIUngUxqyEVPeIugGM4VpOniaa1bQ6d..WoaAnXNWLMqMiR1qEcwm', 'admin');
