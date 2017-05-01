@@ -2,10 +2,13 @@
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 60%;
+@stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
-<a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
-<a class="active item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 @stop
@@ -13,6 +16,21 @@
 
 
 <table class="ui celled yellow table">
+<thead>
+<tr>
+<th>User Name</th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>E-mail</th>
+<th>Mobile</th>
+<th>Affiliation</th>
+<th>Role</th>
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<th></th>
+@endif
+</tr>
+</thead>
+<tbody>
 <tr>
     <td class="username">{{ $user->username }}</td>
     <td class="firstname">{{ $user->firstname }}</td>
@@ -23,10 +41,11 @@
     <td class="users_role">{{$user->users_role}}</td>
     @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<a href="/user/{{ $user->id }}/edituser"  class = "ui fluid large yellow submit button">Edit</a>
+		<a href="/user/{{ $user->id }}/edituser"  class = "ui fluid tiny yellow submit button">Edit</a>
 	</td>
 	@endif
 	</tr>
+</tbody>
 </table>
 
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
