@@ -150,7 +150,7 @@ class ReservationsController extends Controller
         if ($request->or_number){
             $this->validate($request, [
 
-                'or_number' => "required|alpha_num|min:1",
+                'or_number' => "required|alpha_num|min:1|max:10",
                 
             ]);
             $reserve->or_number = $request->or_number;
@@ -159,7 +159,7 @@ class ReservationsController extends Controller
             $log = new Log;
 
             $log->user_id = $request->user()->id;
-            $log->date_of_reservation = date("Y-m-d H:i:sa");
+            $log->date_of_reservation = date("Y-m-d H:i:s");
             $log->remarks = "Paid Reservation";
 
             $log->save();
@@ -177,7 +177,7 @@ class ReservationsController extends Controller
         $log = new Log;
 
         $log->user_id = $request->user()->id;
-        $log->date_of_reservation = date("Y-m-d H:i:sa");
+        $log->date_of_reservation = date("Y-m-d H:i:s");
         $log->remarks = "Cancel Reservation";
 
         $log->save();
