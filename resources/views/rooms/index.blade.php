@@ -6,12 +6,19 @@
 max-width: 40%;
 @stop
 @section('items')
+@if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
 <a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
 <a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
 <a class="item" style="font-size: 110%" href = "{{url('/logs')}}">Logs</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+@elseif (Auth::user()->users_role == 'user')
+<a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
+<a class="item" style="font-size: 110%" href = "{{url('/equipment')}}">Equipment</a>
+<a class="active item" style="font-size: 110%" href = "{{url('/rooms')}}">Rooms</a>
+<a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>
+@endif
 @stop
 @section('content')
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -27,7 +34,9 @@ max-width: 40%;
       <th>Room Name</th>
       <th>Rate</th>
       <th>Capacity</th>
+      @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
       <th>Options</th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -36,11 +45,13 @@ max-width: 40%;
             <td class="room">{{ $room->name }}</td>
             <td class="rate">{{ $room->rate }}</td>
             <td class="capacity">{{ $room->capacity }}</td>
+            @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
             <td class="options">
               <div class="container" align="center" style="padding: 0px 0px 0px 0px;">
                 <a href="/rooms/{{ $room->id }}" class="ui tiny yellow fluid button">View</a>
               </div>
             </td>
+            @endif
             </tr>
     @endforeach
 </tbody>

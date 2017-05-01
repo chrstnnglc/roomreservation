@@ -8,7 +8,7 @@ use App\Room;
 class RoomsController extends Controller
 {
     public function __construct() {
-        $this->middleware('adminmedia');
+        $this->middleware('adminmedia', ['only' => 'form', 'showroom', 'addroom', 'editroom', 'updateroom', 'deleteroom']);
     }
 
     public function index() {
