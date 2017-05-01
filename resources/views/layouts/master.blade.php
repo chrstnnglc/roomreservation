@@ -43,7 +43,18 @@
       @yield('width')
       max-height: 75%;
     }
+    #table{
+      position:absolute;
+      height: 25%;
+      width: 25%;
+      top:50%;
+      left:50%;
+      user-select:none;
+      transform:translate(-50%,-50%);
+      -ms-transform:translate(-50%,-50%)
+    }
   </style>
+
 </head>
 <body>
   <div class="ui secondary top fixed inverted blue borderless menu">
