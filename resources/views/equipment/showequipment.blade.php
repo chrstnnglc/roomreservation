@@ -17,15 +17,26 @@ max-width: 40%;
 
 
 <table class="ui celled yellow table">
+<thead>
+<tr>
+<th>Name</th>
+<th>Brand</th>
+<th>Model</th>
+<th>Price</th>
+<th>Condition</th>
+<th>Room</th>
+@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<th></th>
+@endif
+</tr>
+</thead>
 <tr>
       <td class="equipment">{{$equipment->name}}</td>
       <td class="brand">{{$equipment->brand}}</td>
       <td class="model">{{$equipment->model}}</td>
       <td class="price">{{$equipment->price}}</td>
       <td class="condition">{{$equipment->condition}}</td>
-      @if ($equipment->room != "")
-      	<td class="room_id">{{$equipment->room->name}}</td>
-      @endif
+      <td class="room_id">{{$equipment->room->name}}</td>
       @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
 		<a href="/equipment/{{ $equipment->id }}/editequipment" class = "ui fluid tiny yellow submit button">Edit</a>
