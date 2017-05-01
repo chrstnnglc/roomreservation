@@ -2,6 +2,9 @@
 @section('name')
 <title>Equipment - Diocese of Cubao Reservation System</title>
 @stop
+@section('width')
+max-width: 40%;
+@stop
 @section('items')
 <a class="item" style="font-size: 110%" href = "{{url('/reservations')}}">Reservations</a>
 <a class="item" style="font-size: 110%" href = "{{url('/user')}}">Users</a>
@@ -23,7 +26,7 @@
       <td class="room_id">{{$equipment->room->name}}</td>
       @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">
-		<a href="/equipment/{{ $equipment->id }}/editequipment" class = "ui fluid large yellow submit button">Edit</a>
+		<a href="/equipment/{{ $equipment->id }}/editequipment" class = "ui fluid tiny yellow submit button">Edit</a>
 	</td>
 	@endif
 	</tr>
