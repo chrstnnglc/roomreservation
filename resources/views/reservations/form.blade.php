@@ -98,11 +98,11 @@ max-width: 25%;
 	    </div>
 
 	    <div id = "terms" style="height: 200px; overflow: scroll; text-align: left;">
+	    	    Upon submission, please pay the amount within 2 days in order to keep your reservation.
+		    <br><br>
 		    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium nunc eu libero fermentum, vulputate vehicula urna vulputate. Cras dui turpis, aliquam vitae sodales vel, imperdiet eget ligula. Nunc in cursus sem, vitae suscipit quam. Curabitur auctor nibh ac condimentum lobortis.
 		    <br><br>
 		    Duis eget arcu eu quam posuere volutpat. Sed non ultrices tellus. Proin auctor nulla feugiat, gravida elit nec, commodo dolor. Aliquam in tincidunt lacus. Phasellus fringilla porttitor lorem et finibus. Vivamus non mauris sit amet elit vulputate porta. Integer id bibendum lorem. Duis eget nulla sed orci blandit sodales ac nec erat. 
-		    <br><br>
-		    Ut fermentum tortor turpis, id congue mi volutpat a. Aenean sed vestibulum eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 	   	</div>
 
 	    <div class="field">
