@@ -28,7 +28,7 @@ max-width: 40%;
         </tr>
         <tr>
             <td>Name:</td>
-            <td class="name">{{ $user->firstname }} {{Auth::user()->lastname}}</td>
+            <td class="name">{{ $user->firstname }} {{$user->lastname}}</td>
         </tr>
         <tr>
             <td>E-mail:</td>
