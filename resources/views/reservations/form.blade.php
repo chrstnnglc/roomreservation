@@ -23,7 +23,7 @@ max-width: 25%;
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>@endif
 @stop
 @section('content')
-<!--<div class="ui middle aligned center aligned grid">
+<div class="ui middle aligned center aligned grid">
   <div class="column">-->
 	<h3>Add Reservation</h3>
 
@@ -122,6 +122,4 @@ max-width: 25%;
 		</div>
 		</div>
 	  </form>
-	<!--</div>
-</div>-->
 @stop
