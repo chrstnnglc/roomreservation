@@ -76,7 +76,7 @@ max-width: 90%;
       <td class="or_number">{{ $reserve->or_number }}</td>
       <td>
       
-        @if(Auth::user()->username == $reserve->user->username)
+        @if(Auth::user()->username == $reserve->user->username or Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
         <form method="POST" action="/reservations/{{ $reserve->id }}">
           {{ csrf_field() }}
           
