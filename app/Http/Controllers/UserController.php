@@ -172,7 +172,7 @@ class UserController extends Controller
 
         $user->save();
 
-        if ($user->users_role == 'user') {
+        if (Auth::user()->users_role == 'user') {
             $url = 'user/profile';
             return redirect($url);
         } else {
