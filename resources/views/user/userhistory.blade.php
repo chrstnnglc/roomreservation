@@ -47,6 +47,6 @@ max-width: 50%;
         @endif
   </tbody>
 </table>
-<a href="../{{ $reserve->user_id }}">Back to Profile</a>
+<a href="../{{ $user->id }}">Back to Profile</a>
 </form>
 @stop
