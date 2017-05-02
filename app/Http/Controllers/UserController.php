@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Reservation;
+use Validator;
 
 class UserController extends Controller
 {
@@ -72,7 +74,7 @@ class UserController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = Hash::make($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;
@@ -89,7 +91,9 @@ class UserController extends Controller
 
     public function updateuser(Request $request, User $user) {
         
-        $this->validate($request, [
+        // return [$request->old_password, $request->password, $request->password_confirmation];
+
+        $validator = Validator::make($request->all(), [
             'username' => [
                 'required',
                 'alpha_num',
@@ -103,6 +107,7 @@ class UserController extends Controller
                 'email',
                 Rule::unique('users')->ignore($user->id),
             ],
+            'old_password' => 'required',
             'password' => 'required|alpha_num|min:6|confirmed',
             'password_confirmation' => 'required',
             'mobile' => 'nullable|digits:11',
@@ -111,11 +116,17 @@ class UserController extends Controller
                 'required',
                 Rule::in(['admin', 'media', 'treasury', 'user']),
             ],
-            
         ]);
 
+        if ($validator->fails()) {
+            return redirect('user/' . $user->id . '/edituser')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         if (Auth::user()->users_role != "admin" && Auth::user()->users_role != "media") {
-            if (bcrypt($request->password) != $user->password) {
+            // return [Hash::check($request->old_password, $user->password), Hash::check('password', $user->password), $request->old_password];
+            if (!Hash::check($request->old_password, $user->password)) {
                 // return [$user, 'error' => 'Current password is incorrect!'];
                 return view('user.edituser', ['user' => $user, 'error' => 'Current password is incorrect!']); 
             }
@@ -124,7 +135,7 @@ class UserController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = Hash::make($request->password);
         $user->mobile = $request->mobile;
         $user->affiliation = $request->affiliation;
         $user->users_role = $request->users_role;

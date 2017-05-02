@@ -31,24 +31,6 @@ max-width: 90%;
 </div>
 </div>
 @endif
-
-<table class="ui very compact celled yellow table">
-  <thead>
-    <tr>
-      <th>Date of Reservation</th>
-      <th>User</th>
-      <th>Room</th>
-      <th>Date Reserved</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Hours</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th>OR Number</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-  <tbody>
   @if (count($errors) > 0)
   <div class = "ui left aligned inverted red stacked segment">
       <i class="warning icon"></i>
@@ -61,7 +43,26 @@ max-width: 90%;
   </div>
   @endif
   
-  @foreach ($reserves as $reserve)
+  @forelse ($reserves as $reserve)
+    @if ($loop->first)
+            <table class="ui celled yellow table">
+            <thead>
+        <tr>
+          <th>Date of Reservation</th>
+          <th>User</th>
+          <th>Room</th>
+          <th>Date Reserved</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Hours</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>OR Number</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>  
+    @endif
     <tr>
       <td class="room">{{ $reserve->date_of_reservation }}</td>
       <td class="user">{{ $reserve->user->username }}</td>
@@ -101,9 +102,11 @@ max-width: 90%;
         @endif
       </td>
     </tr>
-  @endforeach
-
-  
-  </tbody>
+        @if ($loop->last)
+    </tbody>
 </table>
+    @endif
+  @empty
+    <h1>No reservations to show.</h1>
+  @endforelse
 @stop

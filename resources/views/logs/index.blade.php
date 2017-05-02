@@ -14,26 +14,32 @@ max-width: 40%;
 <a class="item" style="font-size: 110%" href = "{{url('/user/profile')}}">{{Auth::user()->username}}</a>@stop
 @section('content')
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-<table class="ui celled yellow table">
-      <thead>
-        <tr>
-          <th>Log No.</th>
-          <th>User ID</th>
-          <th>Date of Reservation</th>
-          <th>Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($logs as $log)
+        @forelse ($logs as $log)
+            @if ($loop->first)
+        <table class="ui celled yellow table">
+              <thead>
+                <tr>
+                  <th>Log No.</th>
+                  <th>User ID</th>
+                  <th>Date of Reservation</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+            @endif
             <tr>
             <td class="id">{{ $log->id }}</td>
             <td class="user_id">{{ $log->user->username }}</td>
             <td class="user_id">{{ $log->date_of_reservation }}</td>
             <td class="remarks">{{ $log->remarks }}</td>
             </tr>
-    @endforeach
+      @if ($loop->last)
       </tbody>
-    </table>
+      </table>
+      @endif
+    @empty
+      <h1>There are no logs to show.</h1>
+    @endforelse
 @endif
 @stop
 

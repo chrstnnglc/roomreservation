@@ -26,21 +26,25 @@ max-width: 60%;
   <a href="{{url('/user/form')}}" class="ui yellow fluid button">Add User</a>
 </div>
 </div>
-<table class="ui celled yellow table">
-  <thead>
-    <tr>
-      <th>User Name</th>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th>E-mail</th>
-      <th>Mobile</th>
-      <th>Affiliation</th>
-      <th>Role</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-  <tbody>
-      @foreach ($users as $user)
+
+      @forelse ($users as $user)
+        @if ($loop->first)
+        <table class="ui celled yellow table">
+            <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Last Name</th>
+              <th>First Name</th>
+              <th>E-mail</th>
+              <th>Mobile</th>
+              <th>Affiliation</th>
+              <th>Role</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+        @endif
+
         <tr>
             <td class="username">{{ $user->username }}</td>
             <td class="firstname">{{ $user->firstname }}</td>
@@ -62,9 +66,13 @@ max-width: 60%;
                     </button>
                 </form>
             </td> -->
-        </tr>
-    @endforeach
-  </tbody>
-</table>
+        </tr>    
+            @if ($loop->last)
+    </tbody>
+    </table>
+    @endif
+    @empty
+      <h1>No users to show.</h1>
+    @endforelse
 </form>
 @stop

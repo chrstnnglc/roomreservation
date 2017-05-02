@@ -61,7 +61,7 @@ max-width: 25%;
 			  	<input type="text" name="lastname" value="{{ $user->lastname }}" placeholder = "Last Name">
 			  </div>
 			  <div class="field">
-					<input type="hidden" name="email" value="{{ $user->email }}"placeholder = "Email">
+					<input type="text" name="email" value="{{ $user->email }}"placeholder = "Email">
 				</div>
 				<div class="field">
 					<input type="password" name="password" value="" placeholder = "Password">
@@ -120,7 +120,7 @@ max-width: 25%;
 			  	<input type="text" name="lastname" value="{{ $user->lastname }}" placeholder = "Last Name">
 			  </div>
 			  <div class="field">
-					<input type="hidden" name="email" value="{{ $user->email }}" placeholder = "Email">
+					<input type="text" name="email" value="{{ $user->email }}" placeholder = "Email">
 				</div>
 				<div class="field">
 					<input type="text" name="mobile" value="{{ $user->mobile }}" placeholder = "Mobile (09xxxxxxxxx)">

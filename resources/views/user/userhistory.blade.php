@@ -15,22 +15,23 @@ max-width: 50%;
 
 @stop
 @section('content')
-<table class="ui celled yellow table">
-  <thead>
-    <tr>
-      <th>Date of Reservation</th>
-      <th>Room</th>
-      <th>Date Reserved</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Hours</th>
-      <th>Price</th>
-      <th>OR Number</th>
-    </tr>
-  </thead>
-  <tbody>
-      @if ($reserves != NULL)
-      @foreach ($reserves as $reserve)
+      @forelse ($reserves as $reserve)
+        @if ($loop->first)
+            <table class="ui celled yellow table">
+            <thead>
+            <tr>
+              <th>Date of Reservation</th>
+              <th>Room</th>
+              <th>Date Reserved</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Hours</th>
+              <th>Price</th>
+              <th>OR Number</th>
+            </tr>
+          </thead>
+          <tbody>
+        @endif
         <tr>
             <td class="room">{{ $reserve->date_of_reservation }}</td>
             <td class="room">{{ $reserve->room->name }}</td>
@@ -41,12 +42,15 @@ max-width: 50%;
             <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
             <td class="or_number">{{ $reserve->or_number }}</td>
         </tr>
-        @endforeach
-        @else
-        This user had not made any reservations.
-        @endif
-  </tbody>
-</table>
+              @if ($loop->last)
+    </tbody>
+    </table>
+    @endif
+        @empty
+          <h1>You have no reservations yet.</h1>
+        @endforelse
+
+
 <a href="../{{ $user->id }}">Back to Profile</a>
 </form>
 @stop

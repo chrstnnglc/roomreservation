@@ -29,24 +29,24 @@ max-width: 50%;
   </div>
 </div>
 @endif
-
-<table class="ui celled yellow table">
-  <thead>
-    <tr>
-      <th>Equipment</th>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>Price</th>
-      <th>Condition</th>
-      <th>Room</th>
-      @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
-      <th>Options</th>
+    @forelse ($equipments as $equip)
+      @if ($loop->first)
+            <table class="ui celled yellow table">
+            <thead>
+          <tr>
+            <th>Equipment</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Condition</th>
+            <th>Room</th>
+            @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+            <th>Options</th>
+            @endif
+          </tr>
+        </thead>
+        <tbody>
       @endif
-    </tr>
-  </thead>
-  <tbody>
-
-    @foreach ($equipments as $equip)
     <tr>
 
       <td class="equipment">{{$equip->name}}</td>
@@ -67,9 +67,13 @@ max-width: 50%;
       </td>
       @endif
     </tr>
-    @endforeach
-  </tbody>
+    @if ($loop->last)
+    </tbody>
 </table>
+    @endif
+    @empty
+      <h1>No equipment to show.</h1>
+    @endforelse
 
 @stop
 
