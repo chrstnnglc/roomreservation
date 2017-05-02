@@ -24,7 +24,6 @@ max-width: 25%;
 @stop
 @section('content')
 <div class="ui middle aligned center aligned grid">
-  <div class="column">-->
 	<h3>Add Reservation</h3>
 
 	<form class="ui form" method="POST" action="{{ url('/reservations')}}">
