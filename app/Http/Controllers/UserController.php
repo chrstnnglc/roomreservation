@@ -92,8 +92,45 @@ class UserController extends Controller
     public function updateuser(Request $request, User $user) {
         
         // return [$request->old_password, $request->password, $request->password_confirmation];
+        if (Auth::user()->users_role != "admin" && Auth::user()->users_role != "media") {
+                $validator = Validator::make($request->all(), [
+                'username' => [
+                    'required',
+                    'alpha_num',
+                    'max:255',
+                    Rule::unique('users')->ignore($user->id),
+                ],
+                'firstname' => 'nullable|alpha_num|max:255',
+                'lastname' => 'nullable|alpha_num|max:255',
+                'email' => [
+                    'nullable',
+                    'email',
+                    Rule::unique('users')->ignore($user->id),
+                ],
+                'old_password' => 'required',
+                'password' => 'required|alpha_num|min:6|confirmed',
+                'password_confirmation' => 'required',
+                'mobile' => 'nullable|digits:11',
+                'affiliation' => 'nullable|alpha_num|max:255',
+                'users_role' => [
+                    'required',
+                    Rule::in(['admin', 'media', 'treasury', 'user']),
+                ],
+            ]);
 
-        $validator = Validator::make($request->all(), [
+            if ($validator->fails()) {
+                return redirect('user/' . $user->id . '/edituser')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+
+            if (!Hash::check($request->old_password, $user->password)) {
+                // return [$user, 'error' => 'Current password is incorrect!'];
+                return view('user.edituser', ['user' => $user, 'error' => 'Current password is incorrect!']); 
+            }
+        } else {
+            $validator = Validator::make($request->all(), [
             'username' => [
                 'required',
                 'alpha_num',
@@ -107,7 +144,6 @@ class UserController extends Controller
                 'email',
                 Rule::unique('users')->ignore($user->id),
             ],
-            'old_password' => 'required',
             'password' => 'required|alpha_num|min:6|confirmed',
             'password_confirmation' => 'required',
             'mobile' => 'nullable|digits:11',
@@ -124,12 +160,6 @@ class UserController extends Controller
                         ->withInput();
         }
 
-        if (Auth::user()->users_role != "admin" && Auth::user()->users_role != "media") {
-            // return [Hash::check($request->old_password, $user->password), Hash::check('password', $user->password), $request->old_password];
-            if (!Hash::check($request->old_password, $user->password)) {
-                // return [$user, 'error' => 'Current password is incorrect!'];
-                return view('user.edituser', ['user' => $user, 'error' => 'Current password is incorrect!']); 
-            }
         }
         $user->username = $request->username;
         $user->firstname = $request->firstname;
