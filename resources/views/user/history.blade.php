@@ -37,6 +37,7 @@ max-width: 50%;
     </tr>
   </thead>
   <tbody>
+      @if ($reserves != NULL)
       @foreach ($reserves as $reserve)
         <tr>
             <td class="room">{{ $reserve->date_of_reservation }}</td>
@@ -48,7 +49,10 @@ max-width: 50%;
             <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
             <td class="or_number">{{ $reserve->or_number }}</td>
         </tr>
-    @endforeach
+        @endforeach
+        @else
+        You have no reservations yet.
+        @endif
   </tbody>
 </table>
 <a href="../profile">Back to Profile</a>
