@@ -47,7 +47,7 @@ max-width: 50%;
     </table>
     @endif
         @empty
-          <h1>You have no reservations yet.</h1>
+          <h1>This user has no reservations yet.</h1>
         @endforelse
 
 
