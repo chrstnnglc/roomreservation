@@ -52,13 +52,13 @@ class UserController extends Controller
     public function adduser(Request $request) {
         $this->validate($request, [
             'username' => 'required|alpha_num|max:255|unique:users',
-            'firstname' => 'nullable|alpha_num|max:255',
-            'lastname' => 'nullable|alpha_num|max:255',
+            'firstname' => 'nullable|max:255',
+            'lastname' => 'nullable|max:255',
             'email' => 'nullable|email',
             'password' => 'required|alpha_num|min:6|confirmed',
             'password_confirmation' => 'required',
             'mobile' => 'nullable|digits:11',
-            'affiliation' => 'nullable|alpha_num|max:255',
+            'affiliation' => 'nullable|max:255',
             'users_role' => [
                 'required',
                 Rule::in(['admin', 'media', 'treasury', 'user']),
