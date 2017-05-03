@@ -70,7 +70,7 @@ class ReservationsController extends Controller
             'username' => "required|exists:users,username",
             'roomname' => "required|exists:rooms,name",
             'date' => "required|date|after_or_equal:" . date("Y-m-d"),
-            'starttime' => "required|after_or_equal:" . date("H:i:s"),
+            'starttime' => "required",
             'endtime' => "required|greater_than_field:starttime"
 
             ]);
@@ -85,7 +85,7 @@ class ReservationsController extends Controller
             
             'roomname' => "required|exists:rooms,name",
             'date' => "required|date|after_or_equal:" . date("Y-m-d"),
-            'starttime' => "required|after_or_equal:" . date("H:i:s"),
+            'starttime' => "required",
             'endtime' => "required|greater_than_field:starttime",
 
             ]);
