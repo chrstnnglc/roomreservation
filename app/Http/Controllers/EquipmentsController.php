@@ -31,11 +31,11 @@ class EquipmentsController extends Controller
         
         $this->validate($request, [
 
-            'equipment' => 'required|alphaNum|max:255',
+            'equipment' => 'required|max:255',
             'brand' => 'required|max:255',
             'model' => 'required|max:255',
             'price' => 'required|numeric|min:0|not_in:0',
-            'condition' => 'required|alpha',
+            'condition' => 'required',
             
         ]);
         
@@ -67,11 +67,11 @@ class EquipmentsController extends Controller
 
         $this->validate($request, [
 
-            'equipment' => 'required|alphaNum|max:255',
+            'equipment' => 'required|max:255',
             'brand' => 'required|max:255',
             'model' => 'required|max:255',
             'price' => 'required|numeric|min:0|not_in:0',
-            'condition' => 'required|alpha',
+            'condition' => 'required',
             'room' => 'exists:rooms,name',
 
         ]);
