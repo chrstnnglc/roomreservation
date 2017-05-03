@@ -29,7 +29,7 @@ max-width: 40%;
 <tbody>
 <tr>
 	<td class="room">{{ $room->name }}</td>
-	<td class="rates">{{ $room->rate }}</td>
+	<td class="rates">Php {{ number_format((float)$room->rate, 2, '.', '') }}</td>
 	<td class="capacity">{{ $room->capacity }}</td>
 	@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 	<td class="options">

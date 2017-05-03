@@ -46,7 +46,7 @@ max-width: 40%;
         @endif
         <tr>
             <td class="room">{{ $room->name }}</td>
-            <td class="rate">{{ $room->rate }}</td>
+            <td class="rate">Php {{ number_format((float)$room->rate, 2, '.', '') }}</td>
             <td class="capacity">{{ $room->capacity }}</td>
             @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
             <td class="options">

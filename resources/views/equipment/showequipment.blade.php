@@ -34,7 +34,7 @@ max-width: 40%;
       <td class="equipment">{{$equipment->name}}</td>
       <td class="brand">{{$equipment->brand}}</td>
       <td class="model">{{$equipment->model}}</td>
-      <td class="price">{{$equipment->price}}</td>
+      <td class="price">Php {{ number_format((float)$equipment->price, 2, '.', '') }}</td>
       <td class="condition">{{$equipment->condition}}</td>
       @if ($equipment->room)
 	      <td class="room_id">{{$equipment->room->name}}</td>
