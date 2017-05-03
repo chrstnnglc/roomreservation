@@ -28,7 +28,7 @@ class RoomsController extends Controller
         
         $this->validate($request, [
 
-            'roomname' => 'required|alphaNum|max:255|unique:rooms,name',
+            'roomname' => 'required|max:255|unique:rooms,name',
             'rate' => 'required|integer|min:1',
             'capacity' => 'required|integer|min:1',
         
@@ -57,7 +57,6 @@ class RoomsController extends Controller
 
             'roomname' => [
                 'required',
-                'alphaNum',
                 'max:255',
             ],
             'rate' => 'required|integer|min:1',
