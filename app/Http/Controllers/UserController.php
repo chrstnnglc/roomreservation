@@ -54,7 +54,7 @@ class UserController extends Controller
             'username' => 'required|max:255|unique:users',
             'firstname' => 'nullable|max:255',
             'lastname' => 'nullable|max:255',
-            'email' => 'nullable|email',
+            'email' => 'required|email',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
             'mobile' => 'nullable|digits:11',
