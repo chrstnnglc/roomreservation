@@ -58,7 +58,7 @@ class ReservationsController extends Controller
                 }
             }
 
-            $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->all();
+            $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->where('reservations_status', '!=', 'cancelled')->all();
 
             return view('reservations.index', compact('reserves'));
 
@@ -209,7 +209,7 @@ class ReservationsController extends Controller
 
     public function deletereservation(Request $request) {
         $reservation = Reservation::where('id', $request->id)->first();
-        $reservation->delete();
+        $reservation->reservations_status = 'cancelled';
 
         $log = new Log;
 
@@ -218,6 +218,8 @@ class ReservationsController extends Controller
         $log->remarks = "Cancel Reservation";
 
         $log->save();
+
+        $reservation->save();
 
         return redirect('reservations');
     }

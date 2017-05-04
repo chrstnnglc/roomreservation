@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     public function userslist(User $user) {
-        $users = User::all();
+        $users = User::where('users_role', '!=', 'trash')->get();
         // if ($this->notice['message'] != '') {
         //     return $this->notice;
         //     $notice['message'] = $this->notice['message'];
@@ -194,7 +194,7 @@ class UserController extends Controller
             $notice['color'] = 'red';
         
         } else {
-            $user->delete();
+            $user->users_role = 'trash';
             
             $users = User::all();
             $notice['message'] = 'Successfully deleted user!';
