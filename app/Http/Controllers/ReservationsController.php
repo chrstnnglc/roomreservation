@@ -25,6 +25,24 @@ class ReservationsController extends Controller
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
             $reserves = Reservation::with('room', 'user')->get();
 
+            foreach ($reserves as $reserve) {
+                if ((strtotime(date("Y-m-d"))) > strtotime($reserve->date_reserved)) {
+                    $reserve->reservations_status = 'done';
+
+                    $log = new Log;
+
+                    $log->user_id = $user->id;
+                    $log->date_of_reservation = date("Y-m-d H:i:s");
+                    $log->remarks = "Done Reservation";
+
+                    $log->save();
+
+                    $reserve->save();
+                }
+            }
+
+            $reserves = $reserves->where('reservations_status', '!=', 'done')->all();
+
             return view('reservations.index', compact('reserves'));
 
         } elseif ($user->users_role == 'treasury') {

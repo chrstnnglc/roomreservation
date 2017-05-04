@@ -74,7 +74,7 @@ max-width: 90%;
       <td class="hours">{{ $reserve->hours }}</td>
       <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
       <td class="status">{{ $reserve->reservations_status }}</td>
-      <td class="status">{{ $reserve->date_paid }}</td>
+      <td class="date_paid">{{ $reserve->date_paid }}</td>
       <td class="or_number">{{ $reserve->or_number }}</td>
       <td>
       
