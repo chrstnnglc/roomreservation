@@ -53,7 +53,7 @@ class ReservationsController extends Controller
             
             'username' => "required|exists:users,username",
             'roomname' => "required|exists:rooms,name",
-            'date' => "required|date|after_or_equal:" . date("Y-m-d"),
+            'date' => "required|date|after_or_equal:" . date("Y-m-d H:i:s"),
             'starttime' => "required",
             'endtime' => "required|greater_than_field:starttime"
 
@@ -68,7 +68,7 @@ class ReservationsController extends Controller
             $this->validate($request, [
             
             'roomname' => "required|exists:rooms,name",
-            'date' => "required|date|after_or_equal:" . date("Y-m-d"),
+            'date' => "required|date|after_or_equal:" . date("Y-m-d H:i:s"),
             'starttime' => "required",
             'endtime' => "required|greater_than_field:starttime",
 
@@ -151,11 +151,12 @@ class ReservationsController extends Controller
         if ($request->or_number){
             $this->validate($request, [
 
-                'or_number' => "numeric",
+                'or_number' => "alpha_num|max:10",
                 
             ]);
             $reserve->or_number = $request->or_number;
             $reserve->reservations_status = "paid";
+            $reserve->date_paid = date("Y-m-d H:i:s");
 
             $log = new Log;
 
