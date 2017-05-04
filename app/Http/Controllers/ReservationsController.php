@@ -26,22 +26,39 @@ class ReservationsController extends Controller
             $reserves = Reservation::with('room', 'user')->get();
 
             foreach ($reserves as $reserve) {
-                if ((strtotime(date("Y-m-d"))) > strtotime($reserve->date_reserved)) {
-                    $reserve->reservations_status = 'done';
+                if ($reserve->reservations_status == 'not paid') {
+                    if (((strtotime(date("Y-m-d H:i:s"))) - strtotime($reserve->date_reserved)) > 259200) {
+                        $reserve->reservations_status = 'expired';
 
-                    $log = new Log;
+                        $log = new Log;
 
-                    $log->user_id = $user->id;
-                    $log->date_of_reservation = date("Y-m-d H:i:s");
-                    $log->remarks = "Done Reservation";
+                        $log->user_id = $user->id;
+                        $log->date_of_reservation = date("Y-m-d H:i:s");
+                        $log->remarks = "Expired Reservation";
 
-                    $log->save();
+                        $log->save();
 
-                    $reserve->save();
+                        $reserve->save();
+                    }
+                }
+                elseif ($reserve->reservations_status == 'paid') {
+                    if ((strtotime(date("Y-m-d"))) > strtotime($reserve->date_reserved)) {
+                        $reserve->reservations_status = 'done';
+
+                        $log = new Log;
+
+                        $log->user_id = $user->id;
+                        $log->date_of_reservation = date("Y-m-d H:i:s");
+                        $log->remarks = "Done Reservation";
+
+                        $log->save();
+
+                        $reserve->save();
+                    }
                 }
             }
 
-            $reserves = $reserves->where('reservations_status', '!=', 'done')->all();
+            $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->all();
 
             return view('reservations.index', compact('reserves'));
 
