@@ -201,6 +201,18 @@ class UserController extends Controller
             $notice['color'] = 'green';
         }
 
+        #$user = User::where('id', $request->id)->first();
+        #$reserves = Reservation::where('user_id', $user->id)->where('reservations_status', '!=', 'done')->orWhere('reservations_status', '!=', 'expired')->orWhere('reservations_status', '!=', 'cancelled')->get();
+        #if ($reserves) {
+        #    $user->users_role = 'trash';
+            
+        #    $user->save();
+
+        #    $users = User::all();
+        #    $notice['message'] = 'Successfully deleted user!';
+        #    $notice['color'] = 'green';
+        #}
+
         $users = User::all();
         return view('user.userslist', compact('users', 'notice'));
     }
