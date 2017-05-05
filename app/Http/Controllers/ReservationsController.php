@@ -19,11 +19,23 @@ class ReservationsController extends Controller
         $this->middleware('treasury', ['only' => ['updatereservation']]);
     }
 
-    public function index(Reservation $reserve) {
+    public function index(Reservation $reserve, Request $request) {
+        $sortable = array('room_id', 'user_id', 'date_reserved', 'date_of_reservation', 'reservations_status', 'date_paid', 'or_number');
+        $sort = 'date_of_reservation';
+        $ord = 'asc';
+
+        if (in_array($request->sort, $sortable)) {
+            $sort = $request->sort;
+        }
+
+        if ($request->ord != NULL) {
+            $ord = $request->ord;
+        }
+        
         $user = Auth::user();
 
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
-            $reserves = Reservation::with('room', 'user')->get();
+            $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->get();
 
             foreach ($reserves as $reserve) {
                 if ($reserve->reservations_status == 'not paid') {
@@ -60,15 +72,15 @@ class ReservationsController extends Controller
 
             $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->where('reservations_status', '!=', 'cancelled')->all();
 
-            return view('reservations.index', compact('reserves'));
+            return view('reservations.index', compact('reserves', 'ord', 'sort'));
 
         } elseif ($user->users_role == 'treasury') {
-            $reserves = Reservation::with('room', 'user')->orderby('date_of_reservation')->get();
-            return view('reservations.index', compact('reserves'));
+            $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->get();
+            return view('reservations.index', compact('reserves', 'ord', 'sort'));
             
         } else {
-            $reserves = Reservation::with('room', 'user')->where('user_id', $user->id)->get();
-            return view('reservations.index', compact('reserves'));    
+            $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->where('user_id', $user->id)->get();
+            return view('reservations.index', compact('reserves', 'ord', 'sort'));    
         }
     }
 

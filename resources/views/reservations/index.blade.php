@@ -48,17 +48,48 @@ max-width: 90%;
             <table class="ui celled yellow table">
             <thead>
         <tr>
-          <th>Date of Reservation</th>
-          <th>User</th>
-          <th>Room</th>
-          <th>Date Reserved</th>
+          <?php 
+            $new_ord = ($ord == 'asc')?'desc':'asc';
+          ?>
+          <th><a href = "{{ url('reservations') }}?sort=date_of_reservation{{ ($sort == 'date_of_reservation')?'&ord='.$new_ord:''}}">
+              Date of Reservation
+            <i class="sort {{ ($sort == 'date_of_reservation')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
+          <th><a href = "{{ url('reservations') }}?sort=user_id{{ ($sort == 'user_id')?'&ord='.$new_ord:''}}">
+              User
+            <i class="sort {{ ($sort == 'user_id')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </t0h>
+          <th><a href = "{{ url('reservations') }}?sort=room_id{{ ($sort == 'room_id')?'&ord='.$new_ord:''}}">
+              Room
+            <i class="sort {{ ($sort == 'room_id')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
+          <th><a href = "{{ url('reservations') }}?sort=date_reserved{{ ($sort == 'date_reserved')?'&ord='.$new_ord:''}}">
+              Date Reserved
+            <i class="sort {{ ($sort == 'date_reserved')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
           <th>Start Time</th>
           <th>End Time</th>
           <th>Hours</th>
           <th>Price</th>
-          <th>Status</th>
-          <th>Date Paid</th>
-          <th>OR Number</th>
+          <th><a href = "{{ url('reservations') }}?sort=reservations_status{{ ($sort == 'reservations_status')?'&ord='.$new_ord:''}}">
+              Status
+            <i class="sort {{ ($sort == 'reservations_status')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
+          <th><a href = "{{ url('reservations') }}?sort=date_paid{{ ($sort == 'date_paid')?'&ord='.$new_ord:''}}">
+              Date Paid
+            <i class="sort {{ ($sort == 'date_paid')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
+          <th><a href = "{{ url('reservations') }}?sort=or_number{{ ($sort == 'or_number')?'&ord='.$new_ord:''}}">
+              OR Number
+            <i class="sort {{ ($sort == 'or_number')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th>
           <th>Options</th>
         </tr>
       </thead>
