@@ -12,6 +12,10 @@ class Reservation extends Model
         return $this->belongsTo('App\Room','room_id');
     }
 
+    public function equipment() {
+    	return $this->hasmany(ReservationEquipment::class);
+    }
+
     public function user() {
         return $this->belongsTo('App\User','user_id');
     }

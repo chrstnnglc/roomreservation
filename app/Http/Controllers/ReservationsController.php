@@ -9,6 +9,7 @@ use App\User;
 use App\Room;
 use App\Log;
 use App\Equipment;
+use App\ReservationEquipment;
 
 class ReservationsController extends Controller
 {
@@ -20,6 +21,8 @@ class ReservationsController extends Controller
     }
 
     public function index(Reservation $reserve, Request $request) {
+
+
         $sortable = array('room_id', 'user_id', 'date_reserved', 'date_of_reservation', 'reservations_status', 'date_paid', 'or_number');
         $sort = 'date_of_reservation';
         $ord = 'asc';
@@ -87,7 +90,8 @@ class ReservationsController extends Controller
     public function form() {
         $rooms = Room::all();
         $users = User::all();
-        return view('reservations.form', compact('rooms', 'users'));
+        $equipment = Equipment::where('room_id', null)->get();
+        return view('reservations.form', compact('rooms', 'users', 'equipment'));
     }
     
     public function addreservation(Request $request) {
@@ -140,7 +144,7 @@ class ReservationsController extends Controller
             $reserve->hours = (strtotime($reserve->end_of_reserved) - strtotime($reserve->start_of_reserved))/3600;
         }
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
-        $equipment_reserved = Equipment::where('room_id', $room->id);
+        $equipment_reserved = Equipment::where('room_id', $room->id)->get();
 
         foreach ($equipment_reserved as $equipment) {
             $reserve->price += $equipment->price;
@@ -201,6 +205,29 @@ class ReservationsController extends Controller
                 ->where('reservations_status', 'not paid');                           
             });
         if (!$reserve_in_database1->first() and !$reserve_in_database2->first() and !$reserve_in_database3->first() and !$reserve_in_database4->first()) {
+            $reserve->save();
+
+            foreach($request['addlequip'] as $addl) {
+                if (isset($addl)) {
+                    $reserveeq = new ReservationEquipment;
+                    $reserveeq->equipment_id = $addl;
+                    
+                    $equip = Equipment::where('id', $addl)->first();
+                    $reserveeq->equipment_name = $equip->name;
+                    $reserveeq->equipment_brand = $equip->brand;
+                    $reserveeq->equipment_model = $equip->model;
+
+                    $reserveeq->reservation_id = $reserve->id;
+                    $reserveeq->save();
+                    $reserve->equipment()->save($reserveeq);
+                }
+            }
+
+            foreach($reserve->equipment as $r) {
+                $req = Equipment::where('id', $r->equipment_id)->first();
+                $reserve->price += $req->price;
+            }
+
             $reserve->save();
 
             $log = new Log;

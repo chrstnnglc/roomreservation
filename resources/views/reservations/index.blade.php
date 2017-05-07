@@ -66,6 +66,7 @@ max-width: 90%;
             <i class="sort {{ ($sort == 'room_id')?$new_ord.'ending':''}} icon"></i>
             </a>
           </th>
+          <th>Additional Equipment</th>
           <th><a href = "{{ url('reservations') }}?sort=date_reserved{{ ($sort == 'date_reserved')?'&ord='.$new_ord:''}}">
               Date Reserved
             <i class="sort {{ ($sort == 'date_reserved')?$new_ord.'ending':''}} icon"></i>
@@ -99,6 +100,12 @@ max-width: 90%;
       <td class="room">{{ $reserve->date_of_reservation }}</td>
       <td class="user">{{ $reserve->user->username }}</td>
       <td class="room">{{ $reserve->room->name }}</td>
+      <td>
+        @foreach ($reserve->equipment as $addleq)
+          {{ $addleq->equipment_name }}: {{ $addleq->equipment_brand }} {{ $addleq->equipment_model }}
+          <br>
+        @endforeach
+      </td>
       <td class="date">{{ $reserve->date_reserved }}</td>
       <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
       <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>

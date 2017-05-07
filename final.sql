@@ -62,6 +62,9 @@ CREATE TABLE Reservation_Equipments (
 	id SERIAL PRIMARY KEY,
 	reservation_id integer REFERENCES Reservations (id) NOT NULL,
 	equipment_id integer REFERENCES Equipment (id) NOT NULL
+	equipment_name varchar(50) NOT NULL,
+	equipment_brand varchar(50) NOT NULL,
+	equipment_model varchar(50) NOT NULL,
 ); 
 
 CREATE TABLE Logs (

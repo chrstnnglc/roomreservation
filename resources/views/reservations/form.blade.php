@@ -54,6 +54,15 @@ max-width: 25%;
 		        @endforeach
 		    </select>
 	    </div>
+	    <div class="field">
+	    	@foreach ($equipment as $equip)
+		    	<div class="ui checkbox">
+				  <input type="checkbox" name="addlequip[]" value={{ $equip->id }}>
+				  <label>{{ $equip->name }} - Php {{ $equip->price }}</label>
+				</div>
+				<br>
+			@endforeach
+	    </div>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
 	      <select name="username" class="ui dropdown" id="select">
