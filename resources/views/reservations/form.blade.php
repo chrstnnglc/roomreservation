@@ -59,7 +59,7 @@ max-width: 25%;
 	      <select name="username" class="ui dropdown" id="select">
 			        <option value="">Select User</option>
 			        @foreach ($users as $user)
-			        	@if($user->users_role != 'treasury')
+			        	@if($user->users_role == 'admin' or $user->users_role == 'media' or $user->users_role == 'user')
 			        		<option value="{{ $user->username }}">{{ $user->username }}</option>
 			        	@endif
 			        @endforeach

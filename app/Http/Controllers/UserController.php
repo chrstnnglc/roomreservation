@@ -181,37 +181,48 @@ class UserController extends Controller
 
     public function deleteuser(Request $request) {
         
-        $user = User::withCount('reservation')->withCount('log')->where('id', $request->id)->first();
-        if (Auth::user()->id == $request->id) {
-            $users = User::all();
-            $notice['message'] = 'Cannot delete the account you are using.';
-            $notice['color'] = 'red';
-            // return $this->notice;
-        } elseif ($user->reservation_count != 0 || $user->log_count) {
-            $users = User::all();
+        #$user = User::withCount('reservation')->withCount('log')->where('id', $request->id)->first();
+        #if (Auth::user()->id == $request->id) {
+        #    $users = User::all();
+        #    $notice['message'] = 'Cannot delete the account you are using.';
+        #    $notice['color'] = 'red';
+        #    // return $this->notice;
+        #} elseif ($user->reservation_count != 0 || $user->log_count) {
+        #    $users = User::all();
             
-            $notice['message'] = 'Cannot delete! User is referenced in entries in the database.';
-            $notice['color'] = 'red';
+        #    $notice['message'] = 'Cannot delete! User is referenced in entries in the database.';
+        #    $notice['color'] = 'red';
         
-        } else {
-            $user->users_role = 'trash';
-            
-            $users = User::all();
-            $notice['message'] = 'Successfully deleted user!';
-            $notice['color'] = 'green';
-        }
-
-        #$user = User::where('id', $request->id)->first();
-        #$reserves = Reservation::where('user_id', $user->id)->where('reservations_status', '!=', 'done')->orWhere('reservations_status', '!=', 'expired')->orWhere('reservations_status', '!=', 'cancelled')->get();
-        #if ($reserves) {
+        #} else {
         #    $user->users_role = 'trash';
             
-        #    $user->save();
-
         #    $users = User::all();
         #    $notice['message'] = 'Successfully deleted user!';
         #    $notice['color'] = 'green';
         #}
+
+        $user = User::where('id', $request->id)->first();
+        $reserves = Reservation::where('user_id', $user->id)
+            ->where('reservations_status', 'paid')
+            ->orWhere(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                ->where('reservations_status', 'not paid');                           
+            });
+        if ($reserves->first()) {
+            $users = User::all();
+            
+            $notice['message'] = 'Cannot delete! User is referenced in entries in the database.';
+            $notice['color'] = 'red';
+        }
+        else {
+            $user->users_role = 'trash';
+            
+            $user->save();
+
+            $users = User::all();
+            $notice['message'] = 'Successfully deleted user!';
+            $notice['color'] = 'green';
+        }
 
         $users = User::all();
         return view('user.userslist', compact('users', 'notice'));

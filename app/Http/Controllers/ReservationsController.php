@@ -151,25 +151,55 @@ class ReservationsController extends Controller
         $reserve_in_database1 = Reservation::where('room_id', $room->id)
             ->where('date_reserved', $request->date)
             ->where('start_of_reserved', '<=', $request->starttime)
-            ->where('end_of_reserved', '>=', $request->endtime);
-
+            ->where('end_of_reserved', '>=', $request->endtime)
+            ->where('reservations_status', 'paid')
+            ->orWhere(function ($query) use ($request, $room) {
+                $query->where('room_id', $room->id)
+                ->where('date_reserved', $request->date)
+                ->where('start_of_reserved', '<=', $request->starttime)
+                ->where('end_of_reserved', '>=', $request->endtime)
+                ->where('reservations_status', 'not paid');                          
+            });
         $reserve_in_database2 = Reservation::where('room_id', $room->id)
             ->where('date_reserved', $request->date)
             ->where('start_of_reserved', '>=', $request->starttime)
-            ->where('end_of_reserved', '<=', $request->endtime);
-
+            ->where('end_of_reserved', '<=', $request->endtime)
+            ->where('reservations_status', 'paid')
+            ->orWhere(function ($query) use ($request, $room) {
+                $query->where('room_id', $room->id)
+                ->where('date_reserved', $request->date)
+                ->where('start_of_reserved', '>=', $request->starttime)
+                ->where('end_of_reserved', '<=', $request->endtime)
+                ->where('reservations_status', 'not paid');                           
+            });
         $reserve_in_database3 = Reservation::where('room_id', $room->id)
             ->where('date_reserved', $request->date)
             ->where('start_of_reserved', '>=', $request->starttime)
             ->where('start_of_reserved', '<=', $request->endtime)
-            ->where('end_of_reserved', '>=', $request->endtime);
-
+            ->where('end_of_reserved', '>=', $request->endtime)
+            ->where('reservations_status', 'paid')
+            ->orWhere(function ($query) use ($request, $room) {
+                $query->where('room_id', $room->id)
+                ->where('date_reserved', $request->date)
+                ->where('start_of_reserved', '>=', $request->starttime)
+                ->where('start_of_reserved', '<=', $request->endtime)
+                ->where('end_of_reserved', '>=', $request->endtime)
+                ->where('reservations_status', 'not paid');                           
+            });
         $reserve_in_database4 = Reservation::where('room_id', $room->id)
             ->where('date_reserved', $request->date)
             ->where('start_of_reserved', '<=', $request->starttime)
             ->where('end_of_reserved', '<=', $request->endtime)
-            ->where('end_of_reserved', '>=', $request->starttime);
-
+            ->where('end_of_reserved', '>=', $request->starttime)
+            ->where('reservations_status', 'paid')
+            ->orWhere(function ($query) use ($request, $room) {
+                $query->where('room_id', $room->id)
+                ->where('date_reserved', $request->date)
+                ->where('start_of_reserved', '<=', $request->starttime)
+                ->where('end_of_reserved', '<=', $request->endtime)
+                ->where('end_of_reserved', '>=', $request->starttime)
+                ->where('reservations_status', 'not paid');                           
+            });
         if (!$reserve_in_database1->first() and !$reserve_in_database2->first() and !$reserve_in_database3->first() and !$reserve_in_database4->first()) {
             $reserve->save();
 
@@ -220,8 +250,10 @@ class ReservationsController extends Controller
     }
 
     public function deletereservation(Request $request) {
+        $user = User::where('users_role','admin')->first();
         $reservation = Reservation::where('id', $request->id)->first();
         $reservation->reservations_status = 'cancelled';
+        $reservation->user_id = $user->id;
 
         $log = new Log;
 
