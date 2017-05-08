@@ -106,13 +106,13 @@ max-width: 25%;
 		    </select>
 	      </div>
 	    </div>
-
+	    
 	    <div id = "terms" style="height: 200px; overflow: scroll; text-align: left;">
-	    	    Upon submission, please pay the amount within 2 days in order to keep your reservation.
+	    	Upon submission, please pay the amount within 2 days in order to keep your reservation.
 		    <br><br>
-		    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium nunc eu libero fermentum, vulputate vehicula urna vulputate. Cras dui turpis, aliquam vitae sodales vel, imperdiet eget ligula. Nunc in cursus sem, vitae suscipit quam. Curabitur auctor nibh ac condimentum lobortis.
+		    An ingress of 1 hour and egress of 30 minutes are included in your reservation.
 		    <br><br>
-		    Duis eget arcu eu quam posuere volutpat. Sed non ultrices tellus. Proin auctor nulla feugiat, gravida elit nec, commodo dolor. Aliquam in tincidunt lacus. Phasellus fringilla porttitor lorem et finibus. Vivamus non mauris sit amet elit vulputate porta. Integer id bibendum lorem. Duis eget nulla sed orci blandit sodales ac nec erat. 
+		    
 	   	</div>
 
 	    <div class="field">

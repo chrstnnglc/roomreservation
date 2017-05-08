@@ -133,17 +133,10 @@ class ReservationsController extends Controller
         $reserve->room_id = $room->id;
         $reserve->date_of_reservation = date("Y-m-d H:i:s");
         $reserve->date_reserved = $request->date;
-        $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime) - 3600);
-        $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime) + 1800);
-        if ((strtotime($request->endtime) - strtotime($request->starttime))/3600 < 0) {
-            $reserve->hours = (strtotime($request->endtime)+(12*60*60) - strtotime($request->starttime))/3600;
-        } if ((strtotime($reserve->end_of_reserved) - strtotime($reserve->start_of_reserved))/3600 < 0){
-            $reserve->hours = (strtotime($reserve->end_of_reserved)+(24*60*60) - strtotime($reserve->start_of_reserved))/3600;
-        }
-        else{
-            $reserve->hours = (strtotime($reserve->end_of_reserved) - strtotime($reserve->start_of_reserved))/3600;
-        }
-        $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
+        $reserve->start_of_reserved = date("H:i:s", strtotime($request->starttime));
+        $reserve->end_of_reserved = date("H:i:s", strtotime($request->endtime));
+        $reserve->hours = (strtotime($reserve->end_of_reserved) - strtotime($reserve->start_of_reserved))/3600;
+        $reserve->price = $reserve->hours * $room->rate;
         $equipment_reserved = Equipment::where('room_id', $room->id)->where('condition','Working')->get();
 
         foreach ($equipment_reserved as $equipment) {
@@ -207,19 +200,21 @@ class ReservationsController extends Controller
         if (!$reserve_in_database1->first() and !$reserve_in_database2->first() and !$reserve_in_database3->first() and !$reserve_in_database4->first()) {
             $reserve->save();
 
-            foreach($request['addlequip'] as $addl) {
-                if (isset($addl)) {
-                    $reserveeq = new ReservationEquipment;
-                    $reserveeq->equipment_id = $addl;
-                    
-                    $equip = Equipment::where('id', $addl)->first();
-                    $reserveeq->equipment_name = $equip->name;
-                    $reserveeq->equipment_brand = $equip->brand;
-                    $reserveeq->equipment_model = $equip->model;
+            if (!empty($request['addlequip'])) {
+                foreach($request['addlequip'] as $addl) {
+                    if (isset($addl)) {
+                        $reserveeq = new ReservationEquipment;
+                        $reserveeq->equipment_id = $addl;
+                        
+                        $equip = Equipment::where('id', $addl)->first();
+                        $reserveeq->equipment_name = $equip->name;
+                        $reserveeq->equipment_brand = $equip->brand;
+                        $reserveeq->equipment_model = $equip->model;
 
-                    $reserveeq->reservation_id = $reserve->id;
-                    $reserveeq->save();
-                    $reserve->equipment()->save($reserveeq);
+                        $reserveeq->reservation_id = $reserve->id;
+                        $reserveeq->save();
+                        $reserve->equipment()->save($reserveeq);
+                    }
                 }
             }
 
