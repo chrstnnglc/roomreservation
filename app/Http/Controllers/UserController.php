@@ -20,10 +20,16 @@ class UserController extends Controller
         $this->middleware('adminmedia', ['only' => ['user_form', 'userslist', 'showuser', 'adduser', 'deleteuser', 'userhistory']]);
     }
 
-    public function profile() {
+    public function profile(Request $request) {
         $user = Auth::user();
 
-        return view('user.profile', compact('user'));
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+             return view('user.profile', compact('user', 'notice'));
+        } else {
+             return view('user.profile', compact('user'));
+        }
     }
 
     public function user_form(User $user) {
@@ -43,14 +49,27 @@ class UserController extends Controller
         if ($request->ord != NULL) {
             $ord = $request->ord;
         }
-
+        
         $users = User::where('users_role', '!=', 'trash')->orderby($sort, $ord)->get();
 
-        return view('user.userslist', compact('users', 'sort', 'ord'));
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+            return view('user.userslist', compact('users', 'sort', 'ord', 'notice'));
+        } else {
+            return view('user.userslist', compact('users', 'sort', 'ord'));
+        }
+
     }
 
-    public function showuser(User $user) {
-        return view('user.showuser', compact('user'));
+    public function showuser(Request $request, User $user) {
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+             return view('user.showuser', compact('user', 'notice'));
+        } else {
+             return view('user.showuser', compact('user'));
+        }
     }
 
     public function adduser(Request $request) {
@@ -85,8 +104,9 @@ class UserController extends Controller
 
         $user->save();
 
-        $users = User::all();
-        return view('user.userslist', compact('users'));
+        $request->session()->flash('message', 'Successfully added user!');
+        $request->session()->flash('color', 'green');
+        return redirect('user');
     }
 
     public function edituser(User $user) {
@@ -175,10 +195,14 @@ class UserController extends Controller
         $user->save();
 
         if (Auth::user()->users_role == 'user') {
+            $request->session()->flash('message', 'Successfully updated user!');
+            $request->session()->flash('color', 'green');
             $url = 'user/profile';
             return redirect($url);
         } else {
             $url = 'user/' . $user->id;
+            $request->session()->flash('message', 'Successfully updated credentials!');
+            $request->session()->flash('color', 'green');
             return redirect($url);
         }
     }
@@ -213,23 +237,19 @@ class UserController extends Controller
                 ->where('reservations_status', 'not paid');                           
             });
         if ($reserves->first()) {
-            $users = User::all();
-            
-            $notice['message'] = 'Cannot delete! User is referenced in entries in the database.';
-            $notice['color'] = 'red';
+            $request->session()->flash('message', 'Cannot delete user with dependent entries in the database!');
+            $request->session()->flash('color', 'red');
         }
         else {
             $user->users_role = 'trash';
             
             $user->save();
 
-            $users = User::all();
-            $notice['message'] = 'Successfully deleted user!';
-            $notice['color'] = 'green';
+            $request->session()->flash('message', 'Successfully deleted user!');
+            $request->session()->flash('color', 'green');
         }
 
-        $users = User::all();
-        return view('user.userslist', compact('users', 'notice'));
+        return redirect('user');
     }
 
     public function viewhistory(Request $request) {

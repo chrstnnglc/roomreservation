@@ -24,8 +24,14 @@ class ReservationsController extends Controller
 
 
         $sortable = array('room_id', 'user_id', 'date_reserved', 'date_of_reservation', 'reservations_status', 'date_paid', 'or_number');
-        $sort = 'date_of_reservation';
-        $ord = 'asc';
+        $user = Auth::user();
+        if ($user->users_role == 'treasury') {
+            $sort = 'reservations_status';
+            $ord = 'desc';
+        } else {
+            $sort = 'date_of_reservation';
+            $ord = 'asc';
+        }
 
         if (in_array($request->sort, $sortable)) {
             $sort = $request->sort;
@@ -35,7 +41,6 @@ class ReservationsController extends Controller
             $ord = $request->ord;
         }
         
-        $user = Auth::user();
 
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
             $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->get();
@@ -74,16 +79,36 @@ class ReservationsController extends Controller
             }
 
             $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->where('reservations_status', '!=', 'cancelled')->all();
-
-            return view('reservations.index', compact('reserves', 'ord', 'sort'));
+            
+            if ($request->session()->has('message') && $request->session()->has('color')) {
+                $notice['message'] = session('message');
+                $notice['color'] = session('color');
+                return view('reservations.index', compact('reserves', 'ord', 'sort', 'notice'));
+            } else {
+                return view('reservations.index', compact('reserves', 'ord', 'sort'));
+            }
 
         } elseif ($user->users_role == 'treasury') {
-            $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->get();
-            return view('reservations.index', compact('reserves', 'ord', 'sort'));
+            $reserves = Reservation::with('room', 'user')->where('reservations_status', '!=', 'cancelled')->orderBy($sort, $ord)->get();
+
+            if ($request->session()->has('message') && $request->session()->has('color')) {
+                $notice['message'] = session('message');
+                $notice['color'] = session('color');
+                return view('reservations.index', compact('reserves', 'ord', 'sort', 'notice'));
+            } else {
+                return view('reservations.index', compact('reserves', 'ord', 'sort'));
+            }
             
         } else {
             $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->where('user_id', $user->id)->get();
-            return view('reservations.index', compact('reserves', 'ord', 'sort'));    
+            
+            if ($request->session()->has('message') && $request->session()->has('color')) {
+                $notice['message'] = session('message');
+                $notice['color'] = session('color');
+                return view('reservations.index', compact('reserves', 'ord', 'sort', 'notice'));
+            } else {
+                return view('reservations.index', compact('reserves', 'ord', 'sort'));
+            }  
         }
     }
 
@@ -242,6 +267,8 @@ class ReservationsController extends Controller
             
         }
         
+        $request->session()->flash('message', 'Successfully added reservation!');
+        $request->session()->flash('color', 'green');
         return redirect('reservations');
     }
 
@@ -269,6 +296,8 @@ class ReservationsController extends Controller
         
         $reserve->save();
 
+        $request->session()->flash('message', 'Successfully updated reservation!');
+        $request->session()->flash('color', 'green');
         return redirect('reservations');
     }
 
@@ -287,7 +316,8 @@ class ReservationsController extends Controller
         $log->save();
 
         $reservation->save();
-
+        $request->session()->flash('message', 'Successfully cancelled reservation!');
+        $request->session()->flash('color', 'green');
         return redirect('reservations');
     }
 }

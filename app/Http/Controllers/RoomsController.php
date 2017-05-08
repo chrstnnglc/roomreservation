@@ -24,17 +24,31 @@ class RoomsController extends Controller
         if ($request->ord != NULL) {
             $ord = $request->ord;
         }
-
+        
         $rooms = DB::table('rooms')->orderBy($sort, $ord)->get();
-    	return view('rooms.index', compact('rooms', 'sort', 'ord'));
+
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+            return view('rooms.index', compact('rooms', 'sort', 'ord', 'notice'));
+        } else {
+    	    return view('rooms.index', compact('rooms', 'sort', 'ord'));
+        }
     }
 
     public function form() {
         return view('rooms.form');
     }
 
-    public function showroom(Room $room) {
-        return view('rooms.showroom', compact('room'));
+    public function showroom(Room $room, Request $request) {
+
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+            return view('rooms.showroom', compact('room', 'notice'));
+        } else {
+    	    return view('rooms.showroom', compact('room'));
+        }
     }
 
     public function addroom(Request $request) {
@@ -55,9 +69,8 @@ class RoomsController extends Controller
 
         $room->save();
         $rooms = Room::all();
-        // $notice['message'] = 'Successfully added room!';
-        // $notice['color'] = 'green';
-        // return view('rooms.index', compact('rooms', 'notice'));
+        $request->session()->flash('message', 'Successfully added room!');
+        $request->session()->flash('color', 'green');
         return redirect('/rooms');
     }
 
@@ -86,6 +99,8 @@ class RoomsController extends Controller
 
         $url = 'rooms/' . $room->id;
 
+        $request->session()->flash('message', 'Successfully updated room!');
+        $request->session()->flash('color', 'green');
         return redirect($url);
 
     }
@@ -96,15 +111,14 @@ class RoomsController extends Controller
         
         if ($room->reservation_count != 0 || $room->equipment_count != 0) {
             $rooms = Room::all();
-            $notice['message'] = 'Cannot delete! Room has dependent entries in the database.';
-            $notice['color'] = 'red';
-
+            $request->session()->flash('message', 'Cannot delete room with dependencies!');
+            $request->session()->flash('color', 'red');
         } else {
             $room->delete();
-            $notice['message'] = 'Successfully deleted room!';
-            $notice['color'] = 'green';
+            $request->session()->flash('message', 'Successfully deleted room!');
+            $request->session()->flash('color', 'green');
         }
         $rooms = Room::all();
-        return view('rooms.index', compact('rooms', 'notice'));
+        return redirect('/rooms');
     }
 }

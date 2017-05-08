@@ -27,7 +27,15 @@ class EquipmentsController extends Controller
         }
 
         $equipments = Equipment::with('room')->orderby($sort, $ord)->get();
-        return view('equipment.index', compact('equipments', 'sort', 'ord'));
+
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+            return view('equipment.index', compact('equipments', 'sort', 'ord', 'notice'));
+        } else {
+    	    return view('equipment.index', compact('equipments', 'sort', 'ord'));
+        }
+        
     }
 
     public function form() {
@@ -35,8 +43,14 @@ class EquipmentsController extends Controller
         return view('equipment.form', compact('rooms'));
     }
 
-    public function showequipment(Equipment $equipment) {
-        return view('equipment.showequipment', compact('equipment'));
+    public function showequipment(Request $request, Equipment $equipment) {
+        if ($request->session()->has('message') && $request->session()->has('color')) {
+            $notice['message'] = session('message');
+            $notice['color'] = session('color');
+            return view('equipment.showequipment', compact('equipment', 'notice'));
+        } else {
+    	    return view('equipment.showequipment', compact('equipment'));
+        }
     }
 
     public function addequipment(Request $request) {
@@ -66,6 +80,8 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
+        $request->session()->flash('message', 'Successfully added equipment!');
+        $request->session()->flash('color', 'green');
         return redirect('/equipment');
     }
 
@@ -100,13 +116,16 @@ class EquipmentsController extends Controller
 
         $url = 'equipment/' . $equipment->id;
 
+        $request->session()->flash('message', 'Successfully update equipment!');
+        $request->session()->flash('color', 'green');
         return redirect($url);
     }
 
     public function deleteequipment(Request $request) {
         $equipment = Equipment::where('id', $request->id)->first();
         $equipment->delete();
-
+        $request->session()->flash('message', 'Successfully deleted equipment!');
+        $request->session()->flash('color', 'green');
         return redirect('equipment');
     }
 }
