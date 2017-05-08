@@ -31,18 +31,22 @@ class UserController extends Controller
         return view('user.users_form', compact('users'));
     }
 
-    public function userslist(User $user) {
-        $users = User::where('users_role', '!=', 'trash')->get();
-        // if ($this->notice['message'] != '') {
-        //     return $this->notice;
-        //     $notice['message'] = $this->notice['message'];
-        //     $notice['color'] = $this->notice['color'];
-        //     $this->notice['message'] = '';
+    public function userslist(Request $request, User $user) {
+        $sortable = array('username', 'firstname', 'lastname', 'email', 'mobile', 'affiliation', 'users_role');
+        $sort = 'username';
+        $ord = 'ord';
 
-        //     return view('user.userslist', compact('users, notice'));
-        // } else {
-            return view('user.userslist', compact('users'));
-        // }
+        if (in_array($request->sort, $sortable)) {
+            $sort = $request->sort;
+        }
+
+        if ($request->ord != NULL) {
+            $ord = $request->ord;
+        }
+
+        $users = User::where('users_role', '!=', 'trash')->orderby($sort, $ord)->get();
+
+        return view('user.userslist', compact('users', 'sort', 'ord'));
     }
 
     public function showuser(User $user) {

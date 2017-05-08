@@ -32,13 +32,44 @@ max-width: 60%;
         <table class="ui celled yellow table">
             <thead>
             <tr>
-              <th>User Name</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>E-mail</th>
-              <th>Mobile</th>
-              <th>Affiliation</th>
-              <th>Role</th>
+              <?php 
+                $new_ord = ($ord == 'asc')?'desc':'asc';
+              ?>
+              <th><a href = "{{ url('user') }}?sort=username{{ ($sort == 'username')?'&ord='.$new_ord:''}}">
+                  Username
+                <i class="sort {{ ($sort == 'username')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=lastname{{ ($sort == 'lastname')?'&ord='.$new_ord:''}}">
+                  Last Name
+                <i class="sort {{ ($sort == 'lastname')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=firstname{{ ($sort == 'firstname')?'&ord='.$new_ord:''}}">
+                  First Name
+                <i class="sort {{ ($sort == 'firstname')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=email{{ ($sort == 'email')?'&ord='.$new_ord:''}}">
+                  E-mail
+                <i class="sort {{ ($sort == 'email')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=mobile{{ ($sort == 'mobile')?'&ord='.$new_ord:''}}">
+                  Mobile
+                <i class="sort {{ ($sort == 'mobile')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=affiliation{{ ($sort == 'affiliation')?'&ord='.$new_ord:''}}">
+                  Affiliation
+                <i class="sort {{ ($sort == 'affiliation')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('user') }}?sort=users_role{{ ($sort == 'users_role')?'&ord='.$new_ord:''}}">
+                  Role
+                <i class="sort {{ ($sort == 'users_role')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
               <th>Options</th>
             </tr>
           </thead>

@@ -19,9 +19,24 @@ max-width: 40%;
         <table class="ui celled yellow table">
               <thead>
                 <tr>
-                  <th>Log No.</th>
-                  <th>User ID</th>
-                  <th>Date of Reservation</th>
+                  <?php 
+                    $new_ord = ($ord == 'asc')?'desc':'asc';
+                  ?>
+                  <th><a href = "{{ url('logs') }}?sort=id{{ ($sort == 'id')?'&ord='.$new_ord:''}}">
+                      Log No.
+                    <i class="sort {{ ($sort == 'id')?$new_ord.'ending':''}} icon"></i>
+                    </a>
+                  </th>
+                  <th><a href = "{{ url('logs') }}?sort=user_id{{ ($sort == 'user_id')?'&ord='.$new_ord:''}}">
+                      User Id
+                    <i class="sort {{ ($sort == 'user_id')?$new_ord.'ending':''}} icon"></i>
+                    </a>
+                  </th>
+                  <th><a href = "{{ url('logs') }}?sort=date_of_reservation{{ ($sort == 'date_of_reservation')?'&ord='.$new_ord:''}}">
+                      Date of Reservation
+                    <i class="sort {{ ($sort == 'date_of_reservation')?$new_ord.'ending':''}} icon"></i>
+                    </a>
+                  </th>
                   <th>Remarks</th>
                 </tr>
               </thead>

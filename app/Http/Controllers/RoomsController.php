@@ -55,9 +55,10 @@ class RoomsController extends Controller
 
         $room->save();
         $rooms = Room::all();
-        $notice['message'] = 'Successfully added room!';
-        $notice['color'] = 'green';
-        return view('rooms.index', compact('rooms', 'notice'));
+        // $notice['message'] = 'Successfully added room!';
+        // $notice['color'] = 'green';
+        // return view('rooms.index', compact('rooms', 'notice'));
+        return redirect('/rooms');
     }
 
     public function editroom (Room $room) {
