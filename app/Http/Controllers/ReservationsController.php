@@ -241,8 +241,9 @@ class ReservationsController extends Controller
 
             $rooms = Room::all();
             $users = User::all();
+            $equipment = Equipment::where('room_id', null)->get();
             $conflict = 'The time and date is already taken.';
-            return view('reservations.form', compact('rooms', 'users', 'conflict'));
+            return view('reservations.form', compact('rooms', 'users', 'equipment', 'conflict'));
             
         }
         

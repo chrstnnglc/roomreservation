@@ -34,9 +34,24 @@ max-width: 40%;
             <table class="ui celled yellow table">
             <thead>
             <tr>
-              <th>Room Name</th>
-              <th>Rate</th>
-              <th>Capacity</th>
+              <?php 
+                $new_ord = ($ord == 'asc')?'desc':'asc';
+              ?>
+              <th><a href = "{{ url('rooms') }}?sort=name{{ ($sort == 'name')?'&ord='.$new_ord:''}}">
+                  Room Name
+                <i class="sort {{ ($sort == 'name')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('rooms') }}?sort=rate{{ ($sort == 'rate')?'&ord='.$new_ord:''}}">
+                  Rate
+                <i class="sort {{ ($sort == 'rate')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
+              <th><a href = "{{ url('rooms') }}?sort=capacity{{ ($sort == 'capacity')?'&ord='.$new_ord:''}}">
+                  Capacity
+                <i class="sort {{ ($sort == 'capacity')?$new_ord.'ending':''}} icon"></i>
+                </a>
+              </th>
               @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
               <th>Options</th>
               @endif

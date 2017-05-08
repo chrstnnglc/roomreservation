@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Room;
 
 class RoomsController extends Controller
@@ -11,9 +12,21 @@ class RoomsController extends Controller
         $this->middleware('adminmedia', ['only' => 'form', 'showroom', 'addroom', 'editroom', 'updateroom', 'deleteroom']);
     }
 
-    public function index() {
-        $rooms = Room::all()->sortby('name');
-    	return view('rooms.index', compact('rooms'));
+    public function index(Request $request) {
+        $sortable = array('name', 'rate', 'capacity');
+        $sort = 'name';
+        $ord = 'asc';
+
+        if (in_array($request->sort, $sortable)) {
+            $sort = $request->sort;
+        }
+
+        if ($request->ord != NULL) {
+            $ord = $request->ord;
+        }
+
+        $rooms = DB::table('rooms')->orderBy($sort, $ord)->get();
+    	return view('rooms.index', compact('rooms', 'sort', 'ord'));
     }
 
     public function form() {

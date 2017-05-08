@@ -34,12 +34,39 @@ max-width: 50%;
             <table class="ui celled yellow table">
             <thead>
           <tr>
-            <th>Equipment</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Condition</th>
-            <th>Room</th>
+            <?php 
+              $new_ord = ($ord == 'asc')?'desc':'asc';
+            ?>
+            <th><a href = "{{ url('equipment') }}?sort=name{{ ($sort == 'name')?'&ord='.$new_ord:''}}">
+                Equipment
+              <i class="sort {{ ($sort == 'name')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
+            <th><a href = "{{ url('equipment') }}?sort=brand{{ ($sort == 'brand')?'&ord='.$new_ord:''}}">
+                Brand
+              <i class="sort {{ ($sort == 'brand')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
+            <th><a href = "{{ url('equipment') }}?sort=model{{ ($sort == 'model')?'&ord='.$new_ord:''}}">
+                Model
+              <i class="sort {{ ($sort == 'model')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
+            <th><a href = "{{ url('equipment') }}?sort=price{{ ($sort == 'price')?'&ord='.$new_ord:''}}">
+                Price
+              <i class="sort {{ ($sort == 'price')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
+            <th><a href = "{{ url('equipment') }}?sort=condition{{ ($sort == 'condition')?'&ord='.$new_ord:''}}">
+                Condition
+              <i class="sort {{ ($sort == 'condition')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
+            <th><a href = "{{ url('equipment') }}?sort=room_id{{ ($sort == 'room_id')?'&ord='.$new_ord:''}}">
+                Room
+              <i class="sort {{ ($sort == 'room_id')?$new_ord.'ending':''}} icon"></i>
+              </a>
+            </th>
             @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
             <th>Options</th>
             @endif
