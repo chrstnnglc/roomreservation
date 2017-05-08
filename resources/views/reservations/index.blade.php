@@ -3,7 +3,7 @@
 <title>Reservations - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
-max-width: 90%;
+max-width: 95%;
 @stop
 @section('items')
 @if (Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
@@ -135,7 +135,7 @@ max-width: 90%;
           {{ csrf_field() }}
 
           <div class="ui mini input">
-            <input type="text" placeholder="OR Number" name = "or_number" style="width: 90%;">
+            <input type="text" placeholder="OR Number" name = "or_number" style="width: 60%;">
             <button class="ui very compact mini blue button" type = "submit" onclick = "return confirm('This action cannot be undone. Are you sure?')"><font size='1'>Confirm</font></button>
           </div>
         </form>
