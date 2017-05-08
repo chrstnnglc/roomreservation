@@ -13,9 +13,21 @@ class EquipmentsController extends Controller
         $this->middleware('adminmedia', ['only' => 'form', 'showequipment', 'addequipment', 'editequipment', 'updateequipment', 'deleteequipment']);
     }
 
-   public function index() {
-        $equipments = Equipment::with('room')->orderby('room_id')->get();
-        return view('equipment.index', compact('equipments'));
+   public function index(Request $request) {
+        $sortable = array('name', 'brand', 'model', 'price', 'condition', 'room_id');
+        $sort = 'name';
+        $ord = 'asc';
+
+        if (in_array($request->sort, $sortable)) {
+            $sort = $request->sort;
+        }
+
+        if ($request->ord != NULL) {
+            $ord = $request->ord;
+        }
+
+        $equipments = Equipment::with('room')->orderby($sort, $ord)->get();
+        return view('equipment.index', compact('equipments', 'sort', 'ord'));
     }
 
     public function form() {
@@ -54,8 +66,7 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
-        $equipments = Equipment::all();
-        return view('equipment.index', compact('equipments'));
+        return redirect('/equipment');
     }
 
     public function editequipment(Equipment $equipment) {
