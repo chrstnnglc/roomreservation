@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('name')
-<title>Rooms - Diocese of Cubao Reservation System</title>
+<title>Logs - Diocese of Cubao Reservation System</title>
 @stop
 @section('width')
 max-width: 40%;
