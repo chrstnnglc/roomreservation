@@ -90,7 +90,7 @@ class ReservationsController extends Controller
     public function form() {
         $rooms = Room::all();
         $users = User::all();
-        $equipment = Equipment::where('room_id', null)->get();
+        $equipment = Equipment::where('room_id', null)->where('condition','Working')->get();
         return view('reservations.form', compact('rooms', 'users', 'equipment'));
     }
     
@@ -144,7 +144,7 @@ class ReservationsController extends Controller
             $reserve->hours = (strtotime($reserve->end_of_reserved) - strtotime($reserve->start_of_reserved))/3600;
         }
         $reserve->price = ($reserve->hours * $room->rate > 0)?$reserve->hours * $room->rate:$room->rate;
-        $equipment_reserved = Equipment::where('room_id', $room->id)->get();
+        $equipment_reserved = Equipment::where('room_id', $room->id)->where('condition','Working')->get();
 
         foreach ($equipment_reserved as $equipment) {
             $reserve->price += $equipment->price;
