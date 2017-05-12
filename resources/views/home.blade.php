@@ -127,7 +127,7 @@ function fill_table(month,month_length,year){
       calendarTable+="<table class='ui very compact fixed single line table' style='border: none;'><tbody>";
       for(var index=0; index<indices.length; index++){
         if(index>1){
-          calendarTable+="<tr><td><div id='"+string_of_day+"' style='display: none; position: fixed; height: 100%; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; user-select:none; background-color: rgba(0,0,0, 0.6); overflow-x: hidden;'><table class='ui very compact single line table' id='table'><thead><tr><th><i onclick='off("+String(day)+")' class='remove icon' style='cursor: pointer;'></i></th></tr></thead><tbody>"
+          calendarTable+="<tr><td><div id='"+string_of_day+"' style='display: none; position: fixed; height: 100%; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; user-select:none; background-color: rgba(0,0,0, 0.6); overflow-x: hidden;'><table class='ui very compact single line table' id='table'><thead><tr><th><i onclick='off("+String(day)+")' class='remove icon' style='cursor: pointer;'></i>"+year+"-"+string_of_month+"-"+string_of_day+"</th></tr></thead><tbody>"
           for(var iter=0; iter<indices.length; iter++){
             if(reservation_status[indices[iter]]=="paid"){
               calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
