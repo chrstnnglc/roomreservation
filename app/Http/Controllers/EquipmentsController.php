@@ -121,11 +121,11 @@ class EquipmentsController extends Controller
         return redirect($url);
     }
 
-    public function deleteequipment(Request $request) {
-        $equipment = Equipment::where('id', $request->id)->first();
-        $equipment->delete();
-        $request->session()->flash('message', 'Successfully deleted equipment!');
-        $request->session()->flash('color', 'green');
-        return redirect('equipment');
-    }
+    // public function deleteequipment(Request $request) {
+    //     $equipment = Equipment::where('id', $request->id)->first();
+    //     $equipment->delete();
+    //     $request->session()->flash('message', 'Successfully deleted equipment!');
+    //     $request->session()->flash('color', 'green');
+    //     return redirect('equipment');
+    // }
 }

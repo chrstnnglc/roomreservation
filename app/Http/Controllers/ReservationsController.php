@@ -29,7 +29,7 @@ class ReservationsController extends Controller
             $sort = 'reservations_status';
             $ord = 'desc';
         } else {
-            $sort = 'date_of_reservation';
+            $sort = 'date_reserved';
             $ord = 'asc';
         }
 
@@ -115,7 +115,7 @@ class ReservationsController extends Controller
     public function form() {
         $rooms = Room::all();
         $users = User::all();
-        $equipment = Equipment::where('room_id', null)->where('condition','Working')->get();
+        $equipment = Equipment::where('room_id', null)->where('condition','Working')->orderby('name', 'asc')->get();
         return view('reservations.form', compact('rooms', 'users', 'equipment'));
     }
     

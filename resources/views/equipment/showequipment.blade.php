@@ -59,11 +59,11 @@ max-width: 40%;
 	<input type="hidden" name="price" value="{{ $equipment->price }}">
 	<input type="hidden" name="condition" value="{{ $equipment->rate }}">
 	<input type="hidden" name="room_id" value="{{ $equipment->room_id }}">
-	<div class = "container" align = "center">
+	<!-- <div class = "container" align = "center">
 		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
 			<button type="submit" class="ui red fluid button">Delete Equipment</button>
 		</div>
-	</div>
+	</div> -->
 </form>
 @endif
 @stop

@@ -61,7 +61,7 @@ max-width: 40%;
 	<input type="hidden" name="affiliation" value="{{ $user->affiliation }}">
 	<input type="hidden" name="users_role" value="{{ $user->users_role }}">
 	<div class="container" align="center" style="padding: 5px 0px 0px 0px">
-		<button type="submit" class="ui fluid large red submit button">Delete User</button>
+		<button type="submit" class="ui fluid large red submit button" onclick = "return confirm('This action cannot be undone. Are you sure?');">Delete User</button>
 	</div>
 </form>
 @stop
