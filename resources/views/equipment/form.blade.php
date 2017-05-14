@@ -55,7 +55,20 @@ max-width: 25%;
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="condition" placeholder="Condition" value = "{{ old('condition') }}">
+        <select class = "ui search dropdown" name = "condition">
+          <option value = "">Select Condition</value>
+          <option value = "Good"
+          @if (old('condition') == "Good")
+            selected
+          @endif
+          >Good</value>
+          <option value = "Bad"
+          @if (old('condition') == "Bad")
+            selected
+          @endif
+          >Bad</value>
+        </select>
+        <!--<input type="text" name="condition" placeholder="Condition" value = "{{ old('condition') }}">-->
       </div>
     </div>
     <div class="field">

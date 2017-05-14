@@ -80,6 +80,7 @@ class EquipmentsController extends Controller
 
         $equipment->save();
 
+
         $request->session()->flash('message', 'Successfully added equipment!');
         $request->session()->flash('color', 'green');
         return redirect('/equipment');
@@ -99,7 +100,6 @@ class EquipmentsController extends Controller
             'model' => 'required|max:255',
             'price' => 'required|numeric|min:0|not_in:0',
             'condition' => 'required',
-            'room' => 'exists:rooms,name',
 
         ]);
 
@@ -109,8 +109,10 @@ class EquipmentsController extends Controller
         $equipment->price = $request->price;
         $equipment->condition = $request->condition;
         
-        $room = Room::where('name', $request->room)->first();
-        $equipment->room_id = $room->id;
+        if ($request->room != ""){
+            $room = Room::where('name', $request->room)->first();
+            $equipment->room_id = $room->id;
+        }
 
         $equipment->save();
 

@@ -53,13 +53,25 @@ max-width: 25%;
 			    </div>
 			    <div class="field">
 			    	<td>Condition</td>
-		    		<input type="text" name="condition" value="{{ $equipment->condition }}">
+		    		<select class = "ui search dropdown" name = "condition">
+			          <option value = "">Select Condition</value>
+			          <option value = "Good"
+			          @if ($equipment->condition == "Good")
+			            selected
+			          @endif
+			          >Good</value>
+			          <option value = "Bad"
+			          @if ($equipment->condition == "Bad")
+			            selected
+			          @endif
+			          >Bad</value>
+			        </select>
 		    	</div>
 
 				<div class="field">
 					<td>Room</td>
 					<select class = "ui search dropdown" name = "room">
-						<option value = ""></option>
+						<option value = "">Select Room</option>
 						
 						@foreach ($rooms as $room)
 						<option value = "{{ $room->name }}" 
