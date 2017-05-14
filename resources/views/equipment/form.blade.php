@@ -72,6 +72,11 @@ max-width: 25%;
       </div>
     </div>
     <div class="field">
+      <div class="ui input">
+        <input type="text" name="remarks" placeholder="Remarks" value = "{{ old('remarks') }}">
+      </div>
+    </div>
+    <div class="field">
       <!--<div class="ui input">
         <input type="text" name="room" placeholder="Room Name">
       </div>-->
