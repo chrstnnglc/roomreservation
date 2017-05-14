@@ -67,6 +67,12 @@ max-width: 25%;
 			          >Bad</value>
 			        </select>
 		    	</div>
+			<div class="field">
+			    	<td>Remarks</td>
+			      <div class="ui input">
+			        <input type="text" name="remarks" placeholder="Remarks" value = "{{ $equipment->remarks }}">
+			      </div>
+			    </div>
 
 				<div class="field">
 					<td>Room</td>
