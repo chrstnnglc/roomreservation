@@ -51,9 +51,14 @@ max-width: 95%;
           <?php 
             $new_ord = ($ord == 'asc')?'desc':'asc';
           ?>
-          <th><a href = "{{ url('reservations') }}?sort=date_of_reservation{{ ($sort == 'date_of_reservation')?'&ord='.$new_ord:''}}">
+          <!-- <th><a href = "{{ url('reservations') }}?sort=date_of_reservation{{ ($sort == 'date_of_reservation')?'&ord='.$new_ord:''}}">
               Date of Reservation
             <i class="sort {{ ($sort == 'date_of_reservation')?$new_ord.'ending':''}} icon"></i>
+            </a>
+          </th> -->
+          <th><a href = "{{ url('reservations') }}?sort=date_reserved{{ ($sort == 'date_reserved')?'&ord='.$new_ord:''}}">
+              Date Reserved
+            <i class="sort {{ ($sort == 'date_reserved')?$new_ord.'ending':''}} icon"></i>
             </a>
           </th>
           <th><a href = "{{ url('reservations') }}?sort=user_id{{ ($sort == 'user_id')?'&ord='.$new_ord:''}}">
@@ -67,11 +72,6 @@ max-width: 95%;
             </a>
           </th>
           <th>Additional Equipment</th>
-          <th><a href = "{{ url('reservations') }}?sort=date_reserved{{ ($sort == 'date_reserved')?'&ord='.$new_ord:''}}">
-              Date Reserved
-            <i class="sort {{ ($sort == 'date_reserved')?$new_ord.'ending':''}} icon"></i>
-            </a>
-          </th>
           <th>Start Time</th>
           <th>End Time</th>
           <th>Hours</th>
@@ -97,7 +97,8 @@ max-width: 95%;
       <tbody>  
     @endif
     <tr>
-      <td class="room">{{ $reserve->date_of_reservation }}</td>
+<!--       <td class="room">{{ $reserve->date_of_reservation }}</td> -->
+      <td class="date">{{ $reserve->date_reserved }}</td>
       <td class="user">{{ $reserve->user->username }}</td>
       <td class="room">{{ $reserve->room->name }}</td>
       <td>
@@ -106,7 +107,6 @@ max-width: 95%;
           <br>
         @endforeach
       </td>
-      <td class="date">{{ $reserve->date_reserved }}</td>
       <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
       <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
       <td class="hours">{{ $reserve->hours }}</td>
