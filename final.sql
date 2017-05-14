@@ -40,6 +40,7 @@ CREATE TABLE Equipment (
 	model varchar(50) NOT NULL,
 	price integer NOT NULL,
 	condition varchar(50) NOT NULL,
+	remarks varchar(100),
 	room_id integer 
 );
 

@@ -115,7 +115,7 @@ class ReservationsController extends Controller
     public function form() {
         $rooms = Room::all();
         $users = User::all();
-        $equipment = Equipment::where('room_id', null)->where('condition','Working')->orderby('name', 'asc')->get();
+        $equipment = Equipment::where('room_id', null)->where('condition','Good')->orderby('name', 'asc')->get();
         return view('reservations.form', compact('rooms', 'users', 'equipment'));
     }
     

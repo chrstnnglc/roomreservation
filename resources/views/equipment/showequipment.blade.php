@@ -24,6 +24,7 @@ max-width: 40%;
 <th>Model</th>
 <th>Price</th>
 <th>Condition</th>
+<th>Remarks</th>
 <th>Room</th>
 @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <th>Options</th>
@@ -36,6 +37,7 @@ max-width: 40%;
       <td class="model">{{$equipment->model}}</td>
       <td class="price">Php {{ number_format((float)$equipment->price, 2, '.', '') }}</td>
       <td class="condition">{{$equipment->condition}}</td>
+      <td class="remarks">{{$equipment->remarks}}</td>
       @if ($equipment->room)
 	      <td class="room_id">{{$equipment->room->name}}</td>
 	  @else
@@ -57,7 +59,8 @@ max-width: 40%;
 	<input type="hidden" name="equipment" value="{{ $equipment->equipment }}">
 	<input type="hidden" name="brand" value="{{ $equipment->brand }}">
 	<input type="hidden" name="price" value="{{ $equipment->price }}">
-	<input type="hidden" name="condition" value="{{ $equipment->rate }}">
+	<input type="hidden" name="condition" value="{{ $equipment->condition }}">
+	<input type="hidden" name="remarks" value="{{ $equipment->remarks }}">
 	<input type="hidden" name="room_id" value="{{ $equipment->room_id }}">
 	<!-- <div class = "container" align = "center">
 		<div class="container" align="center" style="padding: 5px 0px 5px 0px; height: 50%; width: 25%;">
