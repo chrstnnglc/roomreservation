@@ -55,7 +55,7 @@ max-width: 50%;
             <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
             <td class="hours">{{ $reserve->hours }}</td>
             <td class="price">Php {{ number_format((float)$reserve->price, 2, '.', '') }}</td>
-            <td class="price">{{ $reserve->status }}</td>
+            <td class="status">{{ $reserve->reservations_status }}</td>
             <td class="or_number">{{ $reserve->or_number }}</td>
         </tr>
               @if ($loop->last)
