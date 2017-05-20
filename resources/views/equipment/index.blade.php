@@ -67,9 +67,7 @@ max-width: 50%;
               <i class="sort {{ ($sort == 'room_id')?$new_ord.'ending':''}} icon"></i>
               </a>
             </th>
-            @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
             <th>Options</th>
-            @endif
           </tr>
         </thead>
         <tbody>
@@ -86,13 +84,11 @@ max-width: 50%;
       @else
         <td class="room"></td>
       @endif
-      @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
       <td class="options">
         <!--<div class="container" align="center" style="padding: 0px 0px 0px 0px; height: 50%; width: 50%;">-->
           <a href="/equipment/{{ $equip->id }}" class="ui tiny yellow fluid button">View</a>
         <!--</div>-->
       </td>
-      @endif
     </tr>
     @if ($loop->last)
     </tbody>

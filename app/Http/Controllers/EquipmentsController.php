@@ -7,7 +7,7 @@ use App\User;
 class EquipmentsController extends Controller
 {
     public function __construct() {
-        $this->middleware('adminmedia', ['only' => 'form', 'showequipment', 'addequipment', 'editequipment', 'updateequipment', 'deleteequipment']);
+        $this->middleware('adminmedia', ['only' => 'form', 'addequipment', 'editequipment', 'updateequipment', 'deleteequipment']);
     }
    public function index(Request $request) {
         $sortable = array('name', 'brand', 'model', 'price', 'condition', 'room_id');
