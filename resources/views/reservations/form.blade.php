@@ -50,7 +50,13 @@ max-width: 25%;
 	      <select name="roomname" class="ui dropdown" id="select">
 		        <option value="">Select Room</option>
 		        @foreach ($rooms as $room)
-		        	<option value="{{ $room-> name }}">{{ $room->name }}</option>
+		        	<!-- <option value="{{ $room-> name }}">{{ $room->name }}</option> -->
+		        	<option value = "{{ $room->name }}"
+          
+		            @if (old('roomname') == $room->name)
+		            	selected
+		            @endif
+		            >{{ $room->name }}</value>
 		        @endforeach
 		    </select>
 	    </div>
@@ -65,11 +71,16 @@ max-width: 25%;
 	    </div>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
-	      <select name="username" class="ui dropdown" id="select">
+	      	<select name="username" class="ui dropdown" id="select">
 			        <option value="">Select User</option>
 			        @foreach ($users as $user)
-			        	@if($user->users_role == 'admin' or $user->users_role == 'media' or $user->users_role == 'user')
-			        		<option value="{{ $user->username }}">{{ $user->username }}</option>
+			        	@if($user->users_role == 'admin' or $user->users_role == 'media')
+			        		<option value="{{ $user->username }}"
+          
+						        @if (old('username') == $user->username)
+	            				selected
+	          					@endif
+			        		>{{ $user->username }}</option>
 			        	@endif
 			        @endforeach
 			    </select>
@@ -77,7 +88,7 @@ max-width: 25%;
 	    @endif
 	    <div class="field">
 	      <div class="ui input">
-	        <input type="date" name="date" value = "" placeholder="mm/dd/yyyy">
+	        <input type="date" name="date" placeholder="mm/dd/yyyy" value = "{{ old('date') }}">
 	      </div>
 	    </div>
 	    <div class="field">
@@ -85,9 +96,18 @@ max-width: 25%;
 		        <option value="">Select Start Time</option>
 		        @for ($i = 0; $i < 24; $i+=0.5)
 		        @if($i/0.5 % 2 == 0)
-		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        	<option value="{{ $i }}:00"
+		        	
+		        		@if (old('starttime') == $i . ":00")
+	            		selected
+	          			@endif
+			        >{{ $i }}:00</option>
 		        @else
-		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        	<option value="{{ $i-0.5 }}:30"
+		        		@if (old('starttime') == $i-0.5 . ":30")
+	            		selected
+	          			@endif
+			        >{{ $i-0.5 }}:30</option>
 		        @endif
 		        @endfor
 		    </select>
@@ -98,9 +118,18 @@ max-width: 25%;
 		        <option value="">Select End Time</option>
 		        @for ($i = 0; $i < 24; $i+=0.5)
 		        @if($i/0.5 % 2 == 0)
-		        	<option value="{{ $i }}:00">{{ $i }}:00</option>
+		        	<option value="{{ $i }}:00"
+		        	
+		        		@if (old('endtime') == $i . ":00")
+	            		selected
+	          			@endif
+			        >{{ $i }}:00</option>
 		        @else
-		        	<option value="{{ $i-0.5 }}:30">{{ $i-0.5 }}:30</option>
+		        	<option value="{{ $i-0.5 }}:30"
+		        		@if (old('endtime') == $i-0.5 . ":30")
+	            		selected
+	          			@endif
+			        >{{ $i-0.5 }}:30</option>
 		        @endif
 		        @endfor
 		    </select>
