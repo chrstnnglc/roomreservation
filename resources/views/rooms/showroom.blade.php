@@ -42,7 +42,7 @@ max-width: 40%;
 </tbody>
 </table>
 
-@if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
+<!-- @if (Auth::user() !== NULL and Auth::user()->users_role == 'admin' or Auth::user()->users_role == 'media')
 <form method="POST" action="/rooms/{{ $room->id }}">
 	{{ csrf_field() }}
 	
@@ -56,5 +56,5 @@ max-width: 40%;
 	</div>
 	</div>
 </form>
-@endif
+@endif -->
 @stop
