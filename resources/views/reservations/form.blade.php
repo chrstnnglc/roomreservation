@@ -45,7 +45,8 @@ max-width: 25%;
             </div>
             @endif
 
-      @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
+	  <div class="ui yellow stacked segment">
+	  	@if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
 	      	<select name="username" class="ui dropdown" id="select">
 			        <option value="">Select User</option>
@@ -62,7 +63,6 @@ max-width: 25%;
 			    </select>
 	    </div>
 	    @endif
-	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <select name="roomname" class="ui dropdown" id="select">
 		        <option value="">Select Room</option>
