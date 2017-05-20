@@ -60,20 +60,23 @@ max-width: 25%;
 		        @endforeach
 		    </select>
 	    </div>
-	    <div class="field">
+	    <strong>Additional Equipment</strong>
+	    <div class="field" style="margin: auto; height:120px; width:200px; border:0px; overflow: auto;">
 	    	@foreach ($equipment as $equip)
-		    	<div class="ui checkbox">
+		    	<div class="ui checkbox" style="padding: 5px 5px 5px 5px; float: left;">
 				  <input type="checkbox" name="addlequip[]" value={{ $equip->id }}
 
 				  @if (old('addlequip') )
 				  	checked
 				  @endif
 				  >
-				  <label>{{ $equip->name }} - Php {{ $equip->price }}</label>
+				  <label>{{ $equip->name }} - Php {{ number_format((float)$equip->price, 2, '.', '') }}</label>
 				</div>
 				<br>
 			@endforeach
+			
 	    </div>
+	    <br>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
 			<div class="field">
 	      	<select name="username" class="ui dropdown" id="select">
@@ -148,9 +151,9 @@ max-width: 25%;
 		    <br><br>
 		    
 	   	</div>
-
+	   	<br>
 	    <div class="field">
-	    	<div class="ui slider checkbox">
+	    	<div class="ui toggle checkbox">
 			  <input type="checkbox" name="termsconditions" onchange="document.getElementById('submit').disabled = !this.checked;">
 			  <label>I accept the terms and conditions.</label>
 			</div>
