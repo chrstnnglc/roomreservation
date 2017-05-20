@@ -49,7 +49,7 @@ max-width: 25%;
 			    </div>
 			    <div class="field">
 			    	<td>Price</td>
-			    	<input type="number" name="price" value="{{ $equipment->price }}">
+			    	<input type="text" name="price" value="{{ $equipment->price }}">
 			    </div>
 			    <div class="field">
 			    	<td>Condition</td>

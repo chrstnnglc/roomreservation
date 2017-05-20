@@ -142,7 +142,7 @@ class UserController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return redirect('user/' . $user->id . '/edituser')
+                return redirect()->back()
                             ->withErrors($validator)
                             ->withInput();
             }

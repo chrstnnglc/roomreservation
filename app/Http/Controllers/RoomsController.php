@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Room;
+use App\Equipment;
 
 class RoomsController extends Controller
 {
@@ -56,7 +57,6 @@ class RoomsController extends Controller
         $this->validate($request, [
 
             'roomname' => 'required|max:255|unique:rooms,name',
-            'rate' => 'required|integer|min:1',
             'capacity' => 'required|integer|min:1',
         
         ]);
@@ -64,7 +64,7 @@ class RoomsController extends Controller
         $room = new Room;
         
         $room->name = $request->roomname;
-        $room->rate = $request->rate;
+        $room->rate = 0;
         $room->capacity = $request->capacity;
 
         $room->save();
@@ -86,13 +86,11 @@ class RoomsController extends Controller
                 'required',
                 'max:255',
             ],
-            'rate' => 'required|integer|min:1',
             'capacity' => 'required|integer|min:1',
         
         ]);
 
         $room->name = $request->roomname;
-        $room->rate = $request->rate;
         $room->capacity = $request->capacity;
 
         $room->save();

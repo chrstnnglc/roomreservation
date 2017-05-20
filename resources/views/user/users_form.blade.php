@@ -42,23 +42,23 @@ max-width: 25%;
   <div class="ui yellow stacked segment">
     <div class="field">
       <div class="ui input">
-        <input type="text" name="username" placeholder="User Name">
+        <input type="text" name="username" placeholder="User Name" value = "{{ old('username') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="firstname" placeholder="First Name">
+        <input type="text" name="firstname" placeholder="First Name" value = "{{ old('firstname') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui input">
-        <input type="text" name="lastname" placeholder="Last Name">
+        <input type="text" name="lastname" placeholder="Last Name" value = "{{ old('lastname') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui left icon input">
         <i class="mail icon"></i>
-        <input type="email" name="email" placeholder="E-mail address">
+        <input type="email" name="email" placeholder="E-mail address" value = "{{ old('email') }}">
       </div>
     </div>
     <div class="field">
@@ -76,20 +76,16 @@ max-width: 25%;
     <div class="field">
       <div class="ui left icon input">
         <i class="mobile icon"></i>
-        <input type="text" name="mobile" placeholder="Mobile">
+        <input type="text" name="mobile" placeholder="Mobile" value = "{{ old('mobile') }}">
       </div>
     </div>
     <div class="field">
       <div class="ui left icon input">
         <i class="users icon"></i>
-        <input type="text" name="affiliation" placeholder="Affiliation">
+        <input type="text" name="affiliation" placeholder="Affiliation" value = "{{ old('affiliation') }}">
       </div>
     </div>
-    <!-- <div class="field">
-      <div class="ui input">
-        <input type="text" name="users_role" placeholder="Role">
-      </div>
-    </div> -->
+    
     <div class="field">
       <select name="users_role" class="ui dropdown" id="select">
         <option value=""></option>

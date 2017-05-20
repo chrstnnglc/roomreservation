@@ -44,8 +44,9 @@ max-width: 25%;
 					<input type="text" name="roomname" value="{{ $room->name }}">
 				</div>
 				<div class="field">
-					<td>Rate</td>
-					<input type="text" name="rate" value="{{ $room->rate }}">
+					<td>Rate per hour</td>
+					<br>
+					Php {{ number_format((float)$room->rate, 2, '.', '') }}
 				</div>
 				<div class="field">
 					<td>Capacity</td>
