@@ -63,7 +63,12 @@ max-width: 25%;
 	    <div class="field">
 	    	@foreach ($equipment as $equip)
 		    	<div class="ui checkbox">
-				  <input type="checkbox" name="addlequip[]" value={{ $equip->id }}>
+				  <input type="checkbox" name="addlequip[]" value={{ $equip->id }}
+
+				  @if (old('addlequip') )
+				  	checked
+				  @endif
+				  >
 				  <label>{{ $equip->name }} - Php {{ $equip->price }}</label>
 				</div>
 				<br>
