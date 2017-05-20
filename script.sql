@@ -1,4 +1,4 @@
-\c rocketdevs
+\c rrimsdb
 
 DROP TYPE role;
 CREATE TYPE role AS ENUM('admin', 'media', 'treasury', 'user', 'trash');
