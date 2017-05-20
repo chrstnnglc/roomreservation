@@ -48,7 +48,7 @@ class EquipmentsController extends Controller
             'equipment' => 'required|max:255',
             'brand' => 'required|max:255',
             'model' => 'required|max:255',
-            'price' => 'required|numeric|min:0|not_in:0',
+            'price' => 'required|numeric',
             'condition' => 'required',
             
         ]);
@@ -65,8 +65,16 @@ class EquipmentsController extends Controller
         if ($request->room != ""){
             $room = Room::where('name', $request->room)->first();
             $equipment->room_id = $room->id;
+
+            if ($equipment->condition == "Good") {
+                $room->rate += $equipment->price;
+                $room->save();
+            }
+
         }
+
         $equipment->save();
+
         $request->session()->flash('message', 'Successfully added equipment!');
         $request->session()->flash('color', 'green');
         return redirect('/equipment');
@@ -80,7 +88,7 @@ class EquipmentsController extends Controller
             'equipment' => 'required|max:255',
             'brand' => 'required|max:255',
             'model' => 'required|max:255',
-            'price' => 'required|numeric|min:0|not_in:0',
+            'price' => 'required|numeric',
             'condition' => 'required',
             'remarks' => 'max:255',
 
@@ -95,7 +103,17 @@ class EquipmentsController extends Controller
         if ($request->room != ""){
             $room = Room::where('name', $request->room)->first();
             $equipment->room_id = $room->id;
+
+            if ($equipment->condition == "Bad") {
+                $room->rate -= $equipment->price;
+                $room->save();
+            } else {
+                $room->rate += $equipment->price;
+                $room->save();
+            }
+
         }
+
         $equipment->save();
         $url = 'equipment/' . $equipment->id;
         $request->session()->flash('message', 'Successfully update equipment!');
