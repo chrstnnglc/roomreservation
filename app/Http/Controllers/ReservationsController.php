@@ -22,7 +22,6 @@ class ReservationsController extends Controller
 
     public function index(Reservation $reserve, Request $request) {
 
-
         $sortable = array('room_id', 'user_id', 'date_reserved', 'date_of_reservation', 'reservations_status', 'date_paid', 'or_number');
         $user = Auth::user();
         if ($user->users_role == 'treasury') {
