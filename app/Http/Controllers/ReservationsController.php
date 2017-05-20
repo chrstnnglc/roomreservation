@@ -42,7 +42,7 @@ class ReservationsController extends Controller
         
 
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
-            $reserves = Reservation::with('room', 'user')->where('date_reserved', '>=', date("Y-m-d"))->where('status', '==', 'paid')->orwhere('status', '==', 'not paid')->orderBy($sort, $ord)->get();
+            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->orwhere('reservations_status','paid')->orwhere('reservations_status','not paid')->orderBy($sort, $ord)->get();
 
             foreach ($reserves as $reserve) {
                 if ($reserve->reservations_status == 'not paid') {
@@ -77,7 +77,7 @@ class ReservationsController extends Controller
                 }
             }
 
-            $reserves = Reservation::with('room', 'user')->where('date_reserved', '>=', date("Y-m-d"))->where('status', '=', 'paid')->orwhere('status', '=', 'not paid')->orderBy($sort, $ord)->get();
+            $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->where('reservations_status', '!=', 'cancelled')->all();
             
             if ($request->session()->has('message') && $request->session()->has('color')) {
                 $notice['message'] = session('message');
@@ -88,7 +88,7 @@ class ReservationsController extends Controller
             }
 
         } elseif ($user->users_role == 'treasury') {
-            $reserves = Reservation::with('room', 'user')->where('reservations_status', '!=', 'cancelled')->orderBy($sort, $ord)->get();
+            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->orwhere('reservations_status','paid')->orwhere('reservations_status','not paid')->orderBy($sort, $ord)->get();
 
             if ($request->session()->has('message') && $request->session()->has('color')) {
                 $notice['message'] = session('message');
@@ -99,7 +99,7 @@ class ReservationsController extends Controller
             }
             
         } else {
-            $reserves = Reservation::with('room', 'user')->orderBy($sort, $ord)->where('user_id', $user->id)->get();
+            $reserves = Reservation::where('user_id', $user->id)->where('date_reserved', '>=', date("Y-m-d"))->orwhere('reservations_status','paid')->orwhere('reservations_status','not paid')->orderBy($sort, $ord)->get();
             
             if ($request->session()->has('message') && $request->session()->has('color')) {
                 $notice['message'] = session('message');
