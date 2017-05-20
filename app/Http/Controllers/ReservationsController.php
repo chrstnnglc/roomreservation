@@ -42,7 +42,7 @@ class ReservationsController extends Controller
         
 
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
-            $reserves = Reservation::with('room', 'user')->where('date_reserved', '>=', date("Y-m-d"))->orderBy($sort, $ord)->get();
+            $reserves = Reservation::with('room', 'user')->where('date_reserved', '>=', date("Y-m-d"))->where('status', '==', 'paid')->orwhere('status', '==', 'not paid')->orderBy($sort, $ord)->get();
 
             foreach ($reserves as $reserve) {
                 if ($reserve->reservations_status == 'not paid') {
