@@ -77,7 +77,7 @@ class ReservationsController extends Controller
                 }
             }
 
-            $reserves = $reserves->where('reservations_status', '!=', 'done')->where('reservations_status', '!=', 'expired')->where('reservations_status', '!=', 'cancelled')->all();
+            $reserves = Reservation::with('room', 'user')->where('date_reserved', '>=', date("Y-m-d"))->orderBy($sort, $ord)->get();
             
             if ($request->session()->has('message') && $request->session()->has('color')) {
                 $notice['message'] = session('message');
