@@ -29,9 +29,9 @@ max-width: 50%;
             <table class="ui celled yellow table">
             <thead>
             <tr>
-              <th>Date of Reservation</th>
-              <th>Room</th>
               <th>Date Reserved</th>
+              <th>Room</th>
+              <th>Additional Equipment Reserved</th>
               <th>Start Time</th>
               <th>End Time</th>
               <th>Hours</th>
@@ -43,9 +43,14 @@ max-width: 50%;
           <tbody>
         @endif
         <tr>
-            <td class="room">{{ $reserve->date_of_reservation }}</td>
-            <td class="room">{{ $reserve->room->name }}</td>
             <td class="date">{{ $reserve->date_reserved }}</td>
+            <td class="room">{{ $reserve->room->name }}</td>
+            <td>
+              @foreach ($reserve->equipment as $addleq)
+                {{ $addleq->equipment_name }}: {{ $addleq->equipment_brand }} {{ $addleq->equipment_model }}
+                <br>
+              @endforeach
+            </td>
             <td class="start_time">{{ date('g:iA', strtotime($reserve->start_of_reserved)) }}</td>
             <td class="end_time">{{ date('g:iA', strtotime($reserve->end_of_reserved)) }}</td>
             <td class="hours">{{ $reserve->hours }}</td>
