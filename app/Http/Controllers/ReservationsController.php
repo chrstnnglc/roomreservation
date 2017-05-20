@@ -42,7 +42,7 @@ class ReservationsController extends Controller
         
 
         if ($user->users_role == 'admin' || $user->users_role == 'media') {
-            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->orwhere('reservations_status','paid')->orwhere('reservations_status','not paid')->orderBy($sort, $ord)->get();
+            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->where('reservations_status','paid')->orwhere('date_reserved', '>=', date("Y-m-d"))->where('reservations_status','not paid')->orderBy($sort, $ord)->get();
 
             foreach ($reserves as $reserve) {
                 if ($reserve->reservations_status == 'not paid') {
@@ -88,7 +88,7 @@ class ReservationsController extends Controller
             }
 
         } elseif ($user->users_role == 'treasury') {
-            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->orwhere('reservations_status','paid')->orwhere('reservations_status','not paid')->orderBy($sort, $ord)->get();
+            $reserves = Reservation::where('date_reserved', '>=', date("Y-m-d"))->where('reservations_status','paid')->orwhere('date_reserved', '>=', date("Y-m-d"))->where('reservations_status','not paid')->orderBy($sort, $ord)->get();
 
             if ($request->session()->has('message') && $request->session()->has('color')) {
                 $notice['message'] = session('message');
