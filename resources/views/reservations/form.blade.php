@@ -70,11 +70,11 @@ max-width: 25%;
 				  	checked
 				  @endif
 				  >
-				  <label>{{ $equip->name }} - Php {{ number_format((float)$equip->price, 2, '.', '') }}</label>
+				  <label style="text-align: left;">{{ $equip->name }} - Php {{ number_format((float)$equip->price, 2, '.', '') }}</label>
 				</div>
 				<br>
 			@endforeach
-			
+
 	    </div>
 	    <br>
 	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
