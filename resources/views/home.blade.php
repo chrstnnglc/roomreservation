@@ -144,8 +144,10 @@ function fill_table(month,month_length,year){
         }
         if(reservation_status[indices[index]]=="paid"){
           calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
-        }else{
+        }else if(reservation_status[indices[index]]=="not paid"){
           calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+        }else if(reservation_status[indices[index]]=="done"){
+          calendarTable+="<tr style='background-color: #6666FF;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
         }
         calendarTable+="</font></td></tr>";
       }
@@ -195,8 +197,10 @@ function fill_table(month,month_length,year){
           }
           if(reservation_status[indices[index]]=="paid"){
             calendarTable+="<tr style='background-color: lightgreen;'><td><font size='1'>"+room_name[indices[index]]+" "+start_time[indices[index]]+"-"+end_time[indices[index]];
-          }else{
+          }else if(reservation_status[indices[index]]=="not paid"){
             calendarTable+="<tr style='background-color: #ff6666;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
+          }else if(reservation_status[indices[index]]=="done"){
+            calendarTable+="<tr style='background-color: #6666FF;'><td><font size='1'>"+room_name[indices[iter]]+" "+start_time[indices[iter]]+"-"+end_time[indices[iter]];
           }
           calendarTable+="</font></td></tr>";
         }
