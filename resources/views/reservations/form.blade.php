@@ -45,6 +45,23 @@ max-width: 25%;
             </div>
             @endif
 
+      @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
+			<div class="field">
+	      	<select name="username" class="ui dropdown" id="select">
+			        <option value="">Select User</option>
+			        @foreach ($users as $user)
+			        	@if($user->users_role == 'admin' or $user->users_role == 'media' or $user->users_role == 'user')
+			        		<option value="{{ $user->username }}"
+          
+						        @if (old('username') == $user->username)
+	            				selected
+	          					@endif
+			        		>{{ $user->username }}</option>
+			        	@endif
+			        @endforeach
+			    </select>
+	    </div>
+	    @endif
 	  <div class="ui yellow stacked segment">
 	    <div class="field">
 	      <select name="roomname" class="ui dropdown" id="select">
@@ -77,23 +94,6 @@ max-width: 25%;
 
 	    </div>
 	    <br>
-	    @if (Auth::user() !== NULL and Auth::user()->users_role != 'user')
-			<div class="field">
-	      	<select name="username" class="ui dropdown" id="select">
-			        <option value="">Select User</option>
-			        @foreach ($users as $user)
-			        	@if($user->users_role == 'admin' or $user->users_role == 'media')
-			        		<option value="{{ $user->username }}"
-          
-						        @if (old('username') == $user->username)
-	            				selected
-	          					@endif
-			        		>{{ $user->username }}</option>
-			        	@endif
-			        @endforeach
-			    </select>
-	    </div>
-	    @endif
 	    <div class="field">
 	      <div class="ui input">
 	        <input type="date" name="date" placeholder="mm/dd/yyyy" value = "{{ old('date') }}">
